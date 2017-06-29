@@ -6,22 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-    section.hero.is-light .hero-body a {
-      color: rgba(54,54,54,.7);
-      border-bottom: 1px dotted rgba(154,154,154,.7);
-    }
-    section.hero.is-light .hero-body a:hover {
-      color: inherit;
-    }
-    .hero.is-fullheight .hero-body {
-      display: block;
-      margin-top: 64px;
-    }
-    .hero.is-fullheight .hero-body .container {
-      max-width: 920px;
-    }
-    </style>
+    <link rel="stylesheet" href="/css/index.css">
     <script defer src="js/index.js"></script>
     <script defer src="https://buttons.github.io/buttons.js"></script>
   </head>
@@ -118,22 +103,39 @@
         </nav>
       </div>
     </section>
-    <div id="modal" class="modal">
+    <div class="modal">
       <div class="modal-background"></div>
-      <div class="modal-content">
-        <div class="box">
-          <article class="media">
-            <div class="media-content">
-              <div class="content has-text-centered">
-                <p>
-                  <strong>... Coming Soon ...</strong>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Coming Soon</p>
+          <button class="delete"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-left">
+                <img id="ag" src="https://www.webreflection.co.uk/img/ag.png" alt="Andrea Giammarchi">
+              </div>
+              <div class="media-content">
+                <p class="title is-4">
+                  Hello There!
+                </p>
+                <p class="subtitle is-6">
+                  I promise you I am doing my best to create good documentation full of meaningful examples.
+                  <br>
+                  However, you know better than me no matter how interesting is an Open Source project,
+                  if it's not sustainable it won't probably have good support and lifespan.<br>
+                </p>
+                <p class="is-6">
+                  Please consider supporting this project<br>
+                  <a class="button is-primary" href="https://www.patreon.com/webreflection">pledging on Patreon</a><br>
+                  Thank You!
                 </p>
               </div>
             </div>
-          </article>
-        </div>
+          </div>
+        </section>
       </div>
-      <button class="modal-close"></button>
     </div>
   </body>
 </html>
