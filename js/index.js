@@ -32,9 +32,11 @@ document.addEventListener(
 
     // bulma modal
     $('.modal').addEventListener('click', function (e) {
-      e.preventDefault();
       e.stopPropagation();
-      this.classList.remove('is-active');
+      if (e.target.id !== 'patreon') {
+        e.preventDefault();
+        this.classList.remove('is-active');
+      }
     });
     $('[href="#examples"]').addEventListener('click', showModal);
     $('[href="#documentation"]').addEventListener('click', showModal);
