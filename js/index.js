@@ -17,10 +17,9 @@ document.addEventListener(
 
     // bulma toggle menu functionality
     $('.nav-toggle').addEventListener('click', function (e) {
-      var menu = this.nextElementSibling;
       e.preventDefault();
       this.classList.toggle('is-active');
-      menu.classList.toggle('is-active');
+      this.nextElementSibling.classList.toggle('is-active');
     });
 
     // bulma full height fix for iOS
