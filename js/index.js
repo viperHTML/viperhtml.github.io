@@ -46,6 +46,11 @@ document.addEventListener(
       $('.modal').classList.add('is-active');
     }
 
+    // GitHub Stars
+    var buttons = doc.createElement('script');
+    buttons.type = 'text/javascript';
+    buttons.src = 'https://buttons.github.io/buttons.js';
+    doc.body.appendChild(buttons);
   },
   {once: true}
 );

@@ -31,3 +31,6 @@ section.hero.is-light .hero-body a:hover {
   transition: all .3s ease-out;
   cursor: pointer;
 }
+#icon-github:hover {
+  fill: #363636;
+}
