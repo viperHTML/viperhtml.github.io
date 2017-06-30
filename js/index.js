@@ -15,19 +15,21 @@ document.addEventListener(
     var doc = this;
     var $ = function (css) { return doc.querySelector(css); };
 
+    // bulma full height fix for iOS
+    addEventListener('orientationchange', fixHeight);
+    addEventListener('load', fixHeight);
+    fixHeight();
+    setTimeout(fixHeight, 300);
+    function fixHeight() {
+      $('.hero').style.minHeight = doc.documentElement.clientHeight + 'px';
+    }
+
     // bulma toggle menu functionality
     $('.nav-toggle').addEventListener('click', function (e) {
       e.preventDefault();
       this.classList.toggle('is-active');
       this.nextElementSibling.classList.toggle('is-active');
     });
-
-    // bulma full height fix for iOS
-    addEventListener('orientationchange', fixHeight);
-    fixHeight();
-    function fixHeight() {
-      $('section').style.minHeight = doc.documentElement.clientHeight + 'px';
-    }
 
     // bulma modal
     $('.modal').addEventListener('click', function (e) {
