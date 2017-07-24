@@ -34,7 +34,7 @@ document.addEventListener(
     // bulma modal
     $('.modal').addEventListener('click', function (e) {
       e.stopPropagation();
-      if (e.target.id !== 'patreon') {
+      if (!/^patreon|paypal$/.test(e.target.id)) {
         e.preventDefault();
         this.classList.remove('is-active');
       }
