@@ -29,6 +29,10 @@
       {
         "name": "Basic event handling",
         "dir": "basic-event"
+      },
+      {
+        "name": "Conditional Rendering",
+        "dir": "conditional-render"
       }
     ]
   }
