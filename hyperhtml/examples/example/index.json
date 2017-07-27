@@ -33,6 +33,14 @@
       {
         "name": "Conditional Rendering",
         "dir": "conditional-render"
+      },
+      {
+        "name": "Temperature Calculator",
+        "dir": "calculator",
+        "pen": {
+          "fw": "https://codepen.io/valscion/pen/jBNjja?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/LjpVqW?editors=0010"
+        }
       }
     ]
   }

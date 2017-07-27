@@ -62,7 +62,7 @@ addEventListener(
         const dir = info[framework].dir;
         info[framework].tests.forEach(test => {
           const path = `/hyperhtml/examples/example/${dir}/${test.dir}`;
-          const resolved = {};
+          const resolved = {pen: Object.assign({}, test.pen)};
           model.example[framework][test.name] = resolved;
           examples.push(
             load(path, resolved, 'fw'),
@@ -121,6 +121,12 @@ addEventListener(
                   hyperHTML.escape(framework[currentExample].fw).trim()
                 }</code></pre>
               </div>
+              <p>${
+                framework[currentExample].pen.fw ?
+                  `<a href="${
+                    framework[currentExample].pen.fw
+                  }">Try it on CodePen.</a>` : ''
+              }</p>
             </div>
           </div>
           <div class="tile is-parent is-6">
@@ -132,6 +138,12 @@ addEventListener(
                   hyperHTML.escape(framework[currentExample].hyper).trim()
                 }</code></pre>
               </div>
+              <p>${
+                framework[currentExample].pen.hyper ?
+                  `<a href="${
+                    framework[currentExample].pen.hyper
+                  }">Try it on CodePen.</a>` : ''
+              }</p>
             </div>
           </div>
         </div>
