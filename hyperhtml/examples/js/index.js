@@ -114,6 +114,7 @@ addEventListener(
         <div class="tile is-ancestor">
           <div class="tile is-parent is-6">
             <div class="tile is-child">
+              <p class="title"> ${currentFramework} </p>
               <div class="content framework">
                 <pre><code class="javascript">${
                   // as text node, it'd be replaced via hljs
@@ -124,6 +125,7 @@ addEventListener(
           </div>
           <div class="tile is-parent is-6">
             <div class="tile is-child">
+              <p class="title"> hyperHTML </p>
               <div class="content hyperhtml">
                 <pre><code class="javascript">${
                   // as text node, it'd be replaced via hljs

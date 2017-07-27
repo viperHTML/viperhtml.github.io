@@ -9,6 +9,22 @@
       {
         "name": "Hello, world & tick",
         "dir": "hello-world-tick"
+      },
+      {
+        "name": "Basic Component",
+        "dir": "basic-component"
+      },
+      {
+        "name": "Custom Element",
+        "dir": "custom-component"
+      },
+      {
+        "name": "Combined Components",
+        "dir": "combined-component"
+      },
+      {
+        "name": "Stateful Component",
+        "dir": "state-class"
       }
     ]
   }
