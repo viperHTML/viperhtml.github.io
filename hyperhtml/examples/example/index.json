@@ -25,6 +25,10 @@
       {
         "name": "Stateful Component",
         "dir": "state-class"
+      },
+      {
+        "name": "Basic event handling",
+        "dir": "basic-event"
       }
     ]
   }
