@@ -2,17 +2,26 @@ addEventListener(
   'DOMContentLoaded',
   () => {
 
+    let currentFramework, currentExample;
+
+    let loaded = 0;
+    const progress = document.querySelector('progress');
+
+    // shortcut
     const wire = hyperHTML.wire;
 
+    // render bound container (not adopting, will replace the progress bar)
     const render = hyperHTML.bind(
       document.querySelector('.hero-body .container')
     );
 
+    // used model
     const model = {
+      // will update currentFramework and currentExample
       handleEvent(e) {
         if (e.target.classList.contains('framework')) {
           currentFramework = e.target.value;
-          currentExample = Object.keys(this.framework[currentFramework])[0];
+          currentExample = Object.keys(this.example[currentFramework])[0];
         } else if (e.target.classList.contains('example')) {
           currentExample = e.target.value;
         }
@@ -22,62 +31,73 @@ addEventListener(
           encodeURIComponent(currentExample)
         }`;
       },
-      framework: {
-        'React': {
-          'Hello, world!': {
-            fw: `
-              ReactDOM.render(
-                <h1>Hello, world!</h1>,
-                document.getElementById('root')
-              );
-            `,
-            hyper: `
-              hyperHTML.bind(document.getElementById('root'))\`
-                <h1>Hello, world!</h1>
-              \`;
-            `
-          },
-          'Hello, world & tick': {
-            fw: `
-              function tick() {
-                const element = (
-                  <div>
-                    <h1>Hello, world!</h1>
-                    <h2>It is {new Date().toLocaleTimeString()}.</h2>
-                  </div>
-                );
-                ReactDOM.render(
-                  element,
-                  document.getElementById('root')
-                );
-              }
+      // loaded later on
+      example: {}
+    };
 
-              setInterval(tick, 1000);
-            `,
-            hyper: `
-              function tick(render) {
-                render\`
-                  <div>
-                    <h1>Hello, world!</h1>
-                    <h2>It is \${new Date().toLocaleTimeString()}.</h2>
-                  </div>
-                \`;
-              }
+    // utility to load all examples
+    const load = (path, resolved, type) => new Promise(resolve => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', `${path}/${type}.js`);
+      xhr.send(null);
+      xhr.onload = () => {
+        resolved[type] = xhr.responseText;
+        progress.value = ++loaded;
+        progress.previousElementSibling.textContent =
+          `Loading examples ${progress.value}/${progress.max}`;
+        resolve();
+      };
+    });
 
-              setInterval(tick, 1000,
-                hyperHTML.bind(document.getElementById('root')));
-            `
-          }
-        }
-      }
+    // grab info from the index.json
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/hyperhtml/examples/example/index.json');
+    xhr.send(null);
+    xhr.onload = () => {
+      // create all tests as object
+      const info = JSON.parse(xhr.responseText);
+      const examples = [];
+      Object.keys(info).forEach(framework => {
+        model.example[framework] = {};
+        const dir = info[framework].dir;
+        info[framework].tests.forEach(test => {
+          const path = `/hyperhtml/examples/example/${dir}/${test.dir}`;
+          const resolved = {};
+          model.example[framework][test.name] = resolved;
+          examples.push(
+            load(path, resolved, 'fw'),
+            load(path, resolved, 'hyper')
+          );
+        });
+      });
+
+      progress.max = examples.length;
+      Promise.all(examples).then(() => {
+
+        // react on hash changes (sharable links)
+        addEventListener('hashchange', update);
+
+        // start with a framework
+        currentFramework = /!fw=([^&]+)/.test(location.hash) ?
+          decodeURIComponent(RegExp.$1) :
+          Object.keys(model.example)[0];
+
+          // and with a test
+        currentExample = /&example=([^&]+)/.test(location.hash) ?
+          decodeURIComponent(RegExp.$1) :
+          Object.keys(model.example[currentFramework])[0];
+
+        // show the output for the first time
+        update();
+      });
     };
 
     const update = () => {
-      const framework = model.framework[currentFramework];
+      const framework = model.example[currentFramework];
       render`
         <div class="tile box selection">
           <select class="framework" onchange="${model}">${
-            Object.keys(model.framework).map(
+            Object.keys(model.example).map(
               key => wire(model, ':fw-' + key)`
               <option selected="${currentFramework === key}">
                 ${key}
@@ -97,7 +117,7 @@ addEventListener(
               <div class="content framework">
                 <pre><code class="javascript">${
                   // as text node, it'd be replaced via hljs
-                  dropSpacesAndEscape(framework[currentExample].fw)
+                  hyperHTML.escape(framework[currentExample].fw).trim()
                 }</code></pre>
               </div>
             </div>
@@ -107,7 +127,7 @@ addEventListener(
               <div class="content hyperhtml">
                 <pre><code class="javascript">${
                   // as text node, it'd be replaced via hljs
-                  dropSpacesAndEscape(framework[currentExample].hyper)
+                  hyperHTML.escape(framework[currentExample].hyper).trim()
                 }</code></pre>
               </div>
             </div>
@@ -117,25 +137,8 @@ addEventListener(
 
       hljs.highlightBlock(document.querySelector('.framework pre code'));
       hljs.highlightBlock(document.querySelector('.hyperhtml pre code'));
+
     };
-
-    const dropSpacesAndEscape = text => {
-      const line = text.split('\n');
-      const gap = /^\s+/.test(line[1]) && RegExp['$&'];
-      return hyperHTML.escape(text.replace(new RegExp('^' + gap, 'gm'), '').trim());
-    };
-
-    let currentFramework = /!fw=([^&]+)/.test(location.hash) ?
-      decodeURIComponent(RegExp.$1) :
-      Object.keys(model.framework)[0];
-    let currentExample = /&example=([^&]+)/.test(location.hash) ?
-      decodeURIComponent(RegExp.$1) :
-      Object.keys(model.framework[currentFramework])[0];
-
-    update();
-
-    addEventListener('hashchange', update);
-
   },
   {once: true}
 );

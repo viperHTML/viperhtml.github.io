@@ -1,0 +1,15 @@
+{
+  "React": {
+    "dir": "react",
+    "tests": [
+      {
+        "name": "Hello, world!",
+        "dir": "hello-world"
+      },
+      {
+        "name": "Hello, world & tick",
+        "dir": "hello-world-tick"
+      }
+    ]
+  }
+}
