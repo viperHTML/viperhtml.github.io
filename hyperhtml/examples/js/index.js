@@ -153,6 +153,13 @@ addEventListener(
       hljs.highlightBlock(document.querySelector('.hyperhtml pre code'));
 
     };
+
+    // bulma toggle menu functionality
+    document.querySelector('.nav-toggle').addEventListener('click', e => {
+      e.preventDefault();
+      e.currentTarget.classList.toggle('is-active');
+      e.currentTarget.nextElementSibling.classList.toggle('is-active');
+    });
   },
   {once: true}
 );
