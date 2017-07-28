@@ -75,5 +75,59 @@
         }
       }
     ]
+  },
+  "Vue.js": {
+    "dir": "vue",
+    "tests": [
+      {
+        "name": "Hello, world!",
+        "dir": "hello-world",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/BdomvX?editors=0010"
+        }
+      },
+      {
+        "name": "Bound attributes",
+        "dir": "hello-attributes",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/VzvXGB?editors=0010"
+        }
+      },
+      {
+        "name": "Conditional element",
+        "dir": "conditional",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/mMexQa?editors=0010"
+        }
+      },
+      {
+        "name": "Basic todos",
+        "dir": "todos",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/YxyagJ?editors=0010"
+        }
+      },
+      {
+        "name": "User input",
+        "dir": "user-input",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/rzOvOG?editors=0010"
+        }
+      },
+      {
+        "name": "Input Bindings",
+        "dir": "bindings",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/QMjrvd?editors=0010"
+        }
+      },
+      {
+        "name": "Todos Component",
+        "dir": "complex-todos",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/PKPeQZ?editors=0010"
+        }
+      }
+    ]
   }
 }
