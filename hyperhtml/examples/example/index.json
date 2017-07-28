@@ -4,35 +4,67 @@
     "tests": [
       {
         "name": "Hello, world!",
-        "dir": "hello-world"
+        "dir": "hello-world",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/ZpvBNJ?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/BdomvX?editors=0010"
+        }
       },
       {
         "name": "Hello, world & tick",
-        "dir": "hello-world-tick"
+        "dir": "hello-world-tick",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/gwoJZk?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/RZWjOv?editors=0010"
+        }
       },
       {
         "name": "Basic Component",
-        "dir": "basic-component"
+        "dir": "basic-component",
+        "pen": {
+          "fw": "",
+          "hyper": ""
+        }
       },
       {
         "name": "Custom Element",
-        "dir": "custom-component"
+        "dir": "custom-component",
+        "pen": {
+          "fw": "https://codepen.io/WebReflection/pen/prjpye?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/brVYPN?editors=0010"
+        }
       },
       {
         "name": "Combined Components",
-        "dir": "combined-component"
+        "dir": "combined-component",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/rrJNJY?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/ZJbvLa?editors=0010"
+        }
       },
       {
         "name": "Stateful Component",
-        "dir": "state-class"
+        "dir": "state-class",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/amqdNA?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/oejpGV?editors=0010"
+        }
       },
       {
         "name": "Basic event handling",
-        "dir": "basic-event"
+        "dir": "basic-event",
+        "pen": {
+          "fw": "",
+          "hyper": ""
+        }
       },
       {
         "name": "Conditional Rendering",
-        "dir": "conditional-render"
+        "dir": "conditional-render",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/QKzAgB?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/zdvpaJ?editors=0010"
+        }
       },
       {
         "name": "Temperature Calculator",

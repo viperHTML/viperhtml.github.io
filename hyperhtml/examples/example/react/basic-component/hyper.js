@@ -1,6 +1,6 @@
 // as function
 function Welcome(props) {
-  return hyperHTML.wire(props)`
+  return hyperHTML.wire()`
   <h1>Hello, ${props.name}</h1>`;
 }
 

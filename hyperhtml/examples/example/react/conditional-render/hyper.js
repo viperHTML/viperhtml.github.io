@@ -30,14 +30,14 @@ function LogoutButton(clickHandler) {
 
 class LoginControl extends HTMLElement {
   constructor(...args) {
-    super(...args);
+    super(...args).html = hyperHTML.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = {isLoggedIn: false};
   }
 
-  connectedCallback() { this.render(); }
-
+  connectedCallback() { this.setState({isLoggedIn: false}); }
+  setState(state) { this.state = state; this.render(); }
+ 
   handleLoginClick() {
     this.setState({isLoggedIn: true});
   }
@@ -50,14 +50,17 @@ class LoginControl extends HTMLElement {
     const isLoggedIn = this.state.isLoggedIn;
 
     return this.html`
-    <div>${
-      Greeting(isLoggedIn)
-    }${
+    <div>${[
+      Greeting(isLoggedIn),
       isLoggedIn ?
         LogoutButton(this.handleLogoutClick) :
         LoginButton(this.handleLoginClick)
-    }</div>`;
+    ]}</div>`;
   }
 }
 
 customElements.define('login-control', LoginControl);
+
+document
+  .getElementById('root')
+  .appendChild(new LoginControl);
