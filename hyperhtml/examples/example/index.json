@@ -153,6 +153,27 @@
         "pen": {
           "hyper": "https://codepen.io/WebReflection/pen/mMVrYJ?editors=0010"
         }
+      },
+      {
+        "name": "Data binding",
+        "dir": "data-binding",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/LjGRwo?editors=0010"
+        }
+      },
+      {
+        "name": "Declare a property",
+        "dir": "declare-property",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/JyGbjV?editors=0010"
+        }
+      },
+      {
+        "name": "Bind to a property",
+        "dir": "bind-property",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/KvVNgo?editors=0010"
+        }
       }
     ]
   }

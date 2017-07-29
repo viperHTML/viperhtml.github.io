@@ -9,6 +9,7 @@
     class DomElement extends Polymer.Element {
       static get is() { return "dom-element"; }
     }
+
     customElements.define(DomElement.is, DomElement);
   /*
   </script>

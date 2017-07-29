@@ -19,6 +19,7 @@
     class PictureFrame extends Polymer.Element {
       static get is() { return "picture-frame"; }
     }
+
     customElements.define(PictureFrame.is, PictureFrame);
   /*
   </script>
