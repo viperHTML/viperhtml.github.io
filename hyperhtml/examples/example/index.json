@@ -129,5 +129,17 @@
         }
       }
     ]
+  },
+  "Polymer": {
+    "dir": "polymer",
+    "tests": [
+      {
+        "name": "custom-element",
+        "dir": "custom-element",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/YxwGjo?editors=0010"
+        }
+      }
+    ]
   }
 }
