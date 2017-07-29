@@ -139,6 +139,20 @@
         "pen": {
           "hyper": "https://codepen.io/WebReflection/pen/YxwGjo?editors=0010"
         }
+      },
+      {
+        "name": "With Shadow DOM",
+        "dir": "shadow-dom",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/aydmPR?editors=0010"
+        }
+      },
+      {
+        "name": "Compose with shadow DOM",
+        "dir": "sd-composed",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/mMVrYJ?editors=0010"
+        }
       }
     ]
   }
