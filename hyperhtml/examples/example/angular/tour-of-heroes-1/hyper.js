@@ -12,6 +12,36 @@ const HEROES = [
 ];
 
 class AppComponent {
+  render() {
+    const wire = hyperHTML.wire;
+    const selectedHero = this.selectedHero;
+    hyperHTML.bind(document.querySelector('my-app'))`
+    <style>${AppComponent.styles}</style>
+    <h1> ${this.title} </h1>
+    <h2>My Heroes</h2>
+    <ul class="heroes">${this.heroes.map(
+      hero => wire(hero)`
+      <li
+        class="${hero === selectedHero ? 'selected' : ''}"
+        data-id="${hero.id}"
+        onclick="${this}"
+      >
+        <span class="badge"> ${hero.id} </span> ${hero.name}
+      </li>`
+    )}</ul>${selectedHero ?
+      wire(this, ':editor')`
+      <div>
+        <h2> ${selectedHero.name} details!</h2>
+        <div><label>id: </label> ${selectedHero.id}</div>
+        <div>
+          <label>name: </label>
+          <input
+            value="${selectedHero.name}"
+            oninput="${this}" placeholder="name">
+        </div>
+      </div>` : ''
+    }`;
+  }
   static get styles() { return `
     .selected {
       background-color: #CFD8DC !important;
@@ -78,34 +108,5 @@ class AppComponent {
         break;
     }
     this.render();
-  }
-  render() {
-    const wire = hyperHTML.wire;
-    hyperHTML.bind(document.querySelector('my-app'))`
-    <style>${AppComponent.styles}</style>
-    <h1> ${this.title} </h1>
-    <h2>My Heroes</h2>
-    <ul class="heroes">${this.heroes.map(
-      hero => wire(hero)`
-      <li
-        class="${hero === this.selectedHero ? 'selected' : ''}"
-        data-id="${hero.id}"
-        onclick="${this}"
-      >
-        <span class="badge"> ${hero.id} </span> ${hero.name}
-      </li>`
-    )}</ul>${this.selectedHero ?
-      wire(this, ':editor')`
-      <div>
-        <h2> ${this.selectedHero.name} details!</h2>
-        <div><label>id: </label> ${this.selectedHero.id}</div>
-        <div>
-          <label>name: </label>
-          <input
-            value="${this.selectedHero.name}"
-            oninput="${this}" placeholder="name">
-        </div>
-      </div>` : ''
-    }`;
   }
 }
