@@ -200,6 +200,13 @@
         "pen": {
           "hyper": "https://codepen.io/WebReflection/pen/vJLVVy?editors=0010"
         }
+      },
+      {
+        "name": "List of Heroes",
+        "dir": "tour-of-heroes-1",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/dzGQbO?editors=0010"
+        }
       }
     ]
   }
