@@ -183,5 +183,24 @@
         }
       }
     ]
+  },
+  "Angular": {
+    "dir": "angular",
+    "tests": [
+      {
+        "name": "most basic App",
+        "dir": "first-component",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/wqMYwo?editors=0010"
+        }
+      },
+      {
+        "name": "Tour of Heroes",
+        "dir": "tour-of-heroes-0",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/vJLVVy?editors=0010"
+        }
+      }
+    ]
   }
 }
