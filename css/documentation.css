@@ -1,0 +1,44 @@
+section.hero.is-light .hero-body .column:nth-child(2) a {
+  color: rgba(54,54,54,.7);
+  border-bottom: 1px dotted rgba(154,154,154,.7);
+}
+section.hero.is-light .hero-body  .column:nth-child(2) a:hover {
+  color: inherit;
+}
+.content pre {
+  padding: 0;
+}
+
+pre > code {
+  line-height: 1.5em;
+  counter-reset: line-numbering;
+}
+
+pre > code span.line:before {
+  display: inline-block;
+  width: 3em;
+  margin-left: -0.5em;
+  padding-right: 4px;
+  content: counter(line-numbering);
+  counter-increment: line-numbering;
+  margin-right: 1em;
+  text-align: right;
+  /* color: #33342f; */
+  color: #8f908a;
+  background-color: #202119;
+  border-right: 4px solid #33342f;
+}
+
+pre > code > span.line > i {
+  font-style: normal;
+  display: inline-block;
+  position: relative;
+  min-width: .5em;
+}
+
+pre > code > span.line > i:before {
+  display: inline-block;
+  position: absolute;
+  content: '.';
+  color: #33342f;
+}

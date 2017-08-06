@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>hyperHTML Comparisons &amp; Examples</title>
+    <title>hyperHTML Documentation</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
-    <link rel="stylesheet" href="/css/examples.css">
+    <link rel="stylesheet" href="/css/documentation.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
     <script defer src="https://unpkg.com/hyperhtml@0.17.4"></script>
     <script defer src="js/index.js"></script>
   </head>
   <body>
-    <section class="hero is-fullheight is-light">
+    <section class="hero is-light">
       <div class="hero-head">
         <header class="nav">
           <div class="container">
@@ -24,7 +24,7 @@
               <a class="nav-item" href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
                 <img width="51" src="https://logo.js.org/dark_horz.png" alt="JS.ORG Logo"/>
               </a>
-              <strong class="nav-item">Examples</strong>
+              <strong class="nav-item">Documentation</strong>
             </div>
             <span class="nav-toggle">
               <span></span>
@@ -40,9 +40,34 @@
         </header>
       </div>
       <div class="hero-body">
-        <div class="container">
-          <p>Loading examples ...</p>
-          <progress class="progress"></progress>
+        <div class="columns container is-fluid">
+          <div class="column is-one-quarter">
+            <aside class="menu">
+              <p class="menu-label">
+                Documentation
+              </p>
+              <ul class="menu-list">
+                <li><a>Team Settings</a></li>
+                <li>
+                  <a class="is-active">This is a test</a>
+                  <ul>
+                    <li><a>this is a sub-section</a></li>
+                    <li><a>and so is this one</a></li>
+                  </ul>
+                </li>
+                <li><a>after sub sections</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div class="column">
+            <p><strong>Coming soon ...</strong></p>
+            <p><a>link test</a></p>
+            <pre><code class="javascript">
+              function sum(a, b) {
+                return a + b;
+              }
+            </code></pre>
+          </div>
         </div>
       </div>
     </section>
