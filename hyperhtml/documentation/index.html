@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/documentation.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.0.0/highlightjs-line-numbers.min.js"></script>
     <script defer src="https://unpkg.com/hyperhtml@0.17.4"></script>
     <script defer src="js/index.js"></script>
   </head>
@@ -63,9 +64,27 @@
             <p><strong>Coming soon ...</strong></p>
             <p><a>link test</a></p>
             <pre><code class="javascript">
-              function sum(a, b) {
-                return a + b;
-              }
+              addEventListener(
+                'DOMContentLoaded',
+                function () {
+                  [].forEach.call(
+                    document.querySelectorAll('pre > code'),
+                    function (node) {
+                      dropUnnecessarySpaces(node);
+                      hljs.highlightBlock(node);
+                      hljs.lineNumbersBlock(node);
+                    }
+                  );
+                  function dropUnnecessarySpaces(node) {
+                    var lines = node.textContent.split('\n');
+                    var spaces = /^(\s+)/.test(lines[1]) && RegExp.$1;
+                    node.textContent = lines.join('\n')
+                      .replace(new RegExp('^' + spaces, 'gm'), '')
+                      .replace(/^\s+|\s+$/g, '');
+                  }
+                },
+                {once: true}
+              );
             </code></pre>
           </div>
         </div>
