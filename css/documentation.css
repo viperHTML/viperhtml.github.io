@@ -13,3 +13,25 @@ section.hero.is-light .hero-body  .column:nth-child(2) a:hover {
 td.hljs-ln-numbers {
 	color: #CCC;
 }
+
+h2 {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+h3 {
+  font-size: 1.1em;
+  margin-top: 24px;
+  font-weight: bold;
+}
+
+p {
+  margin: 16px auto;
+}
+
+.column section ul {
+  padding-left: 24px;
+}
+.column section ul > li {
+  list-style: circle;
+}

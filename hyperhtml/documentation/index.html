@@ -10,7 +10,7 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.0.0/highlightjs-line-numbers.min.js"></script>
-    <script defer src="https://unpkg.com/hyperhtml@0.17.4"></script>
+    <script defer src="https://unpkg.com/hyperhtml@1.0.2"></script>
     <script defer src="js/index.js"></script>
   </head>
   <body>
@@ -45,47 +45,658 @@
           <div class="column is-one-quarter">
             <aside class="menu">
               <p class="menu-label">
-                Documentation
+                hyperHTML
               </p>
               <ul class="menu-list">
-                <li><a>Team Settings</a></li>
                 <li>
-                  <a class="is-active">This is a test</a>
+                  <a href="#introduction">Introduction</a>
                   <ul>
-                    <li><a>this is a sub-section</a></li>
-                    <li><a>and so is this one</a></li>
+                    <li><a href="#introduction-0">what is hyperHTML</a></li>
+                    <li><a href="#introduction-1">under the hood</a></li>
+                    <li><a href="#introduction-2">performance</a></li>
                   </ul>
                 </li>
-                <li><a>after sub sections</a></li>
+                <li>
+                  <a href="#essentials">Essentials</a>
+                  <ul>
+                    <li><a href="#essentials-0">installing</a></li>
+                    <li><a href="#essentials-1">bind VS wire</a></li>
+                    <li><a href="#essentials-2">wire types</a></li>
+                    <li><a href="#essentials-3">wire ids</a></li>
+                    <li><a href="#essentials-4">attributes vs content</a></li>
+                    <li><a href="#essentials-5">boolean attributes</a></li>
+                    <li><a href="#essentials-6">events attributes</a></li>
+                    <li><a href="#essentials-7">partial attributes</a></li>
+                    <li><a href="#essentials-8">content values</a></li>
+                    <li><a href="#essentials-9">asynchronous values</a></li>
+                    <li><a href="#essentials-10">the placeholder</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#api">API</a>
+                  <ul>
+                    <li><a href="#api-0">bind</a></li>
+                    <li><a href="#api-1">wire</a></li>
+                    <li><a href="#api-2">escape</a></li>
+                    <li><a href="#api-3">define</a></li>
+                    <li><a href="#api-4">document</a></li>
+                    <li><a href="#api-5">adopt</a></li>
+                  </ul>
+                </li>
               </ul>
             </aside>
           </div>
           <div class="column">
-            <p><strong>Coming soon ...</strong></p>
-            <p><a>link test</a></p>
-            <pre><code class="javascript">
-              addEventListener(
-                'DOMContentLoaded',
-                function () {
-                  [].forEach.call(
-                    document.querySelectorAll('pre > code'),
-                    function (node) {
-                      dropUnnecessarySpaces(node);
-                      hljs.highlightBlock(node);
-                      hljs.lineNumbersBlock(node);
-                    }
-                  );
-                  function dropUnnecessarySpaces(node) {
-                    var lines = node.textContent.split('\n');
-                    var spaces = /^(\s+)/.test(lines[1]) && RegExp.$1;
-                    node.textContent = lines.join('\n')
-                      .replace(new RegExp('^' + spaces, 'gm'), '')
-                      .replace(/^\s+|\s+$/g, '');
-                  }
-                },
-                {once: true}
+            <section id="introduction">
+              <h2>Introduction</h2>
+              <h3 id="introduction-0">What is hyperHTML ?</h3>
+              <hr>
+              <p>
+                100% based on Web standards, hyperHTML is
+                a zero-dependencies, fully cross platform library,
+                suitable to create <strong>declarative</strong> and
+                <strong>reactive</strong> Web Applications.
+              </p>
+              <p>
+                There is basically nothing new to learn with hyperHTML,
+                or better, nothing more than standard JavaScript, HTML, or CSS.
+              </p>
+              <p>
+                Its core features are built on top of <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals">template literals</a>,
+                where every interpolation is addressed once, as unique DOM operation, and updated at light-speed every time it's needed.
+                You can check <a href="https://webreflection.github.io/hyperHTML/test/tick/">the most basic hyperHTML example</a> out,
+                where only the date related content node will change each second.
+              </p>
+              <pre><code class="javascript">
+              function tick(render) {
+                // implicit invoke through template literals
+                render`
+                  &lt;div&gt;
+                    &lt;h1 id=${page.id}>Hello, world!&lt;/h1&gt;
+                    &lt;!-- dynamic content defined via interpolations --&gt;
+                    &lt;h2&gt;It is ${new Date().toLocaleTimeString()}.&lt;/h2&gt;
+                  &lt;/div&gt;
+                `;
+              }
+
+              // update the time each second
+              setInterval(tick, 1000,
+                hyperHTML.bind(document.body)
               );
-            </code></pre>
+              </code></pre>
+              <h3 id="introduction-1">Under the hood</h3>
+              <p>
+                Template literals aren't just better strings,
+                these have some hidden power not every developer is aware of.
+              </p>
+              <p>
+                As example, if you have a generic function and you place it in front of a template literal
+                without invoking it, this will be implicitly executed receiving at least one Array,
+                containing the list of chunks between interpolations,
+                plus zero, one, or more extra argument containing interpolated values.
+              </p>
+              <pre><code class="javascript">
+              function template(chunks, ...interpolations) {
+                console.log(chunks);          // ['1 ', ' 3']
+                console.log(interpolations);  // [2] or [4]
+              }
+
+              // look, no parentheses
+              template`1 ${2} 3`;
+              template`1 ${4} 3`;
+              </code></pre>
+              <p>
+                Not only the function is implicitly invoked,
+                it's first parameter will be a frozen, unique, Array,
+                so that even if a template would generate different strings through different interpolated values,
+                its chunks will be every times absolutely identical and unique.
+              </p>
+              <pre><code class="javascript">
+              const invokes = [];
+              function template(chunks, ...interpolations) {
+                invokes.push(chunks);
+                return chunks.join(interpolations[0]);
+              }
+
+              // create two different strings
+              template`1 ${2} 3`; // 1 2 3
+              template`1 ${4} 3`; // 1 4 3
+
+              // verify chunks were exactly the same
+              console.assert(
+                invokes[0] === invokes[1],
+                'same unique Array'
+              );
+
+              // try a different template literal
+              template`${2} 3`; // 1 4 3
+
+              // verify it's different
+              console.assert(
+                invokes[1] !== invokes[2],
+                'different template used'
+              );
+              </code></pre>
+              <p>
+                This native feature, well reflected even once transpiled via Babel,
+                is the key to generate a DOM structure and parse it once,
+                addressing all the internal operations needed to update interpolations,
+                creating a unique and convenient relationship between a template literal and a DOM template.
+              </p>
+              <p>
+                What hyperHTML adds on top of this feature, is a context to operate,
+                like a context you could use to any generic function or method call.
+              </p>
+              <pre><code class="javascript">
+              // bind hyperHTML to a generic DOM container
+              const bodyRender = hyperHTML.bind(document.body);
+
+              // use it to declare any layout you needed
+              bodyRender`
+                &lt;h1&gt;${document.title}&lt;/h1&gt;
+                &lt;ul&gt;
+                  ${[
+                    {name: 'First item'},
+                    {name: 'Second item'},
+                    {name: 'Third item'}
+                  ].map(item =&gt;
+                  `&lt;li&gt;${item.name}&lt;/li&gt;`)}
+                &lt;/ul&gt;
+              `;
+              </code></pre>
+              <p>
+                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/brrNRp?editors=0010">Code Pen</a>.
+              </p>
+              <h3 id="introduction-2">Performance</h3>
+              <p>
+                It doesn't matter if it's a <a href="https://webreflection.github.io/hyperHTML/test/dbmonster.html">DBMonster</a>
+                or <a href="https://webreflection.github.io/hyperHTML/test/double-rainbow.html">thousand SVGs</a>,
+                no matter if it's a <a href="https://webreflection.github.io/hypermvc/index.html">TodoMVC</a> challenge,
+                or a <a href="https://viperhtml-164315.appspot.com/top/1">Hacker News PWA</a>,
+                hyperHTML grants performance by default thanks to these simple facts: 
+              </p>
+              <ul>
+                <li>it's really lightweight, weighting <strong>less than 4KB minzipped</strong>, that's all the bandwidth budget you, and your users, need</li>
+                <li>it doesn't double RAM or CPU usage via Virtual DOM operations, it <strong>doesn't use Virtual DOM</strong> indeed: direct access!</li>
+                <li>it's fully based on ECMAScript <strong>standard</strong> and DOM <strong>specifications</strong></li>
+              </ul>
+              <p>
+                The last point means that it's hard to perform much faster than hyperHTML in a similar
+                minimalistic, elegant, yet powerful and expressive way,
+                every other framework will inevitably end up manipulating the DOM.
+              </p>
+              <p>
+                hyperHTML just sits already there with direct access to every node or attribute change.
+              </p>
+              <p>
+                Please keep reading the <a href="#essentials">essentials</a> to know more how to start using it.
+              </p>
+            </section>
+            <section id="essentials">
+              <h2>Essentials</h2>
+              <hr>
+              <h3 id="essentials-0">Installing</h3>
+              <p>
+                You can include hyperHTML directly on top of your page, using <a href="https://unpkg.com/#/">unpkg</a> CDN.
+              </p>
+              <pre>&lt;script src="https://unpkg.com/hyperhtml@latest/min.js"&gt;&lt;/script&gt;</pre>
+              <p>
+                Alternatively, you can install the <a href="https://www.npmjs.com/package/hyperhtml">npm CJS package</a> and require it later on.
+              </p>
+              <pre>npm i --save hyperhtml</pre>
+              <p>
+                If you use Babel to transpile template literals, your browser should be compatible with the following ES5 methods:
+              </p>
+              <ul>
+                <li>Object.defineProperty</li>
+                <li>Object.defineProperty</li>
+                <li>Object.defineProperties</li>
+              </ul>
+              <p>
+                In case you'd like to be sure you're including polyfills only when needed,
+                you can either use <a href="https://polyfill.io/v2/docs/">polyfill.io</a>
+                or <a href="https://github.com/es-shims/es5-shim">ES5 shims and shams</a>.
+              </p>
+              <h3 id="essentials-1">Bind VS Wire</h3>
+              <p>
+                There are two basic mechanisms to create DOM nodes in hyperHTML:
+              </p>
+              <ul>
+                <li>declaring the layout <strong>inside an existing DOM node</strong>,
+                like you would do on a <code>document.body</code>,
+                a <code>document.getElementById('node')</code> target node,
+                or a Custom Element node and eventually its Shadow DOM</li>
+                <li><strong>declaring new DOM nodes</strong> and their content,
+                like you would do for a list of table rows, LIs, paragraphs,
+                articles, etcetera.</li>
+              </ul>
+              <p>
+                In the first case, you will need to <strong>bind</strong> that node as hyperHTML context.
+                In the latter case, you would <strong>wire</strong> directly the declared content,
+                optionally relating it to a specific object.
+              </p>
+              <pre><code class="javascript">
+              const {bind, wire} = hyperHTML;
+
+              // find a container to render the layout
+              bind(document.querySelector('ul'))`${
+                // fill it up with wired items
+                listOfItems.map(
+                  // any object can be wired
+                  // to a declarative content
+                  item =>
+                  // this will return, per each item
+                  // an actual &lt;LI&gt; DOM node
+                  wire(item)`&lt;li&gt;${item.name}&lt;/li&gt;`
+                )
+              }`;
+              </code></pre>
+              <p>
+                To render and update multiple times existing nodes, you need to bind them as context.
+              </p>
+              <p>
+                To create on the fly one or more nodes, without any real world effect on the live document,
+                you can use wires.
+              </p>
+              <pre><code class="javascript">
+              const singleWire = hyperHTML.wire()`
+                &lt;li&gt;node&lt;/l&gt;`;
+              const multiWire = hyperHTML.wire()`
+                &lt;li&gt;a&lt;/l&gt;
+                &lt;li&gt;b&lt;/l&gt;
+                &lt;li&gt;c&lt;/l&gt;`;
+              </code></pre>
+              <p>
+                To properly render live those wired variables, you will need a bound context to operate.
+              </p>
+              <pre><code class="javascript">
+                hyperHTML.bind(document.body)`
+                &lt;ul&gt;
+                  ${singleWire}
+                  ${multiWire}
+                &lt;/ul&gt;`;
+              </code></pre>
+              <h3 id="essentials-2">Wire Types</h3>
+              <p>
+                When you bind a generic DOM node, it's easy for the library to understand what kind of node it is.
+              </p>
+              <p>
+                However, when you wire nodes at runtime,
+                it's important to distinguish between <code>html</code> nodes,
+                the assumed default, and <code>svg</code> nodes,
+                requiring special treatment during their creation.
+              </p>
+              <pre><code class="javascript">
+              const point = {x: 1, y: 2};
+              hyperHTML.bind(document.body)`
+              &lt;svg&gt;
+                ${hyperHTML.wire(point, 'svg')`
+                &lt;rect x=${point.x} y=${point.y} /&gt;`}
+              &lt;/svg&gt;`;
+              </code></pre>
+              <p>
+                By default, the <code>html</code> type is implicitly assumed as desired one,
+                but a non SVG element, even if appended inside an SVG, won't produce the same result.
+                The wire type is there to solve any ambiguity, when needed,
+                'cause a runtime created node cannot know upfront the kind of parent node it will have.
+              </p>
+              <h3 id="essentials-3">Wire IDs</h3>
+              <p>
+                A wire can be created without references
+              </p>
+              <pre><code class="javascript">
+              const newLI = hyperHTML.wire()`&lt;li&gt;&lt;/li&gt;`;
+              </code></pre>
+              <p>
+                But it could also be created once, weakly relating its content to a generic object.
+              </p>
+              <pre><code class="javascript">
+              const info = {some: 'data'};
+              const sameLI = hyperHTML.wire(info)`
+                              &lt;li&gt;&lt;/li&gt;`;
+
+              // what if we use same template later on?
+              console.assert(
+                sameLI === hyperHTML.wire(info)`
+                              &lt;li&gt;&lt;/li&gt;`,
+                'same reference means exact same node'
+              );
+              </code></pre>
+              <p>
+                However, a single object could be the source of many pieces of layout.
+                Think about a generic <code>user</code> object, it could be used to generate:
+              </p>
+              <ul>
+                <li>a settings page</li>
+                <li>an avatar</li>
+                <li>a profile summary</li>
+                <li>some contact details</li>
+              </ul>
+              <p>
+                In all these cases you want to create those layout only once per user,
+                reusing as much as possible such user as weak reference for its layout.
+              </p>
+              <p>
+                This is where specifying an id becomes handy, so that each user
+                can have multiple layouts associated.
+              </p>
+              <pre><code class="javascript">
+              function createView(user) {
+                const wire = hyperHTML.wire;
+                const avatar = wire(user, ':avatar')`
+                    &lt;img width=80 src=${user.image}&gt;`;
+                return {
+                  avatar: avatar,
+                  profile: wire(user, ':profile')`
+                    &lt;h1&gt;${user.name}&lt;/h1&gt;
+                    ${avatar}
+                    &lt;p&gt;${user.phone}&lt;/p&gt;`
+                };
+              }
+
+              // show the user profile
+              hyperHTML.bind(document.body)`
+              ${createView(userObject).profile}`;
+              </code></pre>
+              <p>
+                You can see the result on <a href="https://codepen.io/WebReflection/pen/dzzYgm?editors=0010">Code Pen</a>.
+              </p>
+              <p>
+                IDs are also <strong>compatible with types</strong>.
+                <code>hyperHTML.wire(obj, 'svg:point')`&lt;rect /&gt;`</code> is perfectly valid indeed.
+              </p>
+              <h3 id="essentials-4">Attributes vs Content</h3>
+              <p>
+                By this time it should be clear how to create nodes inside an existing element or on the fly.
+                While this is great content wise, we haven't talked much about attributes and what's possible to do.
+                Following a quick recap:
+              </p>
+              <ul>
+                <li>every attribute can be defined with or without quotes</li>
+                <li>attributes values can be of 4 kind:
+                  <ul>
+                    <li>text, as <strong>string</strong>, for any kind of attribute</li>
+                    <li><strong>boolean</strong> <code>true</code> or <code>false</code> for special attributes such <code>disabled</code> and others</li>
+                    <li><strong>function</strong> or <strong>object</strong> for custom or native events</li>
+                  </ul>
+                </li>
+              </ul>
+              <p>
+                Every node can have one or more attribute defined in a similar way.
+              </p>
+              <pre><code class="javascript">
+              hyperHTML.bind(form)`
+              &lt;input
+                class=${['one', 'more', 'class'].join(' ')}
+                disabled=${!isAuthorized}
+                oninput=${e => document.title = e.target.value}
+                value=${defaultInputValue}
+                placeholder=${'type something'}
+              &gt;`;
+              </code></pre>
+              <h3 id="essentials-5">Boolean Attributes</h3>
+              <p>
+                Whenever an attribute has a special meaning, and it should be present or not,
+                we can use boolean attribute values.
+              </p>
+              <pre><code class="javascript">
+              // this will generate
+              // &lt;button disabled&gt;click me if you can&lt;/button&gt;
+              hyperHTML.bind(form)`
+              &lt;button disabled=${true}&gt;
+                click me if you can
+              &lt;/bitton&gt;`;
+
+              // this will generate
+              // &lt;button&gt;click me if you can&lt;/button&gt;
+              hyperHTML.bind(form)`
+              &lt;button disabled=${false}&gt;
+                click me if you can
+              &lt;/bitton&gt;`;
+              </code></pre>
+              <p>
+                The same concept works for <code>defer</code>, <code>async</code>, links <code>download</code>,
+                or even <code>contenteditable</code>. Just use boolean attributes any time you need em,
+                if it's part of the element inheritance, it'll always do the right thing.
+              </p>
+              <h3 id="essentials-6">Events Attributes</h3>
+              <p>
+                The <a href="https://en.wikipedia.org/wiki/DOM_events#DOM_Level_0">DOM Level 0</a> introduced inline HTML events a very long time ago.
+                These can be represented by strings on the layout, directly within the element definition,
+                or as direct property accessor like in <code>link.onclick = callback</code>.
+              </p>
+              <p>
+                hyperHTML takes declarative events to the next level:
+                you directly assign them as a DOM Level 3 shortcut for <code>addEventListener</code> or,
+                in case the event is <code>null</code>, as a shortcut for <code>removeEventListener</code>.
+              </p>
+              <p>
+                This means that as long as an attribute name is prefixed with <strong>on</strong>,
+                every possible event can be assigned, either as function,
+                or <a href="https://medium.com/@WebReflection/dom-handleevent-a-cross-platform-standard-since-year-2000-5bf17287fd38">as object</a>,
+                through its <code>handleEvent</code> method.
+              </p>
+              <pre><code class="javascript">
+              function click(e) {
+                e.preventDefault();
+                alert('You wish! Muahahaha');
+              }
+              const site = 'http://google.com';;
+              const text = 'search something';
+              hyperHTML.bind(document.body)`
+              &lt;a href=${site} onclick=${click}&gt;${text}&lt;/a&gt;`;
+              </code></pre>
+              <p>
+                Specially when it comes to create DOM components,
+                having the <code>handleEvent</code> mechanism out of the box
+                is also a very welcome standard feature.
+              </p>
+              <pre><code class="javascript">
+              function Login(user, pass) {
+                this.validated = false;
+                this._user = user;
+                this._pass = pass;
+                this.html = hyperHTML.wire(this);
+                return this.render();
+              }
+
+              Login.prototype.handleEvent = function (e) {
+                this[e.target.name] = e.target.value;
+                this.validated = (
+                  this.user === this._user &amp;&amp;
+                  this.pass === this._pass
+                );
+                this.render();
+              };
+
+              Login.prototype.render = function () {
+                return this.html`
+                &lt;form
+                  method="post"
+                  onsubmit=${e => {
+                    e.preventDefault();
+                    alert('You made it!');
+                  }}
+                  action="/admin"&gt;
+                  &lt;input name=user oninput=${this}&gt;&lt;br&gt;
+                  &lt;input name=pass oninput=${this} type=password&gt;&lt;br&gt;
+                  &lt;input
+                    value='admin area'
+                    type=submit
+                    disabled=${!this.validated}&gt;
+                &lt;/form&gt;`;
+              };
+
+              document.body.appendChild(
+                new Login('super', 'secret')
+              );
+              </code></pre>
+              <p>
+                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/Yxxqwy?editors=0010">Code Pen</a>.
+              </p>
+              <p>
+                Bear in mind that runtime assigned listeners will inevitably remove and readd themselves since
+                two functions, even if with an identical look, are always different in JavaScript.
+                This means that while the previous example works fine for a demo purpose,
+                that <em>onsubmit</em> listener should be defined elsewhere instead of inline.
+              </p>
+              <h3 id="essentials-7">Partial Attributes</h3>
+              <p>
+                Since template literals interpolations can also contain template literals,
+                compromising performance over-complicating attributes operations
+                has been considered <acronym title="You Ain't Gonna Need It">YAGNI</acronym>
+                during the architecture design of the parser.
+              </p>
+              <p>
+                This means that partial attributes are not supported,
+                and most likely will never be supported because there are
+                many ways to obtain the same via a single attribute.
+              </p>
+              <pre><code class="javascript">
+              // THE FOLLOWING IS OK 👍
+              html`&lt;divclass=${`foo ${mayBar ? 'bar' : ''}`}&gt;Foo bar?&lt;/div&gt;`;
+              html`&lt;div class=${'foo' + (mayBar ? ' bar' : '')}&gt;Foo bar?&lt;/div&gt;`;
+              html`&lt;div class=${['foo', mayBar ? 'bar' : ''].join(' ')}&gt;Foo bar?&lt;/div&gt;`;
+              html`&lt;div style=${`top:${top}; left:${left};`}&gt;x&lt;/div&gt;`;
+
+              // THE FOLLOWING BREAKS ⚠️
+              html`&lt;div style="top:${top}; left:${left};"&gt;x&lt;/div&gt;`;
+              </code></pre>
+              <p>
+                Thinking that an attribute could be partially modified,
+                is also a misleading idea.
+                Whenever you change a single portion of an attribute,
+                the browser needs to figure out what to do with its whole new meaning.
+              </p>
+              <h3 id="essentials-8">Content Values</h3>
+              <p>
+                If attributes can be string, boolean, functions, and objects,
+                content value also have its own rules and features.
+              </p>
+              <ul>
+                <li>
+                  if content is text, as <strong>string</strong>, this will always be injected as <code>textContent</code> hence sanitized <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">against XSS</a>.<br>
+                  This makes hyperHTML <em>safe by default</em>, but it could be even safer ( <small>just keep reading</small> )
+                </li>
+                <li>
+                  if the content is a <strong>DOM Node</strong>, it will be simply appended in place.<br>
+                  This is necessary to make wires work within other templates but you can use this feature as you prefer.
+                </li>
+                <li>
+                  if the content is a <strong>Promise</strong>, it will be assigned once resolved.
+                  The resulting value can be of <em>any</em> understood type of this list.
+                </li>
+                <li>
+                  if the content is an <strong>Array</strong>, it's an explicit intent to perform one of the following operations:
+                  <ul>
+                    <li>if it's an array of <strong>strings</strong>, it will be injected as explict opt-in for <em>HTML</em></li>
+                    <li>if it's an array of <strong>DOM Nodes</strong>, it will be appended in place, which plays well with multi node wires.</li>
+                    <li>if it's an array of <strong>Promises</strong>, it will put in place, once all them will be resolved, with <em>any</em> returned value</li>
+                  </ul>
+                </li>
+                <li>
+                  if the content is an <strong>Object</strong>, it's an explicit intent to perform one of the following operations:
+                  <ul>
+                    <li>if it has a <strong>text</strong> property, it will force whatever value as sanitized string, hence XSS free <em>text content</em></li>
+                    <li>if it has a <strong>html</strong> property, it will force whatever value as string, injecting it as <em>HTML</em></li>
+                    <li>if it has a <strong>any</strong> property, it will resolve whatever content it has compatibly with all understood types</li>
+                    <li>if none of the following is true, hyperHTML will try to find out if it has the type <strong>defined</strong> on its registry.<br>
+                    In such case, it will pass along whatever value it is to the defined callback,
+                    and it will parse the resulting object compatibly with all understood type.</li>
+                  </ul>
+                </li>
+              </ul>
+              <p>
+                The following example shows most possible operations opt-in/out intents.
+              </p>
+              <pre><code class="javascript">
+              function html(render) {
+                return render`
+                  &lt;!-- text by default for strings --&gt;
+                  &lt;p&gt;Hello ${'World'}&lt;/p&gt;
+                  &lt;!-- text as explicit intent --&gt;
+                  &lt;p&gt;Hello ${{text: 'World'}}&lt;/p&gt;
+                  &lt;select&gt;
+                    &lt;!-- any by default for no-strings,
+                         Arrays are opt-in for HTML --&gt;
+                    ${['a', 'b'].map(v =&gt; `&lt;option value="${v}"&gt;${v}&lt;/option&gt;`)}
+                  &lt;/select&gt;
+                  &lt;!-- html as explicit intent --&gt;
+                  &lt;p&gt;Hello ${{html: '&lt;strong&gt;World&lt;/strong&gt;'}}&lt;/p&gt;
+                  &lt;!-- any content as explicit intent --&gt;
+                  &lt;p&gt;Hello ${{any: fetch('thing').then(b =&gt; b.text())}}&lt;/p&gt;
+                  &lt;!-- will be resolved as text so it'll be textContent --&gt;
+                `;
+              }
+              </code></pre>
+              <p>
+                To define an intent with its own transformer,
+                you can use the specific method.
+              </p>
+              <pre><code class="javascript">
+              // define an encode intent
+              hyperHTML.define(
+                'encoded',
+                encodeURIComponent
+              );
+
+              // use it like any other intent
+              const text = 'a + b';
+              html`&lt;p&gt;encoded ${{text}} is ${{encoded: text}}&lt;/p&gt;`;
+              // &lt;p&gt;encoded a + b is a%20%2B%20b&lt;/p&gt;
+              </code></pre>
+              <h3 id="essentials-9">Asynchronous Values</h3>
+              <p>
+                Core compatibility with Promises means you can even import layouts
+                asynchronously and return them once resolved.
+                This has been a key to make <a href="https://hnpwa.com/">Viper News HNPWA</a>
+                one of the fastest to bootstrap, despite being 100% <acronym title="Server Side Rendered">SSR</acronym>.
+              </p>
+              <p>
+                However, just having promises means there's no way to show, while waiting for them,
+                any meaningful output.
+                To solve this issue, you can use an extra builtin transformer which aim is to
+                provide content before the promise resolves: it's called <code>placeholder</code>.
+              </p>
+              <h3 id="essentials-10">The Placeholder</h3>
+              <p>
+                Every intent could be setup asynchronously
+                simply using a <strong>complementary</strong> <code>placeholder</code> <strong>property</strong>.
+              </p>
+              <p>
+                Such property can be any understood content type, except it wouldn't make much sense to have this property asynchronous too.
+              </p>
+              <pre><code class="javascript">
+              // fetch the list and render it as HTML
+              html`&lt;ul&gt;
+                ${{
+                  html: fetch('/grocery').then(b => b.text())
+                  placeholder: 'Loading list ...'
+                }}
+              &lt;/ul&gt;`;
+
+              // or wire some content
+              html`&lt;ul&gt;
+                ${{
+                  any: fetch('/grocery.json')
+                        .then(b => b.json())
+                        .then(list => list.map(
+                          item => hyperHTML.wire()
+                          `&lt;li data-id=${item.id}&gt;${item.name}&lt;/li&gt;`
+                        ))
+                  placeholder: spinner.cloneNode(true)
+                }}
+              &lt;/ul&gt;`;
+              </code></pre>
+              <p>
+                You can see a basic example of a <code>placeholder</code> on
+                <a href="https://codepen.io/WebReflection/pen/MvveOw?editors=0010">Code Pen</a>.
+              </p>
+            </section>
+            <section id="api">
+              <h2>API</h2><hr>
+              <h3 id="api-0">Coming soon ...</h3>
+            </section>
           </div>
         </div>
       </div>
