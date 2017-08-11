@@ -9,10 +9,12 @@ const App = {
     ]
   },
   render() { this.html`
-    <ol>${this.data.groceryList.map(
+    <ol>
+    ${this.data.groceryList.map(
       todo => wire(todo)`
-      <li data-id="${todo.id}"> ${todo.text} </li>`
-    )}</ol>`;
+      <li data-id=${todo.id}>${todo.text}</li>`
+    )}
+    </ol>`;
   }
 };
 App.render();

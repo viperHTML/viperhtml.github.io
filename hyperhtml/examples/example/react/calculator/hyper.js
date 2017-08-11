@@ -1,6 +1,6 @@
 function BoilingVerdict(comp, celsius) {
   return hyperHTML.wire(comp, ':verdict')`
-  <p celsius="${celsius}">The water would ${
+  <p celsius=${celsius}>The water would ${
     celsius >= 100 ? '' : ' not '
   } boil.</p>`;
 }
@@ -23,8 +23,8 @@ class TemperatureInput extends HyperElement {
         scaleNames[this.getAttribute('scale')]
       }:</legend>
       <input
-        value="${this.getAttribute('temperature')}"
-        oninput="${this}">
+        value=${this.getAttribute('temperature')}
+        oninput=${this}>
     </fieldset>`;
   }
 }
@@ -53,16 +53,16 @@ class Calculator extends HyperElement {
 
     return this.html`
     <temperature-input
-      scale="c"
-      temperature="${celsius}"
-      ontemperaturechange="${this}"
+      scale=c
+      temperature=${celsius}
+      ontemperaturechange=${this}
     ></temperature-input>
     <temperature-input
-      scale="f"
-      temperature="${fahrenheit}"
-      ontemperaturechange="${this}"
-    ></temperature-input>${
-    BoilingVerdict(this, celsius)}`;
+      scale=f
+      temperature=${fahrenheit}
+      ontemperaturechange=${this}
+    ></temperature-input>
+    ${BoilingVerdict(this, celsius)}`;
   }
 }
 

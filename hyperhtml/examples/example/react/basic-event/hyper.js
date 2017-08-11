@@ -5,7 +5,7 @@ function ActionLink() {
   }
 
   return hyperHTML.wire()`
-  <a href="#" onclick="${handleClick}">
+  <a href="#" onclick=${handleClick}>
     Click me
   </a>`;
 }

@@ -11,7 +11,7 @@ class Toggle extends HTMLElement {
 
   render() {
     return this.html`
-    <button onclick="${this}">
+    <button onclick=${this}>
       ${this.state.isToggleOn ? 'ON' : 'OFF'}
     </button>`;
   }

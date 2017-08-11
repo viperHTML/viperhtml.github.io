@@ -96,54 +96,52 @@ addEventListener(
       const framework = model.example[currentFramework];
       render`
         <div class="tile box selection">
-          <select class="framework" onchange="${model}">${
-            Object.keys(model.example).map(
-              key => wire(model, ':fw-' + key)`
-              <option selected="${currentFramework === key}">
-                ${key}
-              </option>`
-          )}</select>
-          <select class="example" onchange="${model}">${
-            Object.keys(framework).map(
-              key => wire(model, ':example-' + key)`
-              <option selected="${currentExample === key}">
-                ${key}
-              </option>`
-          )}</select>
+          <select class="framework" onchange="${model}">
+          ${Object.keys(model.example).map(
+            key => wire(model, ':fw-' + key)`
+            <option selected=${currentFramework === key}>
+              ${key}
+            </option>`)}
+          </select>
+          <select class="example" onchange=${model}>
+          ${Object.keys(framework).map(
+            key => wire(model, ':example-' + key)`
+            <option selected=${currentExample === key}>
+              ${key}
+            </option>`)}
+          </select>
         </div>
         <div class="tile is-ancestor">
           <div class="tile is-parent is-6">
             <div class="tile is-child">
               <p class="title"> ${currentFramework} </p>
               <div class="content framework">
-                <pre><code class="javascript">${
-                  // as text node, it'd be replaced via hljs
-                  hyperHTML.escape(framework[currentExample].fw).trim()
-                }</code></pre>
+                <pre><code class="javascript">
+                ${framework[currentExample].fw.trim()}
+                </code></pre>
               </div>
-              <p>${
-                framework[currentExample].pen.fw ?
+              <p>
+              ${[framework[currentExample].pen.fw ?
                   `<a href="${
                     framework[currentExample].pen.fw
                   }">Try it on CodePen.</a>` : ''
-              }</p>
+              ]}</p>
             </div>
           </div>
           <div class="tile is-parent is-6">
             <div class="tile is-child">
               <p class="title"> hyperHTML </p>
               <div class="content hyperhtml">
-                <pre><code class="javascript">${
-                  // as text node, it'd be replaced via hljs
-                  hyperHTML.escape(framework[currentExample].hyper).trim()
-                }</code></pre>
+                <pre><code class="javascript">
+                ${framework[currentExample].hyper.trim()}
+                </code></pre>
               </div>
-              <p>${
-                framework[currentExample].pen.hyper ?
-                  `<a href="${
-                    framework[currentExample].pen.hyper
-                  }">Try it on CodePen.</a>` : ''
-              }</p>
+              <p>
+              ${[framework[currentExample].pen.hyper ?
+                `<a href="${
+                  framework[currentExample].pen.hyper
+                }">Try it on CodePen.</a>` : ''
+              ]}</p>
             </div>
           </div>
         </div>

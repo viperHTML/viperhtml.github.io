@@ -17,27 +17,30 @@ class AppComponent {
     const selectedHero = this.selectedHero;
     hyperHTML.bind(document.querySelector('my-app'))`
     <style>${AppComponent.styles}</style>
-    <h1> ${this.title} </h1>
+    <h1>${this.title}</h1>
     <h2>My Heroes</h2>
-    <ul class="heroes">${this.heroes.map(
-      hero => wire(hero)`
-      <li
-        class="${hero === selectedHero ? 'selected' : ''}"
-        data-id="${hero.id}"
-        onclick="${this}"
-      >
-        <span class="badge"> ${hero.id} </span> ${hero.name}
-      </li>`
-    )}</ul>${selectedHero ?
+    <ul class=heroes>
+      ${this.heroes.map(
+        hero => wire(hero)`
+        <li
+          class=${hero === selectedHero ? 'selected' : ''}
+          data-id=${hero.id}
+          onclick=${this}
+        >
+          <span class=badge>${hero.id}</span> ${hero.name}
+        </li>`
+      )}
+    </ul>
+    ${selectedHero ?
       wire(this, ':editor')`
       <div>
-        <h2> ${selectedHero.name} details!</h2>
-        <div><label>id: </label> ${selectedHero.id}</div>
+        <h2>${selectedHero.name} details!</h2>
+        <div><label>id: </label>${selectedHero.id}</div>
         <div>
           <label>name: </label>
           <input
-            value="${selectedHero.name}"
-            oninput="${this}" placeholder="name">
+            value=${selectedHero.name}
+            oninput=${this} placeholder=name>
         </div>
       </div>` : ''
     }`;
