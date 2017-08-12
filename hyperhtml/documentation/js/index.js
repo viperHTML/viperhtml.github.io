@@ -13,10 +13,9 @@ addEventListener(
     hash();
     addEventListener('hashchange', hash);
     (function magicMenu(menu) {
-      if (
-        !/landscape/.test(screen.orientation.type) ||
-        document.documentElement.offsetWidth < 760
-      ) return;
+      if (!matchMedia(
+        '(orientation: landscape) and (min-width: 760px)'
+      ).matches) return;
       var
         hX = $('h2, h3'),
         top = document.body.scrollTop,
@@ -62,7 +61,10 @@ addEventListener(
       animate();
       function animate() {
         if (touched) return;
-        top = Math.max(0, top + (document.body.scrollTop - (top + clientY)) * .02);
+        top = Math.max(0, top + ((
+          document.body.scrollTop ||
+          document.documentElement.scrollTop
+        ) - (top + clientY)) * .02);
         active = old.toFixed(1) !== top.toFixed(1);
         if (active) {
           old = top;
