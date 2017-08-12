@@ -9,6 +9,10 @@ section.hero.is-light .hero-body  .column:nth-child(2) a:hover {
   padding: 0;
 }
 
+.menu a {
+  transition: all .6s ease-in;
+}
+
 /* for block of numbers */
 td.hljs-ln-numbers {
 	color: #CCC;

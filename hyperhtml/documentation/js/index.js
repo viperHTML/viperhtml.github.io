@@ -1,3 +1,4 @@
+// (c) Andrea Giammarchi - @WebReflection
 addEventListener(
   'DOMContentLoaded',
   function () {
@@ -11,16 +12,89 @@ addEventListener(
     );
     hash();
     addEventListener('hashchange', hash);
-    function $(css) {
-      var split = css.split(':first');
+    (function magicMenu(menu) {
+      if (
+        !/landscape/.test(screen.orientation.type) ||
+        document.documentElement.offsetWidth < 760
+      ) return;
+      var
+        hX = $('h2, h3'),
+        top = document.body.scrollTop,
+        active = false,
+        touched = false,
+        clientY = 0,
+        old = 0
+      ;
+      menu.style.position = 'absolute';
+      menu.addEventListener('mousemove', function (e) {
+        clientY = e.clientY;
+        if (!active) animate();
+      });
+      menu.addEventListener('touchstart', function (e) {
+        e.preventDefault();
+        touched = true;
+        clientY = e.touches[0].clientY;
+        old = clientY;
+      });
+      menu.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+        clientY = e.touches[0].clientY;
+        menu.style.top = (top + (clientY - old)) + 'px';
+      });
+      menu.addEventListener('touchend', function (e) {
+        e.preventDefault();
+        touched = false;
+        old = parseFloat(menu.style.top);
+        if (Math.abs(old - top) < 10) {
+          top = old;
+          old = 0;
+          e.target.click();
+          animate();
+        } else {
+          active = false;
+          top = old;
+        }
+      });
+      document.addEventListener('scroll', function (e) {
+        if (!active) animate();
+        [].some.call(hX, highlight);
+      });
+      animate();
+      function animate() {
+        if (touched) return;
+        top = Math.max(0, top + (document.body.scrollTop - (top + clientY)) * .02);
+        active = old.toFixed(1) !== top.toFixed(1);
+        if (active) {
+          old = top;
+          menu.style.top = top + 'px';
+          requestAnimationFrame(animate);
+        }
+      }
+      function highlight(el) {
+        var rect = el.getBoundingClientRect();
+        if ((rect.top >= 0) && (rect.bottom <= window.innerHeight)) {
+          if (el.id) hashChange($('a[href="#' + el.id + '"]:first', menu));
+          return true;
+        }
+      }
+    }($('.menu:first')));
+    function $(css, parent) {
+      var
+        split = css.split(':first'),
+        root = parent || document
+      ;
       return split.length < 2 ?
-        document.querySelectorAll(split[0]) :
-        document.querySelector(split.join(''));
+        root.querySelectorAll(split[0]) :
+        root.querySelector(split.join(''));
+    }
+    function hashChange(el) {
+      if (hash.el !== el) {
+        if (hash.el) hash.el.className = '';
+        if (hash.el = el) el.className = 'is-active';
+      }
     }
     function hash() {
-      if (hash.el) hash.el.className = '';
-      hash.el = $('a[href="' + (location.hash || '#introduction') + '"]:first');
-      if (hash.el) hash.el.className = 'is-active';
+      hashChange($('a[href="' + (location.hash || '#introduction') + '"]:first'));
     }
     function dropUnnecessarySpaces(node) {
       var lines = node.textContent.split('\n');

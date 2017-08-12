@@ -536,7 +536,7 @@
                 You can test above example directly on <a href="https://codepen.io/WebReflection/pen/Yxxqwy?editors=0010">Code Pen</a>.
               </p>
               <p>
-                Bear in mind that runtime assigned listeners will inevitably remove and readd themselves since
+                Bear in mind that runtime assigned listeners will inevitably remove and re-add themselves since
                 two functions, even if with an identical look, are always different in JavaScript.
                 This means that while the previous example works fine for a demo purpose,
                 that <em>onsubmit</em> listener should be defined elsewhere instead of inline.
@@ -608,7 +608,7 @@
                 </li>
               </ul>
               <p>
-                The following example shows most possible operations opt-in/out intents.
+                The following example shows most possible operations as opt-in/out intents.
               </p>
               <pre><code class="javascript">
               function html(render) {
@@ -696,6 +696,20 @@
             </section>
             <section id="api">
               <h2>API</h2><hr>
+              <p>
+                Even if hyperHTML is a function, it should rather be used as a namespace.
+              </p>
+              <p>
+                Every method is also detached from its context, so that you can easily assign
+                them destructuring.
+              </p>
+              <pre><code class="javascript">
+              const {bind:hyper, wire} = hyperHTML;
+
+              hyper(document.body)`
+                ${wire()`&lt;h1&gt;Hello Content&lt;/h1&gt;`}
+              `;
+              </code></pre>
               <h3 id="api-0">Coming soon ...</h3>
             </section>
           </div>
