@@ -73,6 +73,7 @@ addEventListener(
         }
       }
       function highlight(el) {
+        if (el.nodeName === 'H2') el = el.parentNode;
         var rect = el.getBoundingClientRect();
         if ((rect.top >= 0) && (rect.bottom <= window.innerHeight)) {
           if (el.id) hashChange($('a[href="#' + el.id + '"]:first', menu));
