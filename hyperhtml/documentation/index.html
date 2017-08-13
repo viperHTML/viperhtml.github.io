@@ -77,6 +77,9 @@
                   <ul>
                     <li><a href="#api-0">bind</a></li>
                     <li><a href="#api-1">wire</a></li>
+                    <li><a href="#api-1-0">wire object</a></li>
+                    <li><a href="#api-1-1">wire type</a></li>
+                    <li><a href="#api-1-2">wire id</a></li>
                     <li><a href="#api-2">escape</a></li>
                     <li><a href="#api-3">define</a></li>
                     <li><a href="#api-4">document</a></li>
@@ -88,9 +91,8 @@
           </div>
           <div class="column">
             <section id="introduction">
-              <h2>Introduction</h2>
+              <h2>Introduction</h2><hr>
               <h3 id="introduction-0">What is hyperHTML ?</h3>
-              <hr>
               <p>
                 100% based on Web standards, hyperHTML is
                 a zero-dependencies, fully cross platform library,
@@ -233,8 +235,7 @@
               </p>
             </section>
             <section id="essentials">
-              <h2>Essentials</h2>
-              <hr>
+              <h2>Essentials</h2><hr>
               <h3 id="essentials-0">Installing</h3>
               <p>
                 You can include hyperHTML directly on top of your page, using <a href="https://unpkg.com/#/">unpkg</a> CDN.
@@ -710,7 +711,228 @@
                 ${wire()`&lt;h1&gt;Hello Content&lt;/h1&gt;`}
               `;
               </code></pre>
-              <h3 id="api-0">Coming soon ...</h3>
+              <h3 id="api-0">hyperHTML.bind(DOMElement)</h3>
+              <p>
+                Used as <code>Function.prototype.bind</code> subset,
+                since you cannot bind extra arguments 'cause these are not handled by template literals,
+                <code>bind(el)</code> is the method to use when you want to populate an element with some content.
+              </p>
+              <p>
+                The element must exist already, and must be a valid HTML Element.
+              </p>
+              <pre><code class="javascript">
+              const {bind, wire} = hyperHTML;
+              bind(document.querySelector('main'))`
+                &lt;section id=${info.id}&gt;
+                  &lt;h2&gt;${info.title}&lt;/h2&gt;
+                  ${info.articles.map(article =&gt; wire(article)`
+                    &lt;article&gt;${article.author}&lt;/article&gt;`)}
+                &lt;/section&gt;`;
+              </code></pre>
+              <h3 id="api-1">hyperHTML.wire([obj[, type:id]])</h3>
+              <p>
+                Whenever you want to create a container, instead of populating one,
+                or when you want to create some DOM content at runtime,
+                <code>wire()`&lt;p&gt;hello&lt;/p&gt;`</code> is the way to go.
+              </p>
+              <pre><code class="javascript">
+              const {wire} = hyperHTML;
+              const name = 'World';
+
+              // wire() to create an element
+              document.body.appendChild(
+                wire()`&lt;h1&gt;Hello &lt;em&gt;${name}&lt;/em&gt;!&lt;/h1&gt;`
+              );
+              </code></pre>
+              <p>
+                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/dzzaJo?editors=0010">Code Pen</a>
+              </p>
+              <p>
+                If you'd like to use <code>wire</code> like a generic <code>html</code> content creator,
+                you can use a very simple utility like the following one:
+              </p>
+              <pre><code class="javascript">
+              // a wire itself is just a function used with
+              // template literals. You can pass values right away.
+              const html = (...args) => hyperHTML.wire()(...args);
+
+              document.body.appendChild(
+                html`&lt;p&gt;this is so easy&lt;/p&gt;`
+              );
+              </code></pre>
+              <p>
+                You can also create more than one element per wire.
+                In these cases though, hyperHTML will produce an array,
+                so that once appended as list of nodes, it won't lose references
+                like any document fragment would do.
+              </p>
+              <p>
+                Since by standard specification you cannot append an Array to a generic element,
+                you need to bind the target container in order to make <strong>multi-wires</strong> work.
+              </p>
+              <pre><code class="javascript">
+              const {bind, wire} = hyperHTML;
+              const name = 'Andrea';
+              const surname = 'Giammarchi';
+              
+              // multi-wire
+              const myDetails = wire()`
+                &lt;p&gt;${name}&lt;/p&gt;
+                &lt;p&gt;${surname}&lt;/p&gt;`;
+              
+              // handled like a fragment
+              // when passed to a bound element
+              bind(document.body)`
+              &lt;div&gt;
+                ${myDetails}
+              &lt;/div&gt;`;
+              </code></pre>
+              <p>
+                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/prrGLZ?editors=0010">Code Pen</a>
+              </p>
+              <h3 id="api-1-0">Wiring an object</h3>
+              <p>
+                The strongest hyperHTML point is the ability to recycle and address every single DOM node.
+                However, when you wire elements at runtime, you are creating every time a fresh new element.
+              </p>
+              <p>
+                While in most of the cases this is not necessarily a performance issue,
+                there is a bigger amount of used RAM and needed CPU operations that most of the time
+                are very simple to avoid.
+              </p>
+              <p>
+                The easiest way to do it, is by weakly relating a generic object to a generic wired content.
+              </p>
+              <pre><code class="javascript">
+              const {bind:hyper, wire} = hyperHTML;
+              
+              const todo = [
+                {id: 0, text: 'write documentation'},
+                {id: 1, text: 'publish online'}
+              ];
+              
+              // show the todo list
+              update();
+              
+              // add an item in 2 seconds
+              setTimeout(() => {
+                todo.push({
+                  id: 2, text: 'create Code Pen'
+                });
+                update();
+              }, 2000);
+              
+              function update() {
+                hyper(document.body)`
+                &lt;ul&gt;
+                  ${todo.map(item =&gt; wire(item)
+                  `&lt;li data-id=${item.id}&gt;${item.text}&lt;/li&gt;`)}
+                &lt;/ul&gt;`;
+              }
+              </code></pre>
+              <p>
+                As you can verify directly on <a href="https://codepen.io/WebReflection/pen/qXXgJd?editors=0010">Code Pen</a>,
+                the second time the <code>update()</code> function is called,
+                the only change that happens to the DOM,
+                is the new list item appended at the end of the <em>UL</em> element.
+              </p>
+              <p>
+                This happens because elements wired to a generic object will not be created again,
+                these will simply be exact same element and when it comes to list of same elements,
+                hyperHTML does nothing but leaving these there.
+              </p>
+              <h3 id="api-1-1">Wiring SVGs</h3>
+              <p>
+                Beside relating wired content to objects,
+                we might want to specify the kind of content we are either creating or relating.
+              </p>
+              <p>
+                There are currently 3 kinds of elements understood by hyperHTML:
+              </p>
+              <ul>
+                  <li><strong>html</strong> elements, used as default</li>
+                  <li><strong>svg</strong> elements, needing a special treatment</li>
+                  <li>an experimental <strong>adopt</strong> kind, discussed later on</li>
+              </ul>
+              <p>
+                While hyperHTML can easily understand bound element type,
+                when you create a new element it's quite impossible to distinguish
+                if you wanted such element as SVG one or a custom element or ... both ?
+              </p>
+              <p>
+                The optional second parameter for <code>hyperHTML.wire()</code> lets you explicitly define such type.
+              </p>
+              <pre><code class="javascript">
+              // returns an SVG rect shape element
+              hyperHTML.wire(null, 'svg')`&lt;rect /&gt;`;
+
+              // but by default, it would create just
+              // an HTML rect element with no special meaning
+              hyperHTML.wire()`&lt;rect /&gt;`;
+              // same as
+              hyperHTML.wire(null)`&lt;rect /&gt;`;
+              // or as
+              hyperHTML.wire(null, 'html')`&lt;rect /&gt;`;
+              </code></pre>
+              <h3 id="api-1-2">Multi wired objects</h3>
+              <p>
+                Now that we know how to relate some DOM content to a specific object,
+                and how to define its type,
+                we can move to the next step: using the same object to render multiple content.
+              </p>
+              <p>
+                To do this, all we need is an <strong>id</strong>, defined with a colon <code>:</code> prefix.
+                The reason for specifying it as colon and not <code>#</code> was to avoid confusion with DOM ids.
+                In this case we are referencing a generic name, or description, the template is used in relation to the generic object.
+              </p>
+              <pre><code class="javascript">
+              const {bind:hyper, wire} = hyperHTML;
+              
+              const todo = [
+                {id: 0, text: 'write documentation'},
+                {id: 1, text: 'publish online'}
+              ];
+              
+              update();
+              
+              function update() {
+                hyper(document.body)`
+                &lt;style&gt;
+                .todo-id {
+                  display: inline-block;
+                  margin: 4px;
+                  background-color: #eee;
+                  padding: 4px;
+                }
+                &lt;/style&gt;
+                &lt;p&gt;
+                  The list has the following IDs:
+                  ${todo.map(item =&gt; wire(item, ':id')`
+                  &lt;span class=todo-id&gt;${item.id}&lt;/span&gt;`)}
+                &lt;/p&gt;
+                &lt;ul&gt;
+                  ${todo.map(item =&gt; wire(item, ':list')
+                  `&lt;li data-id=${item.id}&gt;${item.text}&lt;/li&gt;`)}
+                &lt;/ul&gt;`;
+              }
+              </code></pre>
+              <p>
+                You can verify on <a href="https://codepen.io/WebReflection/pen/brrzyM?editors=0010">Code Pen</a>
+                even calling <code>update()</code> multiple time will not trash previous content,
+                and objects can be related multiple times with different wired content.
+              </p>
+              <p>
+                To specify a different kind of element and an id, you can simply write the kind upfront.
+              </p>
+              <pre><code class="javascript">
+              // default as html
+              hyperHTML.wire(obj, ':id');
+              // same as
+              hyperHTML.wire(obj, 'html:id');
+
+              // but different from
+              hyperHTML.wire(obj, 'svg:id');
+              </code></pre>
             </section>
           </div>
         </div>

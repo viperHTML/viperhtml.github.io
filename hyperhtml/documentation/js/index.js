@@ -16,62 +16,12 @@ addEventListener(
       if (!matchMedia(
         '(orientation: landscape) and (min-width: 760px)'
       ).matches) return;
-      var
-        hX = $('h2, h3'),
-        top = document.body.scrollTop,
-        active = false,
-        touched = false,
-        clientY = 0,
-        old = 0
-      ;
-      menu.style.position = 'absolute';
-      menu.addEventListener('mousemove', function (e) {
-        clientY = e.clientY;
-        if (!active) animate();
-      });
-      menu.addEventListener('touchstart', function (e) {
-        e.preventDefault();
-        touched = true;
-        clientY = e.touches[0].clientY;
-        old = clientY;
-      });
-      menu.addEventListener('touchmove', function (e) {
-        e.preventDefault();
-        clientY = e.touches[0].clientY;
-        menu.style.top = (top + (clientY - old)) + 'px';
-      });
-      menu.addEventListener('touchend', function (e) {
-        e.preventDefault();
-        touched = false;
-        old = parseFloat(menu.style.top);
-        if (Math.abs(old - top) < 10) {
-          top = old;
-          old = 0;
-          e.target.click();
-          animate();
-        } else {
-          active = false;
-          top = old;
-        }
-      });
+      var hX = $('h2, h3');
+      onresize();
+      addEventListener('resize', onresize);
       document.addEventListener('scroll', function (e) {
-        if (!active) animate();
         [].some.call(hX, highlight);
       });
-      animate();
-      function animate() {
-        if (touched) return;
-        top = Math.max(0, top + ((
-          document.body.scrollTop ||
-          document.documentElement.scrollTop
-        ) - (top + clientY)) * .02);
-        active = old.toFixed(1) !== top.toFixed(1);
-        if (active) {
-          old = top;
-          menu.style.top = top + 'px';
-          requestAnimationFrame(animate);
-        }
-      }
       function highlight(el) {
         if (el.nodeName === 'H2') el = el.parentNode;
         var rect = el.getBoundingClientRect();
@@ -79,6 +29,17 @@ addEventListener(
           if (el.id) hashChange($('a[href="#' + el.id + '"]:first', menu));
           return true;
         }
+      }
+      function onresize() {
+        menu.style.cssText = [
+          'position: fixed;',
+          'width: ' + (menu.parentNode.clientWidth - 20) + 'px;',
+          'max-height:' + (
+            window.innerHeight -
+            menu.getBoundingClientRect().top
+          ) + 'px;',
+          'overflow-y:auto;'
+        ].join('');
       }
     }($('.menu:first')));
     function $(css, parent) {
