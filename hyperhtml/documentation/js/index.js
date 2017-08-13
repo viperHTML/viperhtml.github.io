@@ -17,8 +17,9 @@ addEventListener(
         '(orientation: landscape) and (min-width: 760px)'
       ).matches) return;
       var hX = $('h2, h3');
-      onresize();
+      setTimeout(onresize, 33);
       addEventListener('resize', onresize);
+      onresize();
       document.addEventListener('scroll', function (e) {
         [].some.call(hX, highlight);
       });
