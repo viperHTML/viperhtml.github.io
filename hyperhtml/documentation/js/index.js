@@ -31,15 +31,13 @@ addEventListener(
         }
       }
       function onresize() {
-        menu.style.cssText = [
+        var cssText = [
           'position: fixed;',
-          'width: ' + (menu.parentNode.clientWidth - 20) + 'px;',
-          'max-height:' + (
-            window.innerHeight -
-            menu.getBoundingClientRect().top
-          ) + 'px;',
+          'width: ' + (menu.parentNode.offsetWidth - 20) + 'px;',
+          'max-height:' + (document.documentElement.clientHeight - 140) + 'px;',
           'overflow-y:auto;'
         ].join('');
+        menu.style.cssText = cssText;
       }
     }($('.menu:first')));
     function $(css, parent) {

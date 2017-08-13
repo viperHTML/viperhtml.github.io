@@ -933,6 +933,22 @@
               // but different from
               hyperHTML.wire(obj, 'svg:id');
               </code></pre>
+              <h3 id="api-2">hyperHTML.escape(text)</h3>
+              <p>
+                Before introducing <em>intents</em> through objects literals,
+                such <code>${{text}}</code> or <code>${{html}}</code>,
+                it wasn't possible to specify HTML escaped content.
+              </p>
+              <p>
+                Being something like <em>escaping</em> an always useful utility
+                when you deal with HTML documents,
+                hyperHTML kept this method around.
+              </p>
+              <pre><code class="javascript">
+              const {escape} = hyperHTML;
+              escape(`&lt;&#39;&amp;&quot;&gt;`);
+              // &amp;lt;&amp;#39;&amp;amp;&amp;quot;&amp;gt;
+              </code></pre>
             </section>
           </div>
         </div>
