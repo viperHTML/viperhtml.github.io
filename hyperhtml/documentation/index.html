@@ -949,6 +949,117 @@
               escape(`&lt;&#39;&amp;&quot;&gt;`);
               // &amp;lt;&amp;#39;&amp;amp;&amp;quot;&amp;gt;
               </code></pre>
+              <h3 id="api-3">hyperHTML.define(intent, callback)</h3>
+              <p>
+                You can extend hyperHTML intents by defining a name and a callback.
+                This mechanism is basically the same used to explicitly opt in for
+                text, html, or any other accepted value.
+              </p>
+              <p>
+                Such callback will receive whatever interpolated value is passed along,
+                and its returned value will be used as transformation.
+              </p>
+              <p>
+                This value can be anything, including an intent itself.
+              </p>
+              <pre><code class="javascript">
+              hyperHTML.define(
+                'adminArea',
+                (credentials) => {
+                  const form = new FormData();
+                  form.append('user', credentials.user);
+                  form.append('pass', credentials.pass);
+                  return {
+                    any: fetch('/auth', {
+                          method: 'POST',
+                          body: form
+                        })
+                        .then(b => b.json())
+                        .then(ok => {
+                          if (ok) return view.adminArea;
+                          else return 'failed to authenticate';
+                        }),
+                    'placeholder': 'authorizing user ...'
+                  };
+                }
+              );
+
+              hyperHTML.bind(document.body)`
+              &lt;section id="info"&gt;
+                ${'Welcome'}
+              &lt;/section&gt;
+              &lt;section id="admin"&gt;
+                ${{adminArea: {
+                  user: 'andrea',
+                  pass: '4ndr34'
+                }}}
+              &lt;/section&gt;`;
+              </code></pre>
+              <h4>Why is this needed?</h4>
+              <p>
+                Instead of needing to pollute the current local or global scope
+                with extended behaviors, hyperHTML templates can always have extensions
+                even if not defined.
+              </p>
+              <p>
+                This makes intents and also templates, completely independent
+                from the surrounding scope, giving developers the ability to even test them in isolation.
+              </p>
+              <p>
+                You could even mock intents, if it's testing you are after,
+                and forget about real definitions and dependencies.
+              </p>
+              <pre><code class="javascript">
+              const runtimeIntent = () => {};
+              
+              hyperHTML.bind(document.body)`
+                &lt;p&gt;
+                  This is fine.
+                &lt;/p&gt;
+                &lt;p&gt;
+                  ${{runtimeIntent}}
+                &lt;/p&gt;`;
+              </code></pre>
+              <h3 id="api-4">hyperHTML.document</h3>
+              <p>
+                In case you are using jsdom or <a href="https://viperhtml.js.org/basic.html">basicHTML</a>,
+                you can specify upfront a temporary global document, or change it at runtime.
+              </p>
+              <pre><code class="javascript">
+              const {Document} = require('basichtml');
+
+              // define document before requireing hyperHTML
+              global.document = new Document();
+              const hyperHTML = require('hyperhtml');
+
+              // if you want to get rid of it
+              delete global.document;
+              </code></pre>
+              <h3 id="api-5">hyperHTML.adopt(element)</h3>
+              <p>
+                Born as ideal <a href="https://viperhtml.js.org/viper.html">viperHTML</a> companion,
+                targeting extreme graceful enhancement,
+                adopting a node means trying to
+                map interpolations from an existing content,
+                as best effort without losing input focus or current native status,
+                whatever it is at the adopting time.
+              </p>
+              <p>
+                This is an inevitably limited, <strong>experimental</strong> feature,
+                that requires manual testing on every target device it's applied.
+              </p>
+              <p>
+                As quick suggestion, if the content of your template literal
+                is not exactly the same used in viperHTML,
+                and it's not a form element or some input or select one,
+                it's currently suggested to avoid this method completely,
+                as it increase chances templates would break in some target
+                browser, and it cannot possibly guarantee same reliability
+                a boud element or a wire would grant.
+              </p>
+              <p>
+                More documentation about this is coming soon.
+              </p>
             </section>
           </div>
         </div>
