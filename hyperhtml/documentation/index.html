@@ -91,22 +91,21 @@
           </div>
           <div class="column">
             <section id="introduction">
-              <h2>Introduction</h2><hr>
-              <h3 id="introduction-0">What is hyperHTML ?</h3>
+              <h2>Introduction</h2>
+              <h3 id="introduction-0">What is hyperHTML?</h3>
+              <hr>
               <p>
-                100% based on Web standards, hyperHTML is
-                a zero-dependencies, fully cross platform library,
-                suitable to create <strong>declarative</strong> and
+                hyperHTML is a Web standard compliant, zero-dependency, fully cross platform library
+                suitable for <strong>declarative</strong> and
                 <strong>reactive</strong> Web Applications.
               </p>
               <p>
-                There is basically nothing new to learn with hyperHTML,
-                or better, nothing more than standard JavaScript, HTML, or CSS.
+                There is nothing new to learn with hyperHTML other than standard JavaScript, HTML, or CSS.
               </p>
               <p>
                 Its core features are built on top of <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals">template literals</a>,
-                where every interpolation is addressed once, as unique DOM operation, and updated at light-speed every time it's needed.
-                You can check <a href="https://webreflection.github.io/hyperHTML/test/tick/">the most basic hyperHTML example</a> out,
+                where every interpolation is addressed once, as a unique DOM operation, and updated at lightning-speed when needed.
+                Check out <a href="https://webreflection.github.io/hyperHTML/test/tick/">the most basic hyperHTML example</a> below,
                 where only the date related content node will change each second.
               </p>
               <pre><code class="javascript">
@@ -129,13 +128,13 @@
               <h3 id="introduction-1">Under the hood</h3>
               <p>
                 Template literals aren't just better strings,
-                these have some hidden power not every developer is aware of.
+                they have hidden powers not every developer is aware of.
               </p>
               <p>
-                As example, if you have a generic function and you place it in front of a template literal
-                without invoking it, this will be implicitly executed receiving at least one Array,
-                containing the list of chunks between interpolations,
-                plus zero, one, or more extra argument containing interpolated values.
+                If you have a generic function and place it in front of a template literal
+                without invoking it, the function will be executed receiving an Array as its first argument which
+                will contain the list of chunks between interpolations,
+                the rest of the arguments will contain the interpolated values.
               </p>
               <pre><code class="javascript">
               function template(chunks, ...interpolations) {
@@ -148,10 +147,10 @@
               template`1 ${4} 3`;
               </code></pre>
               <p>
-                Not only the function is implicitly invoked,
-                it's first parameter will be a frozen, unique, Array,
-                so that even if a template would generate different strings through different interpolated values,
-                its chunks will be every times absolutely identical and unique.
+                Not only is the function invoked,
+                it's first parameter will be a frozen, unique, Array.
+                In this way, even if a template generates different strings due to changed interpolated values,
+                its chunks will always be the same.
               </p>
               <pre><code class="javascript">
               const invokes = [];
@@ -180,14 +179,12 @@
               );
               </code></pre>
               <p>
-                This native feature, well reflected even once transpiled via Babel,
-                is the key to generate a DOM structure and parse it once,
-                addressing all the internal operations needed to update interpolations,
-                creating a unique and convenient relationship between a template literal and a DOM template.
+                This native feature, even reflected when transpiled via Babel, is key to generating a DOM structure and parsing it once, 
+                creating a unique relationship between a template literal and a DOM template. 
               </p>
               <p>
-                What hyperHTML adds on top of this feature, is a context to operate,
-                like a context you could use to any generic function or method call.
+                What hyperHTML adds on top of this feature is a context to operate in,
+                like a context you could use for any generic function or method call.
               </p>
               <pre><code class="javascript">
               // bind hyperHTML to a generic DOM container
@@ -207,19 +204,19 @@
               `;
               </code></pre>
               <p>
-                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/brrNRp?editors=0010">Code Pen</a>.
+                View the example above on <a href="https://codepen.io/WebReflection/pen/brrNRp?editors=0010">Code Pen</a>.
               </p>
               <h3 id="introduction-2">Performance</h3>
               <p>
-                It doesn't matter if it's a <a href="https://webreflection.github.io/hyperHTML/test/dbmonster.html">DBMonster</a>
-                or <a href="https://webreflection.github.io/hyperHTML/test/double-rainbow.html">thousand SVGs</a>,
-                no matter if it's a <a href="https://webreflection.github.io/hypermvc/index.html">TodoMVC</a> challenge,
+                It doesn't matter if it's a <a href="https://webreflection.github.io/hyperHTML/test/dbmonster.html">DBMonster</a>, 
+                <a href="https://webreflection.github.io/hyperHTML/test/double-rainbow.html"> a thousand SVGs</a>,
+                a <a href="https://webreflection.github.io/hypermvc/index.html">TodoMVC</a> challenge,
                 or a <a href="https://viperhtml-164315.appspot.com/top/1">Hacker News PWA</a>,
-                hyperHTML grants performance by default thanks to these simple facts: 
+                hyperHTML gives you performance by default thanks to these simple facts: 
               </p>
               <ul>
-                <li>it's really lightweight, weighting <strong>less than 4KB minzipped</strong>, that's all the bandwidth budget you, and your users, need</li>
-                <li>it doesn't double RAM or CPU usage via Virtual DOM operations, it <strong>doesn't use Virtual DOM</strong> indeed: direct access!</li>
+                <li>it's really lightweight, weighing <strong>less than 4KB minzipped</strong>. That's all the bandwidth budget you and your users need.</li>
+                <li>it doesn't double RAM or CPU usage via Virtual DOM operations, it <strong>doesn't use a Virtual DOM at all!</strong></li>
                 <li>it's fully based on ECMAScript <strong>standard</strong> and DOM <strong>specifications</strong></li>
               </ul>
               <p>
@@ -231,14 +228,14 @@
                 hyperHTML just sits already there with direct access to every node or attribute change.
               </p>
               <p>
-                Please keep reading the <a href="#essentials">essentials</a> to know more how to start using it.
+                Read the <a href="#essentials">essentials</a> to learn how to start using it.
               </p>
             </section>
             <section id="essentials">
               <h2>Essentials</h2><hr>
               <h3 id="essentials-0">Installing</h3>
               <p>
-                You can include hyperHTML directly on top of your page, using <a href="https://unpkg.com/#/">unpkg</a> CDN.
+                You can include hyperHTML at the top of your page, using <a href="https://unpkg.com/#/">unpkg</a> CDN.
               </p>
               <pre>&lt;script src="https://unpkg.com/hyperhtml@latest/min.js"&gt;&lt;/script&gt;</pre>
               <p>
@@ -250,12 +247,11 @@
               </p>
               <ul>
                 <li>Object.defineProperty</li>
-                <li>Object.defineProperty</li>
                 <li>Object.defineProperties</li>
               </ul>
               <p>
-                In case you'd like to be sure you're including polyfills only when needed,
-                you can either use <a href="https://polyfill.io/v2/docs/">polyfill.io</a>
+                If you need a polyfill for the methods above
+                you can use <a href="https://polyfill.io/v2/docs/">polyfill.io</a>
                 or <a href="https://github.com/es-shims/es5-shim">ES5 shims and shams</a>.
               </p>
               <h3 id="essentials-1">Bind VS Wire</h3>
@@ -272,9 +268,9 @@
                 articles, etcetera.</li>
               </ul>
               <p>
-                In the first case, you will need to <strong>bind</strong> that node as hyperHTML context.
-                In the latter case, you would <strong>wire</strong> directly the declared content,
-                optionally relating it to a specific object.
+                In the first case, you will need to <strong>bind</strong> the node as hyperHTML context.
+                In the latter case, you would <strong>wire</strong> the declared content,
+                optionally passing it an object.
               </p>
               <pre><code class="javascript">
               const {bind, wire} = hyperHTML;
@@ -293,10 +289,10 @@
               }`;
               </code></pre>
               <p>
-                To render and update multiple times existing nodes, you need to bind them as context.
+                To render and update nodes multiple times, you need to bind them as context.
               </p>
               <p>
-                To create on the fly one or more nodes, without any real world effect on the live document,
+                To create nodes on the fly, without rendering,
                 you can use wires.
               </p>
               <pre><code class="javascript">
@@ -309,7 +305,7 @@
                 &lt;li&gt;c&lt;/l&gt;`;
               </code></pre>
               <p>
-                To properly render live those wired variables, you will need a bound context to operate.
+                To properly render the wired variables, you will need a bound context to operate.
               </p>
               <pre><code class="javascript">
                 hyperHTML.bind(document.body)`
@@ -326,7 +322,7 @@
                 However, when you wire nodes at runtime,
                 it's important to distinguish between <code>html</code> nodes,
                 the assumed default, and <code>svg</code> nodes,
-                requiring special treatment during their creation.
+                which require special treatment during their creation.
               </p>
               <pre><code class="javascript">
               const point = {x: 1, y: 2};
@@ -337,10 +333,10 @@
               &lt;/svg&gt;`;
               </code></pre>
               <p>
-                By default, the <code>html</code> type is implicitly assumed as desired one,
-                but a non SVG element, even if appended inside an SVG, won't produce the same result.
-                The wire type is there to solve any ambiguity, when needed,
-                'cause a runtime created node cannot know upfront the kind of parent node it will have.
+                By default, the <code>html</code> type is assumed,
+                but a non SVG element, even if appended inside another SVG element, won't produce the same result.
+                The wire type is there to solve this ambiguity, when needed,
+                as a runtime created node cannot know upfront its parent's node type.
               </p>
               <h3 id="essentials-3">Wire IDs</h3>
               <p>
@@ -361,13 +357,14 @@
               console.assert(
                 sameLI === hyperHTML.wire(info)`
                               &lt;li&gt;&lt;/li&gt;`,
-                'same reference means exact same node'
+                'same reference means exactly the same node'
               );
               </code></pre>
               <p>
                 However, a single object could be the source of many pieces of layout.
-                Think about a generic <code>user</code> object, it could be used to generate:
+                Think about a generic <code>user</code> object.
               </p>
+              <p>It could be used to generate:</p>
               <ul>
                 <li>a settings page</li>
                 <li>an avatar</li>
@@ -375,12 +372,12 @@
                 <li>some contact details</li>
               </ul>
               <p>
-                In all these cases you want to create those layout only once per user,
-                reusing as much as possible such user as weak reference for its layout.
+                In all these cases you want to create the layout once per user,
+                reusing as much as possible so that <code>user</code> has a weak reference to its layouts.
               </p>
               <p>
-                This is where specifying an id becomes handy, so that each user
-                can have multiple layouts associated.
+                This is where specifying an id comes in handy, as it allows each user
+                scenario to have multiple layouts associated with it.
               </p>
               <pre><code class="javascript">
               function createView(user) {
@@ -401,21 +398,21 @@
               ${createView(userObject).profile}`;
               </code></pre>
               <p>
-                You can see the result on <a href="https://codepen.io/WebReflection/pen/dzzYgm?editors=0010">Code Pen</a>.
+                View the result on <a href="https://codepen.io/WebReflection/pen/dzzYgm?editors=0010">Code Pen</a>.
               </p>
               <p>
                 IDs are also <strong>compatible with types</strong>.
-                <code>hyperHTML.wire(obj, 'svg:point')`&lt;rect /&gt;`</code> is perfectly valid indeed.
+                <br>For example, <code>hyperHTML.wire(obj, 'svg:point')`&lt;rect /&gt;`</code> is perfectly valid.
               </p>
               <h3 id="essentials-4">Attributes vs Content</h3>
               <p>
-                By this time it should be clear how to create nodes inside an existing element or on the fly.
-                While this is great content wise, we haven't talked much about attributes and what's possible to do.
-                Following a quick recap:
+                By now it should be clear how to create nodes inside an existing element or on the fly.
+                While this is great content wise, we haven't talked much about attributes and what's possible with them.
               </p>
+              <p> Here's a list:</p>
               <ul>
                 <li>every attribute can be defined with or without quotes</li>
-                <li>attributes values can be of 4 kind:
+                <li>attribute values can be one of 4 types:
                   <ul>
                     <li>text, as <strong>string</strong>, for any kind of attribute</li>
                     <li><strong>boolean</strong> <code>true</code> or <code>false</code> for special attributes such <code>disabled</code> and others</li>
@@ -424,7 +421,7 @@
                 </li>
               </ul>
               <p>
-                Every node can have one or more attribute defined in a similar way.
+                Every node can have one or more attributes defined in a similar way.
               </p>
               <pre><code class="javascript">
               hyperHTML.bind(form)`
@@ -447,35 +444,35 @@
               hyperHTML.bind(form)`
               &lt;button disabled=${true}&gt;
                 click me if you can
-              &lt;/bitton&gt;`;
+              &lt;/button&gt;`;
 
               // this will generate
               // &lt;button&gt;click me if you can&lt;/button&gt;
               hyperHTML.bind(form)`
               &lt;button disabled=${false}&gt;
                 click me if you can
-              &lt;/bitton&gt;`;
+              &lt;/button&gt;`;
               </code></pre>
               <p>
                 The same concept works for <code>defer</code>, <code>async</code>, links <code>download</code>,
-                or even <code>contenteditable</code>. Just use boolean attributes any time you need em,
-                if it's part of the element inheritance, it'll always do the right thing.
+                or even <code>contenteditable</code>. Just use boolean attributes any time you need them,
+                if it's part of the element's inheritance, it'll always do the right thing.
               </p>
               <h3 id="essentials-6">Events Attributes</h3>
               <p>
                 The <a href="https://en.wikipedia.org/wiki/DOM_events#DOM_Level_0">DOM Level 0</a> introduced inline HTML events a very long time ago.
-                These can be represented by strings on the layout, directly within the element definition,
-                or as direct property accessor like in <code>link.onclick = callback</code>.
+                These can be represented as strings in the layout within the element definition,
+                or as a direct property accessor like <code>link.onclick = callback</code>.
               </p>
               <p>
                 hyperHTML takes declarative events to the next level:
-                you directly assign them as a DOM Level 3 shortcut for <code>addEventListener</code> or,
-                in case the event is <code>null</code>, as a shortcut for <code>removeEventListener</code>.
+                you can assign them as DOM Level 3 shortcuts for <code>addEventListener</code> or,
+                if the event is <code>null</code>, as a shortcut for <code>removeEventListener</code>.
               </p>
               <p>
                 This means that as long as an attribute name is prefixed with <strong>on</strong>,
-                every possible event can be assigned, either as function,
-                or <a href="https://medium.com/@WebReflection/dom-handleevent-a-cross-platform-standard-since-year-2000-5bf17287fd38">as object</a>,
+                every possible event can be assigned, either as a function,
+                or <a href="https://medium.com/@WebReflection/dom-handleevent-a-cross-platform-standard-since-year-2000-5bf17287fd38">an object</a>,
                 through its <code>handleEvent</code> method.
               </p>
               <pre><code class="javascript">
@@ -489,9 +486,9 @@
               &lt;a href=${site} onclick=${click}&gt;${text}&lt;/a&gt;`;
               </code></pre>
               <p>
-                Specially when it comes to create DOM components,
+                When it comes to creating DOM components,
                 having the <code>handleEvent</code> mechanism out of the box
-                is also a very welcome standard feature.
+                is a very welcome, standard feature.
               </p>
               <pre><code class="javascript">
               function Login(user, pass) {
@@ -534,26 +531,28 @@
               );
               </code></pre>
               <p>
-                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/Yxxqwy?editors=0010">Code Pen</a>.
+                View the example above on <a href="https://codepen.io/WebReflection/pen/Yxxqwy?editors=0010">Code Pen</a>.
               </p>
               <p>
                 Bear in mind that runtime assigned listeners will inevitably remove and re-add themselves since
-                two functions, even if with an identical look, are always different in JavaScript.
-                This means that while the previous example works fine for a demo purpose,
-                that <em>onsubmit</em> listener should be defined elsewhere instead of inline.
+                two functions, even if identical, are always different in JavaScript.
+                This means that while the previous example works fine for demo purposes,
+                the <em>onsubmit</em> listener should be defined elsewhere and not inline.
               </p>
               <h3 id="essentials-7">Partial Attributes</h3>
               <p>
-                Since template literals interpolations can also contain template literals,
-                compromising performance over-complicating attributes operations
-                has been considered <acronym title="You Ain't Gonna Need It">YAGNI</acronym>
-                during the architecture design of the parser.
+                Partial attributes are not supported,
+                and most likely will never be supported because there are
+                many ways to achieve the same goal via a single definition.
               </p>
               <p>
-                This means that partial attributes are not supported,
-                and most likely will never be supported because there are
-                many ways to obtain the same via a single attribute.
+                <strong>Why no partial attributes?</strong><br>
+                Template literal interpolations can also contain other template literals 
+                compromising performance and over-complicating attribute operations.
+                This was considered <acronym title="You Ain't Gonna Need It">YAGNI</acronym>
+                during the architecture design of the parser.
               </p>
+              <p>The following example shows several ways to update an attribute correctly as well as the wrong way, mentioned above.</p>
               <pre><code class="javascript">
               // THE FOLLOWING IS OK 👍
               html`&lt;divclass=${`foo ${mayBar ? 'bar' : ''}`}&gt;Foo bar?&lt;/div&gt;`;
@@ -565,20 +564,18 @@
               html`&lt;div style="top:${top}; left:${left};"&gt;x&lt;/div&gt;`;
               </code></pre>
               <p>
-                Thinking that an attribute could be partially modified,
-                is also a misleading idea.
+                It's misleading to think that an attribute can be partially modified.
                 Whenever you change a single portion of an attribute,
-                the browser needs to figure out what to do with its whole new meaning.
+                the browser needs to figure out what to do with the change as a whole.
               </p>
               <h3 id="essentials-8">Content Values</h3>
               <p>
-                If attributes can be string, boolean, functions, and objects,
-                content value also have its own rules and features.
+                Content values also have their own rules and features.
               </p>
               <ul>
                 <li>
-                  if content is text, as <strong>string</strong>, this will always be injected as <code>textContent</code> hence sanitized <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">against XSS</a>.<br>
-                  This makes hyperHTML <em>safe by default</em>, but it could be even safer ( <small>just keep reading</small> )
+                  if content is text, as <strong>string</strong>, this will be injected as <code>textContent</code> and natively sanitized <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">against XSS</a>.<br>
+                  This makes hyperHTML <em>safe by default</em>, but it could be even safer ( <small>keep reading</small> )
                 </li>
                 <li>
                   if the content is a <strong>DOM Node</strong>, it will be simply appended in place.<br>
@@ -586,14 +583,14 @@
                 </li>
                 <li>
                   if the content is a <strong>Promise</strong>, it will be assigned once resolved.
-                  The resulting value can be of <em>any</em> understood type of this list.
+                  The resulting value can be of <em>any</em> understood type in this list.
                 </li>
                 <li>
                   if the content is an <strong>Array</strong>, it's an explicit intent to perform one of the following operations:
                   <ul>
-                    <li>if it's an array of <strong>strings</strong>, it will be injected as explict opt-in for <em>HTML</em></li>
-                    <li>if it's an array of <strong>DOM Nodes</strong>, it will be appended in place, which plays well with multi node wires.</li>
-                    <li>if it's an array of <strong>Promises</strong>, it will put in place, once all them will be resolved, with <em>any</em> returned value</li>
+                    <li>if it's an array of <strong>strings</strong>, they will be injected as explict opt-in for <em>HTML</em></li>
+                    <li>if it's an array of <strong>DOM Nodes</strong>, they will be appended in place, which plays well with multi node wires.</li>
+                    <li>if it's an array of <strong>Promises</strong>, they will be placed once all promises are resolved, with <em>any</em> returned value</li>
                   </ul>
                 </li>
                 <li>
@@ -601,15 +598,15 @@
                   <ul>
                     <li>if it has a <strong>text</strong> property, it will force whatever value as sanitized string, hence XSS free <em>text content</em></li>
                     <li>if it has a <strong>html</strong> property, it will force whatever value as string, injecting it as <em>HTML</em></li>
-                    <li>if it has a <strong>any</strong> property, it will resolve whatever content it has compatibly with all understood types</li>
-                    <li>if none of the following is true, hyperHTML will try to find out if it has the type <strong>defined</strong> on its registry.<br>
-                    In such case, it will pass along whatever value it is to the defined callback,
-                    and it will parse the resulting object compatibly with all understood type.</li>
+                    <li>if it has an <strong>any</strong> property, it will resolve whatever content it has compatibly with all understood types</li>
+                    <li>if none of the following is true, hyperHTML will try to find out if it has the type <strong>defined</strong> in its registry.<br>
+                    In which case, it will pass along whatever value it is to the defined callback,
+                    and it will parse the resulting object against the types in this list.</li>
                   </ul>
                 </li>
               </ul>
               <p>
-                The following example shows most possible operations as opt-in/out intents.
+                The following example shows possible opt-in/out intents.
               </p>
               <pre><code class="javascript">
               function html(render) {
@@ -633,7 +630,7 @@
               </code></pre>
               <p>
                 To define an intent with its own transformer,
-                you can use the specific method.
+                you can use the <code>define</code> method.
               </p>
               <pre><code class="javascript">
               // define an encode intent
@@ -649,24 +646,23 @@
               </code></pre>
               <h3 id="essentials-9">Asynchronous Values</h3>
               <p>
-                Core compatibility with Promises means you can even import layouts
+                Core compatibility with Promises means you can import layouts
                 asynchronously and return them once resolved.
-                This has been a key to make <a href="https://hnpwa.com/">Viper News HNPWA</a>
+                This was key to making <a href="https://hnpwa.com/">Viper News HNPWA</a>, 
                 one of the fastest to bootstrap, despite being 100% <acronym title="Server Side Rendered">SSR</acronym>.
               </p>
               <p>
-                However, just having promises means there's no way to show, while waiting for them,
-                any meaningful output.
-                To solve this issue, you can use an extra builtin transformer which aim is to
-                provide content before the promise resolves: it's called <code>placeholder</code>.
+                However, having promises means there's no way to show content while waiting for them to resolve.
+                To solve this issue, you can use an extra builtin transformer called <code>placeholder</code> which will 
+                provide content before the promise resolves.
               </p>
               <h3 id="essentials-10">The Placeholder</h3>
               <p>
-                Every intent could be setup asynchronously
-                simply using a <strong>complementary</strong> <code>placeholder</code> <strong>property</strong>.
+                Every intent can be setup asynchronously
+                by simply using the <code>placeholder</code> property.
               </p>
               <p>
-                Such property can be any understood content type, except it wouldn't make much sense to have this property asynchronous too.
+                This property can be any content type listed above, although it wouldn't make sense to have this property asynchronous too.
               </p>
               <pre><code class="javascript">
               // fetch the list and render it as HTML
@@ -691,18 +687,16 @@
               &lt;/ul&gt;`;
               </code></pre>
               <p>
-                You can see a basic example of a <code>placeholder</code> on
+                View a basic example of <code>placeholder</code> on
                 <a href="https://codepen.io/WebReflection/pen/MvveOw?editors=0010">Code Pen</a>.
               </p>
             </section>
             <section id="api">
               <h2>API</h2><hr>
               <p>
-                Even if hyperHTML is a function, it should rather be used as a namespace.
-              </p>
-              <p>
-                Every method is also detached from its context, so that you can easily assign
-                them destructuring.
+                Even though hyperHTML is a function, it should be used as a namespace.
+                Every method is detached from its context so that you can easily
+                destructure them.
               </p>
               <pre><code class="javascript">
               const {bind:hyper, wire} = hyperHTML;
@@ -745,7 +739,7 @@
               );
               </code></pre>
               <p>
-                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/dzzaJo?editors=0010">Code Pen</a>
+               View the example above on <a href="https://codepen.io/WebReflection/pen/dzzaJo?editors=0010">Code Pen</a>
               </p>
               <p>
                 If you'd like to use <code>wire</code> like a generic <code>html</code> content creator,
@@ -764,7 +758,7 @@
                 You can also create more than one element per wire.
                 In these cases though, hyperHTML will produce an array,
                 so that once appended as list of nodes, it won't lose references
-                like any document fragment would do.
+                like a document fragment would.
               </p>
               <p>
                 Since by standard specification you cannot append an Array to a generic element,
@@ -788,20 +782,19 @@
               &lt;/div&gt;`;
               </code></pre>
               <p>
-                You can test above example directly on <a href="https://codepen.io/WebReflection/pen/prrGLZ?editors=0010">Code Pen</a>
+                View the example above on <a href="https://codepen.io/WebReflection/pen/prrGLZ?editors=0010">Code Pen</a>
               </p>
               <h3 id="api-1-0">Wiring an object</h3>
               <p>
-                The strongest hyperHTML point is the ability to recycle and address every single DOM node.
-                However, when you wire elements at runtime, you are creating every time a fresh new element.
+                The strongest hyperHTML point is the ability to recycle and address every DOM node.
+                However, when you wire elements at runtime, you are creating a fresh new element every time.
               </p>
               <p>
-                While in most of the cases this is not necessarily a performance issue,
-                there is a bigger amount of used RAM and needed CPU operations that most of the time
-                are very simple to avoid.
+                While in most cases this is not necessarily a performance issue,
+                there is a larger amount of RAM and CPU operations needed that can be avoided.
               </p>
               <p>
-                The easiest way to do it, is by weakly relating a generic object to a generic wired content.
+                The easiest way to do this, is by weakly relating a generic object to a generic wired content.
               </p>
               <pre><code class="javascript">
               const {bind:hyper, wire} = hyperHTML;
@@ -831,10 +824,10 @@
               }
               </code></pre>
               <p>
-                As you can verify directly on <a href="https://codepen.io/WebReflection/pen/qXXgJd?editors=0010">Code Pen</a>,
-                the second time the <code>update()</code> function is called,
-                the only change that happens to the DOM,
-                is the new list item appended at the end of the <em>UL</em> element.
+                As you can see on <a href="https://codepen.io/WebReflection/pen/qXXgJd?editors=0010">Code Pen</a>,
+                the second time the <code>update()</code> function is called
+                the only change that happens to the DOM
+                is that the new list item is appended to the end of the <em>UL</em> element.
               </p>
               <p>
                 This happens because elements wired to a generic object will not be created again,
@@ -847,20 +840,20 @@
                 we might want to specify the kind of content we are either creating or relating.
               </p>
               <p>
-                There are currently 3 kinds of elements understood by hyperHTML:
+                There are currently 3 types of elements accepted by hyperHTML:
               </p>
               <ul>
                   <li><strong>html</strong> elements, used as default</li>
                   <li><strong>svg</strong> elements, needing a special treatment</li>
-                  <li>an experimental <strong>adopt</strong> kind, discussed later on</li>
+                  <li>an experimental <strong>adopt</strong> type, discussed later on</li>
               </ul>
               <p>
-                While hyperHTML can easily understand bound element type,
-                when you create a new element it's quite impossible to distinguish
-                if you wanted such element as SVG one or a custom element or ... both ?
+                While hyperHTML can easily understand a bound element type,
+                when you create a new element it's quite impossible to determine
+                if you wanted the element as an SVG, a custom element or ... both ?
               </p>
               <p>
-                The optional second parameter for <code>hyperHTML.wire()</code> lets you explicitly define such type.
+                The optional second parameter for <code>hyperHTML.wire()</code> lets you explicitly define which type.
               </p>
               <pre><code class="javascript">
               // returns an SVG rect shape element
@@ -918,7 +911,7 @@
               </code></pre>
               <p>
                 You can verify on <a href="https://codepen.io/WebReflection/pen/brrzyM?editors=0010">Code Pen</a>
-                even calling <code>update()</code> multiple time will not trash previous content,
+                that calling <code>update()</code> multiple time will not trash the previous content,
                 and objects can be related multiple times with different wired content.
               </p>
               <p>
@@ -940,7 +933,7 @@
                 it wasn't possible to specify HTML escaped content.
               </p>
               <p>
-                Being something like <em>escaping</em> an always useful utility
+                Since <em>escaping</em> is a useful utility
                 when you deal with HTML documents,
                 hyperHTML kept this method around.
               </p>
@@ -956,8 +949,8 @@
                 text, html, or any other accepted value.
               </p>
               <p>
-                Such callback will receive whatever interpolated value is passed along,
-                and its returned value will be used as transformation.
+                This callback will receive whatever interpolated value is passed along,
+                and its returned value will be used as the transformation.
               </p>
               <p>
                 This value can be anything, including an intent itself.
@@ -997,13 +990,13 @@
               </code></pre>
               <h4>Why is this needed?</h4>
               <p>
-                Instead of needing to pollute the current local or global scope
+                Instead of polluting the local or global scope
                 with extended behaviors, hyperHTML templates can always have extensions
-                even if not defined.
+                even when not defined.
               </p>
               <p>
-                This makes intents and also templates, completely independent
-                from the surrounding scope, giving developers the ability to even test them in isolation.
+                This makes intents and templates completely independent
+                from the surrounding scope, giving developers the ability to test them in isolation.
               </p>
               <p>
                 You could even mock intents, if it's testing you are after,
@@ -1022,8 +1015,8 @@
               </code></pre>
               <h3 id="api-4">hyperHTML.document</h3>
               <p>
-                In case you are using jsdom or <a href="https://viperhtml.js.org/basic.html">basicHTML</a>,
-                you can specify upfront a temporary global document, or change it at runtime.
+                If you're using jsdom or <a href="https://viperhtml.js.org/basic.html">basicHTML</a>,
+                you can specify a temporary global document upfront, or change it at runtime.
               </p>
               <pre><code class="javascript">
               const {Document} = require('basichtml');
@@ -1037,25 +1030,25 @@
               </code></pre>
               <h3 id="api-5">hyperHTML.adopt(element)</h3>
               <p>
-                Born as ideal <a href="https://viperhtml.js.org/viper.html">viperHTML</a> companion,
+                Created as the ideal <a href="https://viperhtml.js.org/viper.html">viperHTML</a> companion,
                 targeting extreme graceful enhancement,
                 adopting a node means trying to
                 map interpolations from an existing content,
-                as best effort without losing input focus or current native status,
-                whatever it is at the adopting time.
+                as a best effort without losing input focus or current native status,
+                whatever it is at the time of adoption.
               </p>
               <p>
-                This is an inevitably limited, <strong>experimental</strong> feature,
-                that requires manual testing on every target device it's applied.
+                This is an inevitably limited, <strong>experimental</strong> feature
+                that requires manual testing on every target device it's applied to.
               </p>
               <p>
-                As quick suggestion, if the content of your template literal
-                is not exactly the same used in viperHTML,
-                and it's not a form element or some input or select one,
-                it's currently suggested to avoid this method completely,
-                as it increase chances templates would break in some target
-                browser, and it cannot possibly guarantee same reliability
-                a boud element or a wire would grant.
+                Beware, if the content of your template literal
+                is not exactly the same as one used in viperHTML,
+                and it's not a form element, input or select,
+                you should avoid this method.
+                Using it may increase the chance that the template will break in some target
+                browser, and this method cannot guarantee the same reliability
+                a bound element or a wire can.
               </p>
               <p>
                 More documentation about this is coming soon.
