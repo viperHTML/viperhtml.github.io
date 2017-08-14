@@ -23,15 +23,17 @@ td.hljs-ln-numbers {
 	color: #CCC;
 }
 
-h2 {
+h2, h3, h4 {
   font-weight: bold;
+}
+
+h2 {
   font-size: 1.3em;
 }
 
 h3 {
   font-size: 1.1em;
   margin-top: 24px;
-  font-weight: bold;
 }
 
 p {

@@ -86,6 +86,12 @@
                     <li><a href="#api-5">adopt</a></li>
                   </ul>
                 </li>
+                <li>
+                  <a href="#extras">Extras</a>
+                  <ul>
+                    <li><a href="#extras-0">about the name</a></li>
+                  </ul>
+                </li>
               </ul>
             </aside>
           </div>
@@ -1051,6 +1057,113 @@
               </p>
               <p>
                 More documentation about this is coming soon.
+              </p>
+            </section>
+            <section id="extras">
+              <h2>Extras</h2><hr>
+              <p>
+                This section is dedicated to F.A.Q. and other less important topics around hyperHTML.
+              </p>
+              <h3 id="extras-0">Hyper Hyper Text ?</h3>
+              <p>
+                Few developers asked me about the apparently redundant name.
+              </p>
+              <p>
+                First of all, it's worth underlying that who used hyperHTML never cared or complained about its name.<br>
+                They rather instantly appreciated the library innovative and revolutionary approach to solve a common problem
+                in such compact, elegant, standard, and also performant way: pick 4 of them.
+              </p>
+              <p>
+                For the little stats I have, it also looks like people complaining about the name are those that
+                never used the library, but decided to already have an opinion about it.
+              </p>
+              <p>
+                Maybe they also need to find an<small>(y)</small> excuse to avoid trying such library,
+                believing what they use daily is better and solved all their problems already.
+              </p>
+              <p>
+                Well, if that's the case, congratulations!
+              </p>
+              <p>
+                Regardless, maybe not everyone knows that <a href="http://dictionary.cambridge.org/dictionary/english/hyper">hyper</a>,
+                which means <em>too excited and energetic</em>, and <a ref="http://dictionary.cambridge.org/dictionary/english/hypertext">hypertext</a>,
+                which is <em>a way of joining a word or image to another page, document, etc. on the internet or in another computer program so that you can move from one to the other easily</em>,
+                are <strong>two completely different words</strong>.
+              </p>
+              <p>
+                Java is not JavaScript,
+                ham is not hamster,
+                and you can have a steelyard made of steel too!
+              </p>
+              <p>
+                But even if you made up your mind before trying hyperHTML,
+                and you think that having a more exciting way to declare Hypertext Markup Language doesn't make sense,
+                I'd like to tell the story behind the name.
+              </p>
+              <h4>innerHTML vs hyperHTML</h4>
+              <p>
+                Binding HTML to a node context, looks very similar to the old way to inject HTML during 00's.
+              </p>
+              <pre><code class="javascript">
+              // what the Web used to do
+              // attributes and content are unsafe
+              // XSS prone, and full of undesired surprises
+              document.body.innerHTML = [
+                '&lt;div class="', className, '"&gt;',
+                  textContent
+                '&lt;/div&gt;'
+              ].join();
+
+              // hyperHTML is safe by default
+              // but it looks similar, if not easier
+              hyperHTML.bind(document.body)`
+              &lt;div class=${className}&gt;
+                ${textContent}
+              &lt;/div&gt;`;
+              </code></pre>
+              <p>
+                If reminding the good old days, emphasizing enhanced features, wasn't enough,
+                <code>inner</code> and <code>hyper</code> words also differs for just 3 chars.
+              </p>
+              <p>
+                Similar intents then, better results, and on top of that a very <strong>easy to remember name</strong>,
+                hyperHTML has also just 3 basic rules to remember and to succeed:
+              </p>
+              <ul>
+                  <li>partial attributes are not supported</li>
+                  <li>text is always injected as textContent</li>
+                  <li>runtimes listeners used as interpolation always get reassigned</li>
+              </ul>
+              <p>
+                Last, but not least, hyperHTML is part of a wider family,
+                including <a href="https://viperhtml.js.org/viper.html">viperHTML</a> and
+                <a href="https://viperhtml.js.org/basic.html">basicHTML</a>.
+              </p>
+              <p>
+                Accordingly, if you connect the word <em>hyper</em> with some Front End meaning,
+                you'll never be confused by what project you need for what.
+              </p>
+              <p>
+                Is it Front-End? hyperHTML.<br>
+                Back-End? viperHTML.<br>
+                Do you need basic HTML on your project? basicHTML it is.<br>
+                And so on ...
+              </p>
+              <h4>Still not convinced?</h4>
+              <p>
+                Imagine the <a href="https://github.com/tc39/proposal-bind-operator">bind operator</a> will become popular and you will be able to write
+                valid JavaScript syntax like:
+              </p>
+              <pre><code class="javascript">
+              document.body::hyperHTML`
+              &lt;div&gt;This is the content.&lt;/div&gt;`;
+              </code></pre>
+              <p>
+                Do you feel any better about the name now? 😃
+              </p>
+              <p>
+                If not, put in this way: if the name is the only complain you ever heard about a library,
+                maybe it means it's that good, and you should really give it a try! 😜
               </p>
             </section>
           </div>
