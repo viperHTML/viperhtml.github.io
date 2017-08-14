@@ -4,6 +4,7 @@ addEventListener(
   function () {
     var
       html = document.documentElement,
+      menu = $('.menu:first'),
       offsetHeight = html.offsetHeight
     ;
     [].forEach.call(
@@ -14,9 +15,9 @@ addEventListener(
         hljs.lineNumbersBlock(node);
       }
     );
-    hash();
+    setTimeout(hash, 10);
     addEventListener('hashchange', hash);
-    (function magicMenu(menu) {
+    (function magicMenu() {
       if (!matchMedia(
         '(orientation: landscape) and (min-width: 760px)'
       ).matches) return;
@@ -44,7 +45,7 @@ addEventListener(
           'overflow-y:auto;'
         ].join('');
       }
-    }($('.menu:first')));
+    }());
     function $(css, parent) {
       var
         split = css.split(':first'),
@@ -57,7 +58,19 @@ addEventListener(
     function hashChange(el) {
       if (hash.el !== el) {
         if (hash.el) hash.el.className = '';
-        if (hash.el = el) el.className = 'is-active';
+        if (hash.el = el) {
+          el.className = 'is-active';
+          var rect = el.getBoundingClientRect();
+          if (
+            rect.top > (menu.offsetHeight - menu.scrollTop) ||
+            rect.top < menu.scrollTop
+          ) {
+            el.scrollIntoView({
+              block: 'end',
+              behavior: 'smooth'
+            });
+          }
+        }
       }
     }
     function hash() {
