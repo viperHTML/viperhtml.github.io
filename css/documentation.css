@@ -3,6 +3,10 @@ html {
   color: #363636;
 }
 
+section.hero.is-light .hero-body .column:nth-child(2) {
+  padding-left: 5%;
+}
+
 section.hero.is-light .hero-body .column:nth-child(2) a {
   color: rgba(54,54,54,.7);
   border-bottom: 1px dotted rgba(154,154,154,.7);
@@ -45,4 +49,9 @@ p {
 }
 .column section ul > li {
   list-style: circle;
+}
+
+p, ul {
+  max-width: 700px;
+  margin-left: 0;
 }
