@@ -366,7 +366,7 @@
               );
               </code></pre>
               <p>
-                However, a single object could be the source of many pieces of layout.
+                However, a single object could be the source of many pieces of layout.<br>
                 Think about a generic <code>user</code> object.
               </p>
               <p>It could be used to generate:</p>
@@ -477,7 +477,7 @@
               <p>
                 This means that as long as an attribute name is prefixed with <strong>on</strong>,
                 every possible event can be assigned, either as a function,
-                or <a href="https://medium.com/@WebReflection/dom-handleevent-a-cross-platform-standard-since-year-2000-5bf17287fd38">an object</a>,
+                or as <a href="https://medium.com/@WebReflection/dom-handleevent-a-cross-platform-standard-since-year-2000-5bf17287fd38">an object</a>,
                 through its <code>handleEvent</code> method.
               </p>
               <pre><code class="javascript">
@@ -516,12 +516,13 @@
               Login.prototype.render = function () {
                 return this.html`
                 &lt;form
-                  method="post"
+                  method=post
+                  action=/admin
                   onsubmit=${e => {
                     e.preventDefault();
                     alert('You made it!');
                   }}
-                  action="/admin"&gt;
+                  &gt;
                   &lt;input name=user oninput=${this}&gt;&lt;br&gt;
                   &lt;input name=pass oninput=${this} type=password&gt;&lt;br&gt;
                   &lt;input
@@ -552,10 +553,10 @@
               </p>
               <p>
                 <strong>Why no partial attributes?</strong><br>
-                Template literal interpolations can also contain other template literals 
-                compromising performance and over-complicating attribute operations.
-                This was considered <acronym title="You Ain't Gonna Need It">YAGNI</acronym>
-                during the architecture design of the parser.
+                Template literal interpolations can also contain other template literals.<br>
+                Accordingly, there is no reason to compromise performance and over-complicate attributes logic.<br>
+                As result, partial attributes were considered <acronym title="You Ain't Gonna Need It">YAGNI</acronym>
+                during the architecture design of the engine.
               </p>
               <p>The following example shows several ways to update an attribute correctly as well as the wrong way, mentioned above.</p>
               <pre><code class="javascript">
@@ -569,9 +570,9 @@
               html`&lt;div style="top:${top}; left:${left};"&gt;x&lt;/div&gt;`;
               </code></pre>
               <p>
-                It's misleading to think that an attribute can be partially modified.
+                It's also misleading to think that an attribute can be partially modified.<br>
                 Whenever you change a single portion of an attribute,
-                the browser needs to figure out what to do with the change as a whole.
+                the browser needs to figure out what to do with the change as a whole, so: no partial attributes.
               </p>
               <h3 id="essentials-8">Content Values</h3>
               <p>
@@ -579,7 +580,7 @@
               </p>
               <ul>
                 <li>
-                  if content is text, as <strong>string</strong>, this will be injected as <code>textContent</code> and natively sanitized <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">against XSS</a>.<br>
+                  if content is text, as <strong>string</strong>, this will be injected as <code>textContent</code> hence sanitized <a href="https://en.wikipedia.org/wiki/Cross-site_scripting">against XSS</a>.<br>
                   This makes hyperHTML <em>safe by default</em>, but it could be even safer ( <small>keep reading</small> )
                 </li>
                 <li>
@@ -699,7 +700,7 @@
             <section id="api">
               <h2>API</h2><hr>
               <p>
-                Even though hyperHTML is a function, it should be used as a namespace.
+                Even though hyperHTML is a function, it should be used as a namespace.<br>
                 Every method is detached from its context so that you can easily
                 destructure them.
               </p>
@@ -842,7 +843,7 @@
               <h3 id="api-1-1">Wiring SVGs</h3>
               <p>
                 Beside relating wired content to objects,
-                we might want to specify the kind of content we are either creating or relating.
+                we might want to specify the kind of content we are going to create.
               </p>
               <p>
                 There are currently 3 types of elements accepted by hyperHTML:
