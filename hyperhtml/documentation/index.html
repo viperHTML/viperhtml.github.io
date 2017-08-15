@@ -87,6 +87,14 @@
                   </ul>
                 </li>
                 <li>
+                    <a href="#components">Components</a>
+                    <ul>
+                        <li><a href="#components-0">good ol' style</a></li>
+                        <li><a href="#components-1">modern style</a></li>
+                        <li><a href="#components-2">hyper style</a></li>
+                    </ul>
+                  </li>
+                <li>
                   <a href="#extras">Extras</a>
                   <ul>
                     <li><a href="#extras-0">about the name</a></li>
@@ -1058,6 +1066,203 @@
               </p>
               <p>
                 More documentation about this is coming soon.
+              </p>
+            </section>
+            <section id="components">
+              <h2>Components</h2><hr>
+              <p>
+                There are different ways to use hyperHTML as component driven library
+                and none of them is strictly better than another.
+                To reach best compatibility without needing too much
+                transpiling or polyfills, you can keep thins simple by using hyperHTML
+                to generate regular HTML.
+                You can also go all-in with Custom Elements and optionally Shadow DOM,
+                as a more modern and elegant solution, mostly suitable for modern targets.
+              </p>
+              <h3 id="components-0">React<i>ish</i> Components</h3>
+              <p>
+                As also shown in <a href="https://viperhtml.js.org/hyperhtml/examples/#!fw=React&example=Basic%20Component">this example</a>,
+                it is possible to create components just as functions or as classes.
+              </p>
+              <pre><code class="javascript">
+              // as function, same props, same node
+              function Component(props) {
+                return hyperHTML.wire(props)`
+                &lt;h1&gt;Hello, ${props.name}&lt;/h1&gt;`;
+              }
+              
+              // as class, each instance
+              // same node returned via obj.render()
+              class Component {
+                constructor(props) {
+                  this.props = props;
+                  this.html = hyperHTML.wire(this);
+                }
+                render() {
+                  return this.html`
+                  &lt;h1&gt;Hello, ${this.props.name}&lt;/h1&gt;`;
+                }
+              }
+              </code></pre>
+              <p>
+                In these cases, there's no real need to create Custom Elements,
+                and we could also style these components inline.
+              </p>
+              <p>
+                I know that many would think this is heresy,
+                but the truth is that it just works.
+              </p>
+              <pre><code class="javascript">
+              // as function, same props, same node
+              function MyH1(props) {'use strict';
+                return hyperHTML.wire(props)`
+                &lt;h1 style=${this.style}&gt;
+                  Hello, ${props.name}
+                &lt;/h1&gt;`;
+              }
+              
+              MyH1.prototype.style = `
+                background-color: black;
+                color: white;
+              `;
+              
+              document.body.appendChild(
+                new MyH1({name: 'hyperHTML'})
+              );
+              </code></pre>
+              <p>
+                However, above example, which is available on <a href="https://codepen.io/WebReflection/pen/YxEPQj?editors=0010">Code Pen</a>,
+                abuses the usage of the inline <code>style</code> property,
+                making our own components less flexible when it comes to themes.<br>
+                Using just a semantic <code>class</code> attribute would probably be a wiser choice.
+              </p>
+              <pre><code class="javascript">
+              function MyH1(props) {'use strict';
+                return hyperHTML.wire(props)`
+                &lt;h1 class=${props.class || this.class}&gt;
+                  Hello, ${props.name}
+                &lt;/h1&gt;`;
+              }
+              
+              MyH1.prototype.class = 'regular-h1';
+              </code></pre>
+              <p>
+                In above example it's possible to change all components by simply specifying
+                a different <code>class</code> value or passing one in case the related object
+                has a special meaning (i.e. it's an <code>active</code> H1).
+              </p>
+              <p>
+                Last, but not least, if you don't need inheritance at all,
+                you can use regular functions without needing a single <code>new</code>
+                operation in your code.
+              </p>
+              <pre><code class="javascript">
+              function myH1(props) {
+                return hyperHTML.wire(props)`
+                &lt;h1 class=my-h1&gt;
+                  Hello, ${props.name}
+                &lt;/h1&gt;`;
+              }
+              
+              document.body.appendChild(
+                myH1({name: 'hyperHTML'})
+              );
+              </code></pre>
+              <p>
+                Try above example on <a href="https://codepen.io/WebReflection/pen/ayVzjE?editors=0010">Code Pen</a>.
+              </p>
+              <h3 id="components-1">Polymer<i>ish</i> Components</h3>
+              <p>
+                A modern approach to components is well represented by Polymer project:
+                it's based on modern Web platform standards, and it's the right tool for the problem it's trying to solve.
+              </p>
+              <p>
+                With hyperHTML you can also use Custom Elements right away,
+                optionally including a <a href="https://github.com/WebReflection/document-register-element">proper polyfill</a> upfront when needed.
+              </p>
+              <pre><code class="javascript">
+              class MyComponent extends HTMLElement {
+                static get observedAttributes() { return ['name']; }
+                constructor(...args) {
+                  super(...args);
+                  this.html = hyperHTML.bind(this);
+                }
+                attributeChangedCallback() { this.render(); }
+                connectedCallback() { this.render(); }
+                render() {
+                  return this.html`
+                  &lt;h1&gt;Hello, ${this.getAttribute('name')}&lt;/h1&gt;`;
+                }
+              }
+              
+              customElements.define('my-component', MyComponent);
+              
+              document.body.innerHTML =
+                '&lt;my-component name="First"&gt;&lt;/my-component&gt;';
+              
+              const mc = new MyComponent;
+              mc.setAttribute('name', 'Second');
+              document.body.appendChild(mc);
+              </code></pre>
+              <p>
+                You can verify the result on <a href="https://codepen.io/WebReflection/pen/yoPNaz?editors=0010">Code Pen</a>.
+              </p>
+              <h4>About Shadow DOM</h4>
+              <p>
+                There are no special rules to remember with Shadow DOM
+                because behind the scene hyperHTML uses a <code>tempalte</code>
+                element so if you bind a Shadow DOM element to hyperHTML, everything will just work.
+              </p>
+              <p>
+                In this <a href="https://codepen.io/WebReflection/pen/eEeNRr?editors=0010">Code Pen</a> example,
+                you can see even closed Shadow DOM are just fine as hyperHTML context.
+              </p>
+              <pre><code class="javascript">
+              class MyComponent extends HTMLElement {
+                ...
+                constructor(...args) {
+                  super(...args);
+                  this.html = hyperHTML.bind(
+                    this.attachShadow({mode: 'closed'})
+                  );
+                }
+                ...
+              }
+              </code></pre>
+              <p>
+                Be sure your target browser supports properly Shadow DOM,
+                and go wild with Custom Elements and hyperHTML.
+              </p>
+              <h3 id="components-2">HyperHTMLElement Class</h3>
+              <p>
+                The <a href="https://github.com/WebReflection/hyperHTML-Element">HyperHTMLElement</a> project goal
+                is to be an ideal companion of hyperHTML itself.<br>
+                It takes away all the repeated, boring, sometimes problematic setup steps needed
+                to define Custom Elements, making their creation a no brainer,
+                as you can see in all <a href="https://viperhtml.js.org/hyperhtml/examples/#!fw=Polymer&example=custom-element">comparisons VS Polymer</a>.
+              </p>
+              <p>
+                Following the <code>HyperHTMLElement</code> class features:
+              </p>
+              <ul>
+                <li><code>created()</code> entry point to have a reliable place to setup components,
+                including injecting text content, html, or shadow dom</li>
+                <li>automatic <code>observedAttributes</code> accessors,
+                to react when you change an attribute directly instead of passing through
+                the verbose and boring <code>comp.setAttribute(name, value)</code></li>
+                <li>a lazy <code>html</code> read-only property that will create content in the right place: the node itself or its shadow DOM, if previously defined.</li>
+                <li>automatic <strong>bound events</strong> without the usual binding overhead. Instead of passing <code>this.click</code> as <code>onclick</code> event listener,
+                just pass <code>this</code> and enjoy the memory friendly, fully cross browser, native <code>handleEvent</code> behavior,
+                as <a href="https://medium.com/@WebReflection/dom-handleevent-a-cross-platform-standard-since-year-2000-5bf17287fd38">described in this post</a>.</li>
+              </ul>
+              <p>
+                Please note <code>HyperHTMLElement</code> implicitly assumes there is a global <code>hyperHTML</code> function available.<br>
+                In order tu use, be sure you include hyperHTML first, then HyperHtMLElement
+              </p>
+              <pre>&lt;script src="//unpkg.com/hyperhtml@latest/min.js"&gt;&lt;/script&gt;</pre>
+              <pre>&lt;script src="//unpkg.com/hyperhtml-element@latest/min.js"&gt;&lt;/script&gt;</pre>
+              <p>
+                At that point, you should be good to go and create amazing PWAs!
               </p>
             </section>
             <section id="extras">
