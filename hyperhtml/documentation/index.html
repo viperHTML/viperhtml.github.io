@@ -87,13 +87,16 @@
                   </ul>
                 </li>
                 <li>
-                    <a href="#components">Components</a>
-                    <ul>
-                        <li><a href="#components-0">good ol' style</a></li>
-                        <li><a href="#components-1">modern style</a></li>
-                        <li><a href="#components-2">hyper style</a></li>
-                    </ul>
-                  </li>
+                  <a href="#components">Components</a>
+                  <ul>
+                    <li><a href="#components-0">good ol' style</a></li>
+                    <li><a href="#components-1">modern style</a></li>
+                    <li><a href="#components-2">hyper style</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#testing">Testing</a>
+                </li>
                 <li>
                   <a href="#extras">Extras</a>
                   <ul>
@@ -1278,6 +1281,20 @@
                 The latter attempt is the last resort to find an otherwise hard to reach closed shadowRoot
                 but if you use regularly opened shadows, the <code>shadowRoot</code> node will be automatically available ( suggested ).
               </p>
+            </section>
+            <section id="testing">
+                <h2>Testing</h2><hr>
+                <p>hyperHTML is easy to test in the browser and in NodeJS.
+                  If you're testing in NodeJS you will, however, need a JavaScript implementation of the DOM (<a href="https://github.com/WebReflection/basicHTML">basicHTML</a> or <a href="https://github.com/tmpvar/jsdom">jsdom</a>). 
+                </p>
+                <p>
+                  With NodeJS, if you're using basicHTML or jsdom you can use the same, familiar syntax you would when querying and interacting with the DOM in the browser.
+                </p>
+                <p>Have a look at the links below to see examples of how you <strong>could</strong> test in your target environment. Obviously, you could replace any of the testing libraries with one you prefer.</p>
+                <ul>
+                  <li><a href="https://codepen.io/anon/pen/zdRMQQ?editors=0010">Browser</a></li>
+                  <li><a href="https://runkit.com/embed/jz7xffvshlz0">Node</a></li>
+                </ul>
             </section>
             <section id="extras">
               <h2>Extras</h2><hr>
