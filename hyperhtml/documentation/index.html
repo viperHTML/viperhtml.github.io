@@ -1264,6 +1264,19 @@
               <p>
                 At that point, you should be good to go and create amazing PWAs!
               </p>
+              <h4>About <code>this.html</code></h4>
+              <p>
+                Lazily defined once per instance, <code>this.html</code> can be:
+              </p>
+              <ul>
+                <li>the bound element itself, if no shadow dom has been attached once created</li>
+                <li>the element <code>shadowRoot</code>, if openly attached once created</li>
+                <li>the element <code>_shadowRoot</code></li>, if the shadow has been created as <code>this._shadowRoot = this.attachShadow({mode:'closed'});</code>
+              </ul>
+              <p>
+                The latter attempt is the last resort to find an otherwise hard to reach closed shadowRoot
+                but if you use regularly opened shadows, the <code>shadowRoot</code> node will be automatically available ( suggested ).
+              </p>
             </section>
             <section id="extras">
               <h2>Extras</h2><hr>
