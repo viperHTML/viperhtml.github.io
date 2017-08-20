@@ -8,8 +8,7 @@ class Counter {
     this.state.count++;
     this.update();
   }
-  update() {
-    return hyperHTML.wire(this)`
+  update() { return hyperHTML.wire(this)`
     <div class=count>${this.state.count}</div>
     <button class=example-button onclick=${this}>
       Click me!
