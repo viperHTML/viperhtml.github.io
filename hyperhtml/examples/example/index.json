@@ -209,5 +209,26 @@
         }
       }
     ]
+  },
+  "Marko": {
+    "dir": "marko",
+    "tests": [
+      {
+        "name": "basic counter",
+        "dir": "counter",
+        "pen": {
+          "fw": "http://markojs.com/#reactive-ui-components",
+          "hyper": "https://codepen.io/WebReflection/pen/jLzMrp?editors=0010"
+        }
+      },
+      {
+        "name": "CE counter",
+        "dir": "counter-ce",
+        "pen": {
+          "fw": "http://markojs.com/#reactive-ui-components",
+          "hyper": "https://codepen.io/WebReflection/pen/prLEeQ?editors=0010"
+        }
+      }
+    ]
   }
 }

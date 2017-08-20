@@ -124,7 +124,7 @@ addEventListener(
               ${[framework[currentExample].pen.fw ?
                   `<a href="${
                     framework[currentExample].pen.fw
-                  }">Try it on CodePen.</a>` : ''
+                  }">Try it Live</a>` : ''
               ]}</p>
             </div>
           </div>
@@ -140,7 +140,7 @@ addEventListener(
               ${[framework[currentExample].pen.hyper ?
                 `<a href="${
                   framework[currentExample].pen.hyper
-                }">Try it on CodePen.</a>` : ''
+                }">Try it Live</a>` : ''
               ]}</p>
             </div>
           </div>
