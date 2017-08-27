@@ -1,8 +1,8 @@
 const {bind:hyper, wire} = hyperHTML;
 const data = {
   todos: [
-    { text: 'Learn JavaScript' },
-    { text: 'Learn Vue' },
+    { text: 'Use JavaScript, HTML, CSS' },
+    { text: 'Learn hyperHTML' },
     { text: 'Build something awesome' }
   ]
 };
