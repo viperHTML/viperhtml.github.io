@@ -60,6 +60,7 @@
                   <a href="#essentials">Essentials</a>
                   <ul>
                     <li><a href="#essentials-0">installing</a></li>
+                    <li><a href="#essentials-11">hyper(HTML)</a></li>
                     <li><a href="#essentials-1">bind VS wire</a></li>
                     <li><a href="#essentials-2">wire types</a></li>
                     <li><a href="#essentials-3">wire ids</a></li>
@@ -274,6 +275,24 @@
                 If you need a polyfill for the methods above
                 you can use <a href="https://polyfill.io/v2/docs/">polyfill.io</a>
                 or <a href="https://github.com/es-shims/es5-shim">ES5 shims and shams</a>.
+              </p>
+              <h3 id="essentials-11">hyper(HTML)</h3>
+              <p>
+                The default <code>hyper</code> exported function, can be used
+                to create DOM nodes at runtime, populate existent nodes,
+                or weakly relate objects with nodes.
+              </p>
+              <p>
+                All these operations are available, as shortcut, through the following usage:
+              </p>
+              <ul>
+                <li><code>hyper`&lt;p&gt;runtime&lt;/p&gt;`</code> to create new DOM content each time <small>(see <code>wire()`...`</code>)</small></li>
+                <li><code>hyper(node)`&lt;p&gt;internal content&lt;/p&gt;`</code> to populate <code>node</code> once with smart DOM content <small>(see <code>.bind(node)`...`</code>)</small></li>
+                <li><code>hyper(obj, typeOrId)`&lt;li&gt;wired content&lt;/li&gt;`</code> to create new DOM content <small>(see <code>.wire(obj, id)`...`</code>)</small></li>
+              </ul>
+              <p>
+                While using <code>hyper`&lt;p&gt;runtime&lt;/p&gt;`</code> for one-off operations <i>just works</i>,
+                binding a DOM node to create its own content or weakly relating generic objects are the best way to recycle the DOM and obtain best performance.
               </p>
               <h3 id="essentials-1">Bind VS Wire</h3>
               <p>
