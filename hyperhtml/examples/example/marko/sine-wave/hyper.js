@@ -30,7 +30,7 @@ class SineWave extends HyperHTMLElement {
   created() {
     this.step = .5;
     this.render = this.render.bind(this);
-    addEventListener('resize', this);
+    addEventListener('resize', e => this.onresize());
     this.addEventListener('click', this);
   }
   connectedCallback() {
