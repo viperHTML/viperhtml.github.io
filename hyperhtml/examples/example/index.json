@@ -228,6 +228,14 @@
           "fw": "http://markojs.com/#reactive-ui-components",
           "hyper": "https://codepen.io/WebReflection/pen/prLEeQ?editors=0010"
         }
+      },
+      {
+        "name": "Silky smooth",
+        "dir": "sine-wave",
+        "pen": {
+          "fw": "http://markojs.com/#silky-smooth",
+          "hyper": "https://codepen.io/WebReflection/pen/rzQPpv?editors=0010"
+        }
       }
     ]
   }
