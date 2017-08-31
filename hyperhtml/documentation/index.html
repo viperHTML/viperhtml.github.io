@@ -93,6 +93,7 @@
                     <li><a href="#components-0">good ol' style</a></li>
                     <li><a href="#components-1">modern style</a></li>
                     <li><a href="#components-2">HyperHTMLElement</a></li>
+                    <li><a href="#components-3">hyper.Component</a></li>
                   </ul>
                 </li>
                 <li>
@@ -237,7 +238,7 @@
                 hyperHTML gives you performance by default thanks to these simple facts: 
               </p>
               <ul>
-                <li>it's really lightweight, weighing <strong>less than 4KB minzipped</strong>. That's all the bandwidth budget you and your users need.</li>
+                <li>it's really lightweight, weighing about <strong>4KB minzipped</strong>. That's all the bandwidth budget you and your users need.</li>
                 <li>it doesn't double RAM or CPU usage via Virtual DOM operations, it <strong>doesn't use a Virtual DOM at all!</strong></li>
                 <li>it's fully based on ECMAScript <strong>standard</strong> and DOM <strong>specifications</strong></li>
               </ul>
@@ -1306,6 +1307,78 @@
                 The latter attempt is the last resort to find an otherwise hard to reach, closed shadowRoot
                 but if you regularly use opened shadows, the <code>shadowRoot</code> node will be automatically available ( suggested ).
               </p>
+              <h3 id="components-3">hyper.Component</h3>
+              <p>
+                If previous solutions didn't satisfy your requirements,
+                version 1.6 introduced a minimalistic Component approach
+                based on the following features:
+              </p>
+              <ul>
+                <li><strong>no custom elements</strong> needed. Forget polyfills and issues with classes extending builtin classes, it just works with regular HTML.</li>
+                <li><strong>automatic wire</strong> via lazy assignment. Just render returning <code>this.html`...`</code> or  <code>this.svg`...`</code> without caring about hyperHTML at all.</li>
+                <li><strong>basic state handling</strong> through a Preact<i>ish</i> method such <code>setState(objOrCallback)</code>, including the ability to define a <code>defaultState</code> accessor.</li>
+                <li><strong>simplified event handling</strong> directly borrowed by HyperHTMLElement behavior.</li>
+              </ul>
+              <p>
+                The following examples represent <code>hyper.Comopnent</code> features in a nutshell.
+              </p>
+              <pre><code class="javascript">
+              class Clock extends hyper.Component {
+                get defaultState() { return {date: new Date()}; }
+                render() {
+                  return this.html`
+                    &lt;div&gt;
+                      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+                      &lt;h2&gt;It is ${
+                        this.state.date.toLocaleTimeString()
+                      }.&lt;/h2&gt;
+                    &lt;/div&gt;`;
+                }
+              }
+              </code></pre>
+              <p><a href="https://codepen.io/WebReflection/pen/ZJVNEp?editors=0010">Code Pen</a></p>
+              <pre><code class="javascript">
+              class Counter extends hyper.Component {
+                get defaultState() {
+                  return {css: 'font-weight:bold;', count: 0};
+                }
+                constructor(count) {
+                  super();
+                  this.setState({count});
+                }
+                onclick() {
+                  this.setState(prev => ({count: prev.count + 1}));
+                }
+                render() {
+                  return this.html`
+                    &lt;button style=${this.state.css} onclick=${this}&gt;
+                      ${this.state.count}
+                    &lt;/button&gt;`;
+                }
+              }
+              </code></pre>
+              <p><a href="https://codepen.io/WebReflection/pen/YxdbyO?editors=0010">Code Pen</a></p>
+              <p>
+                Differently from most other frameworks, components don't really need a top level element.
+              </p>
+              <pre><code class="javascript">
+              class ArrowPad extends hyper.Component {
+
+                left() { this.setState({action: 'left'}); }
+                up() { this.setState({action: 'up'}); }
+                bottom() { this.setState({action: 'bottom'}); }
+                right() { this.setState({action: 'right'}); }
+
+                render() { return this.html`
+                  &lt;button data-call=left onclick=${this}&gt;◂&lt;/button&gt;
+                  &lt;button data-call=up onclick=${this}&gt;▴&lt;/button&gt;
+                  &lt;button data-call=bottom onclick=${this}&gt;▾&lt;/button&gt;
+                  &lt;button data-call=right onclick=${this}&gt;▸&lt;/button&gt;
+                  &lt;p&gt;Last action: ${this.state.action}&lt;/p&gt;`;
+                }
+              }
+              </code></pre>
+              <p><a href="https://codepen.io/WebReflection/pen/YxdbpR?editors=0010">Code Pen</a></p>
             </section>
             <section id="testing">
               <h2>Testing</h2><hr>
