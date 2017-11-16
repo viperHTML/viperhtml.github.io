@@ -67,6 +67,7 @@
                     <li><a href="#essentials-4">attributes vs content</a></li>
                     <li><a href="#essentials-5">boolean attributes</a></li>
                     <li><a href="#essentials-6">events attributes</a></li>
+                    <li><a href="#essentials-6-1">style attributes</a></li>
                     <li><a href="#essentials-7">partial attributes</a></li>
                     <li><a href="#essentials-8">content values</a></li>
                     <li><a href="#essentials-9">asynchronous values</a></li>
@@ -81,10 +82,10 @@
                     <li><a href="#api-1-0">wire object</a></li>
                     <li><a href="#api-1-1">wire type</a></li>
                     <li><a href="#api-1-2">wire id</a></li>
-                    <li><a href="#api-2">escape</a></li>
+                    <!--li><a href="#api-2">escape</a></li-->
                     <li><a href="#api-3">define</a></li>
                     <li><a href="#api-4">document</a></li>
-                    <li><a href="#api-5">adopt</a></li>
+                    <!--li><a href="#api-5">adopt</a></li-->
                   </ul>
                 </li>
                 <li>
@@ -228,6 +229,10 @@
               <p>
                 View the example above on <a href="https://codepen.io/WebReflection/pen/brrNRp?editors=0010">Code Pen</a>.
               </p>
+              <p>
+                Strawberry on top, hyperHTML uses the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein distance algorithm</a> to update internal list of items or node,
+                resulting in the least amount of needed DOM operation to <a href="https://twitter.com/WebReflection/status/930920579938619392">make a list of nodes become another list</a>.
+              </p>
               <h3 id="introduction-2">Performance</h3>
               <p>
                 It doesn't matter if it's a <a href="https://webreflection.github.io/hyperHTML/test/dbmonster.html">DBMonster</a>, 
@@ -237,7 +242,7 @@
                 hyperHTML gives you performance by default thanks to these simple facts: 
               </p>
               <ul>
-                <li>it's really lightweight, weighing about <strong>4KB minzipped</strong>. That's all the bandwidth budget you and your users need.</li>
+                <li>it's really lightweight, weighing around <strong>4.5KB</strong> via brotli. That's all the bandwidth budget you and your users need.</li>
                 <li>it doesn't double RAM or CPU usage via Virtual DOM operations, it <strong>doesn't use a Virtual DOM at all!</strong></li>
                 <li>it's fully based on ECMAScript <strong>standard</strong> and DOM <strong>specifications</strong></li>
               </ul>
@@ -457,8 +462,8 @@
                   <ul>
                     <li>text, as <strong>string</strong>, for any kind of attribute</li>
                     <li><strong>boolean</strong> <code>true</code> or <code>false</code> for special attributes such <code>disabled</code> and others</li>
-                    <li><strong>function</strong> or <strong>object</strong> for custom or native events</li>
-                    <li>either <strong>null</strong> or <strong>undefined</strong> to explicitly remove attributes of any kind, or to remove listeners</li>
+                    <li><strong>function</strong> or <strong>object</strong> for custom or native events, or to assign a <code>style</code> attribute</li>
+                    <li>either <strong>null</strong> or <strong>undefined</strong> to explicitly clean or remove attributes of any kind, or to remove listeners</li>
                   </ul>
                 </li>
               </ul>
@@ -582,6 +587,15 @@
                 This means that while the previous example works fine for demo purposes,
                 the <em>onsubmit</em> listener should be defined elsewhere and not inline.
               </p>
+              <h3 id="essentials-6-1">Style Attributes</h3>
+              <p>
+                Fully inspired by <a href="https://preactjs.com">Preact</a> implementation,
+                <code>style</code> attributes can be updated via both strings, like any other regular attribute,
+                of via an object.
+              </p>
+              <pre><code class="javascript">
+              hyper(ref)`&lt;p style=${{fontSize: 32}}&gt;${'BIG CONTENT'}&lt;/p&gt;`;
+              </code></pre>
               <h3 id="essentials-7">Partial Attributes</h3>
               <p>
                 Differently from other libraries, partial attributes are not supported but there are
@@ -882,12 +896,11 @@
                 we might want to specify the kind of content we are going to create.
               </p>
               <p>
-                There are currently 3 types of elements accepted by hyperHTML:
+                There are currently 2 types of elements accepted by hyperHTML:
               </p>
               <ul>
                   <li><strong>html</strong> elements, used as default</li>
                   <li><strong>svg</strong> elements, needing a special treatment</li>
-                  <li>an experimental <strong>adopt</strong> type, discussed later on</li>
               </ul>
               <p>
                 While hyperHTML can easily understand a bound element type,
@@ -968,6 +981,7 @@
               // but different from
               hyperHTML.wire(obj, 'svg:id');
               </code></pre>
+              <!--
               <h3 id="api-2">hyperHTML.escape(text)</h3>
               <p>
                 Before introducing <em>intents</em> through objects literals,
@@ -984,6 +998,7 @@
               escape(`&lt;&#39;&amp;&quot;&gt;`);
               // &amp;lt;&amp;#39;&amp;amp;&amp;quot;&amp;gt;
               </code></pre>
+              -->
               <h3 id="api-3">hyperHTML.define(intent, callback)</h3>
               <p>
                 You can extend hyperHTML intents by defining a name and a callback.
@@ -1070,7 +1085,7 @@
               // if you want to get rid of it
               delete global.document;
               </code></pre>
-              <h3 id="api-5">hyperHTML.adopt(element)</h3>
+              <!--h3 id="api-5">hyperHTML.adopt(element)</h3>
               <p>
                 Created as the ideal <a href="https://viperhtml.js.org/viper.html">viperHTML</a> companion,
                 targeting extreme graceful enhancement,
@@ -1094,7 +1109,7 @@
               </p>
               <p>
                 More documentation about this is coming soon.
-              </p>
+              </p-->
             </section>
             <section id="components">
               <h2>Components</h2><hr>
@@ -1318,6 +1333,7 @@
                 <li><strong>automatic wire</strong> via lazy assignment. Just render returning <code>this.html`...`</code> or  <code>this.svg`...`</code> without caring about hyperHTML at all.</li>
                 <li><strong>basic state handling</strong> through a Preact<i>ish</i> method such <code>setState(objOrCallback)</code>, including the ability to define a <code>defaultState</code> accessor.</li>
                 <li><strong>simplified event handling</strong> directly borrowed by HyperHTMLElement behavior.</li>
+                <li><strong>onconnected</strong> and <strong>ondisconnected</strong> events out of the box</li>
               </ul>
               <p>
                 The following examples represent <code>hyper.Component</code> features in a nutshell.
@@ -1325,9 +1341,12 @@
               <pre><code class="javascript">
               class Clock extends hyper.Component {
                 get defaultState() { return {date: new Date()}; }
+                onconnected() {
+                  console.log('finally live');
+                }
                 render() {
                   return this.html`
-                    &lt;div&gt;
+                    &lt;div onconnected=${this} &gt;
                       &lt;h1&gt;Hello, world!&lt;/h1&gt;
                       &lt;h2&gt;It is ${
                         this.state.date.toLocaleTimeString()
