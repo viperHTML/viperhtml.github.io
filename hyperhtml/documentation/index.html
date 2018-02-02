@@ -70,10 +70,12 @@
                     <li><a href="#essentials-1">bind VS wire</a></li>
                     <li><a href="#essentials-2">wire types</a></li>
                     <li><a href="#essentials-3">wire ids</a></li>
+                    <li><a href="#essentials-3-1">self closing tags</a></li>
                     <li><a href="#essentials-4">attributes vs content</a></li>
                     <li><a href="#essentials-5">boolean attributes</a></li>
                     <li><a href="#essentials-6">events attributes</a></li>
                     <li><a href="#essentials-6-1">style attributes</a></li>
+                    <li><a href="#essentials-6-2">data attributes</a></li>
                     <li><a href="#essentials-7">partial attributes</a></li>
                     <li><a href="#essentials-8">content values</a></li>
                     <li><a href="#essentials-9">asynchronous values</a></li>
@@ -456,6 +458,18 @@
                 IDs are also <strong>compatible with types</strong>.
                 <br>For example, <code>hyperHTML.wire(obj, 'svg:point')`&lt;rect /&gt;`</code> is perfectly valid.
               </p>
+              <h3 id="essentials-3-1">Self Closing Tags</h3>
+              <p>
+                Directly borrowed from XML, or if you want JSX, both bound and wired content
+                is capable of understanding self-closing tags.
+              </p>
+              <pre><code class="javascript">
+              const p = hyperHTML.wire()`&lt;p class="${any}" /&gt;`;
+              hyperHTML.bind(p)`&lt;i class=${fontIcon} /&gt;`;
+              </code></pre>
+              <p>
+                Self closing tags are also particularly useful with <code>&lt;custom-elements/&gt;</code>
+              </p>
               <h3 id="essentials-4">Attributes vs Content</h3>
               <p>
                 By now it should be clear how to create nodes inside an existing element or on the fly.
@@ -601,6 +615,18 @@
               </p>
               <pre><code class="javascript">
               hyper(ref)`&lt;p style=${{fontSize: 32}}&gt;${'BIG CONTENT'}&lt;/p&gt;`;
+              </code></pre>
+              <h3 id="essentials-6-2">The data Attribute</h3>
+              <p>
+                Whenever you need to pass raw JS data down the element,
+                <code>data=${anyObject}</code> is the way to go.
+              </p>
+              <p>
+                The following code will log in console exactly the <code>user</code> reference.
+                No JSON is involved whatsoever in the process.
+              </p.>
+              <pre><code class="javascript">
+              hyper(ref)`&lt;p onconnected=${() => console.log(this.data)} data=${user} /p&gt;`;
               </code></pre>
               <h3 id="essentials-7">Partial Attributes</h3>
               <p>
@@ -1307,11 +1333,10 @@
                 <li>easy default state definition via <code>get defaultState() { return {}; }</code></li>
               </ul>
               <p>
-                Please note <code>HyperHTMLElement</code> assumes there is a global <code>hyperHTML</code> function available.<br>
-                In order to use it, be sure you include hyperHTML first, then HyperHtMLElement.
+                Please note <code>HyperHTMLElement</code> exposes same <code>hyperHTML</code> methods.<br>
+                There is no need to include both scripts in the same page.
               </p>
               <pre>&lt;script src="//unpkg.com/hyperhtml@latest/min.js"&gt;&lt;/script&gt;</pre>
-              <pre>&lt;script src="//unpkg.com/hyperhtml-element@latest/min.js"&gt;&lt;/script&gt;</pre>
               <p>
                 At this point, you should be good to go and ready to create amazing PWAs!
               </p>
