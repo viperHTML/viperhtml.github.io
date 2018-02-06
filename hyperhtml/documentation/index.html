@@ -626,7 +626,7 @@
                 No JSON is involved whatsoever in the process.
               </p.>
               <pre><code class="javascript">
-              hyper(ref)`&lt;p onconnected=${() => console.log(this.data)} data=${user} /p&gt;`;
+              hyper(ref)`&lt;p onconnected=${function () { console.log(this.data); }} data=${user} /p&gt;`;
               </code></pre>
               <h3 id="essentials-7">Partial Attributes</h3>
               <p>
