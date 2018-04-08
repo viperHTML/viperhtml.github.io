@@ -122,6 +122,13 @@
         }
       },
       {
+        "name": "Multiple Input Bindings",
+        "dir": "bindings-list",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/bvObKV?editors=0010"
+        }
+      },
+      {
         "name": "Todos Component",
         "dir": "complex-todos",
         "pen": {

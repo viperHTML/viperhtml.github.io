@@ -1371,6 +1371,7 @@
                 <li><strong>basic state handling</strong> through a Preact<i>ish</i> method such <code>setState(objOrCallback)</code>, including the ability to define a <code>defaultState</code> accessor.</li>
                 <li><strong>simplified event handling</strong> directly borrowed by HyperHTMLElement behavior.</li>
                 <li><strong>onconnected</strong> and <strong>ondisconnected</strong> events out of the box</li>
+                <li><strong>Component.for(context, uid)</strong> utility to simplify creation of sub components within any render</li>
               </ul>
               <p>
                 The following examples represent <code>hyper.Component</code> features in a nutshell.
@@ -1435,6 +1436,23 @@
               }
               </code></pre>
               <p><a href="https://codepen.io/WebReflection/pen/YxdbpR?editors=0010">Code Pen</a></p>
+              <p>
+                The static `.for(context[, uid])` utility helps solving tedious sub-components initialization.
+              </p>
+              <pre><code class="javascript">
+              class List extends Component {
+                constructor(items) {
+                  super().items = items;
+                }
+                render() {
+                  return this.html`
+                  &lt;ul&gt;${this.items.map(
+                    item => ListItem.for(item)
+                  )}&lt;/ul&gt;`;
+                }
+              }
+              </code></pre>
+              <p><a href="https://codepen.io/WebReflection/pen/ZxjdZQ?editors=0010">Code Pen</a></p>
             </section>
             <section id="testing">
               <h2>Testing</h2><hr>
