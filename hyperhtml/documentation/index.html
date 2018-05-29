@@ -762,7 +762,7 @@
               // fetch the list and render it as HTML
               html`&lt;ul&gt;
                 ${{
-                  html: fetch('/grocery').then(b => b.text())
+                  html: fetch('/grocery').then(b => b.text()),
                   placeholder: 'Loading list ...'
                 }}
               &lt;/ul&gt;`;
@@ -775,7 +775,7 @@
                         .then(list => list.map(
                           item => hyperHTML.wire()
                           `&lt;li data-id=${item.id}&gt;${item.name}&lt;/li&gt;`
-                        ))
+                        )),
                   placeholder: spinner.cloneNode(true)
                 }}
               &lt;/ul&gt;`;
