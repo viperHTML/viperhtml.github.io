@@ -1,0 +1,14 @@
+# Site Configuration
+title: ${basic,hyper,native,viper}HTML
+
+# Site URL
+url: https://viperhtml.js.org
+baseurl: ''
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ''
+    values:
+      layout: 'default'

@@ -1,0 +1,38 @@
+<header class="nav">
+  <div class="container">
+    <div class="nav-left">
+      <a class="nav-item" href="https://github.com/viperHTML/viperhtml.github.io" title="This Website on GitHub">
+        <img width="35" height="28" src="{{ site.baseurl }}/img/viperhtml.svg" alt="Logo">
+      </a>
+      <a class="nav-item" href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+        <img width="51" src="https://logo.js.org/dark_horz.png" alt="JS.ORG Logo"/>
+      </a>
+    </div>
+    <span class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <div class="nav-right nav-menu">
+      <a href="/" class="nav-item is-active">
+        Home
+      </a>
+      <a href="#examples" class="nav-item" title="Coming Soon">
+        Examples
+      </a>
+      <a href="#documentation" class="nav-item" title="Coming Soon">
+        Documentation
+      </a>
+      {%- if page.github %}
+      <span class="nav-item">
+        <a href="{{ page.github }}" class="button is-inverted">
+          <span class="icon">
+            <img width="18" height="18" src="{{ site.baseurl }}/img/github.svg">
+          </span>
+          <span>GitHub</span>
+        </a>
+      </span>
+      {%- endif %}
+    </div>
+  </div>
+</header>

@@ -1,0 +1,12 @@
+{%- if include.url -%}
+  {%- assign include_url = include.url -%}
+{%- else -%}
+  {%- capture include_url -%}
+    /{{ include.name }}.html
+  {%- endcapture -%}
+{%- endif -%}
+<li {%- if page.url == include_url %} class="is-active"{% endif %}>
+  <a href="{{ site.baseurl }}{{ include_url }}">
+    <img width="35" height="28" src="{{ site.baseurl }}/img/{{ include.name }}html.svg" alt="{{ include.name }}HTML"/><span>{{ include.name }}</span>
+  </a>
+</li>

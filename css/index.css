@@ -12,6 +12,11 @@ section.hero.is-light .hero-body a:hover {
 .hero.is-fullheight .hero-body .container {
   max-width: 920px;
 }
+@media screen and (max-width:999px) {
+  .hero.is-fullheight .hero-foot .container {
+    display: contents;
+  }
+}
 #ag {
   display: block;
   content: ' ';
