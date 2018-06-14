@@ -15,13 +15,17 @@ document.addEventListener(
     var doc = this;
     var $ = function (css) { return doc.querySelector(css); };
 
-    // bulma full height fix for iOS
-    addEventListener('orientationchange', fixHeight);
-    addEventListener('load', fixHeight);
-    fixHeight();
-    setTimeout(fixHeight, 300);
-    function fixHeight() {
-      $('.hero').style.minHeight = doc.documentElement.clientHeight + 'px';
+    // don't apply this on supporting platforms
+    if (!(CSS && typeof CSS.supports === 'function' &&
+      CSS.supports('min-height','100vh'))) {
+      // bulma full height fix for iOS
+      addEventListener('orientationchange', fixHeight);
+      addEventListener('load', fixHeight);
+      fixHeight();
+      setTimeout(fixHeight, 300);
+      function fixHeight() {
+        $('.hero').style.minHeight = doc.documentElement.clientHeight + 'px';
+      }
     }
 
     // bulma toggle menu functionality

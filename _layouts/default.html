@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    {% include head.html -%}
+  </head>
+  <body>
+    <section class="hero is-fullheight is-light">
+      <div class="hero-head">
+        {% include nav-header.html -%}
+      </div>
+      <div class="hero-body">
+        {{ content -}}
+      </div>
+      <div class="hero-foot">
+        {% include nav-footer.html -%}
+      </div>
+    </section>
+    {% include modal.html -%}
+  </body>
+</html>
