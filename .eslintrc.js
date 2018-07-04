@@ -16,6 +16,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 'use strict';
+/* eslint comma-dangle: ['error', 'always-multiline'] */
 /* eslint sort-keys: ['error', 'asc'] */
 
 module.exports = {
@@ -30,7 +31,10 @@ module.exports = {
   },
   root: true,
   rules: {
-    eqeqeq: 'error',
+    eqeqeq: [
+      'error',
+      'smart',
+    ],
     indent: [
       'error',
       2,
