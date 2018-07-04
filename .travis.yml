@@ -19,6 +19,7 @@ install:
 # The pre-build script
 before_script:
   - pnpm run lint
+  - chmod u+x ./bin/build
   - chmod u+x ./bin/travis-push-update
 
 # The build script
