@@ -1,0 +1,8 @@
+# Lint the configuration files
+!/.*rc.js
+
+# Ignore vendor files
+/node_modules/**
+
+# Ignore documentation examples
+/src/static/hyperhtml/examples/**
