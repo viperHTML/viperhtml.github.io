@@ -1,0 +1,37 @@
+{
+  "name": "@webreflection/x.viperhtml-website",
+  "version": "0.1.0",
+  "description": "viperhtml.js.org",
+  "private": true,
+  "scripts": {
+    "build": "gulp build",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viperHTML/viperhtml.github.io.git"
+  },
+  "keywords": [
+    "hyperHTML",
+    "server",
+    "render",
+    "performance",
+    "virtual",
+    "dom",
+    "alternative",
+    "universal"
+  ],
+  "author": "Andrea Giammarchi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viperHTML/viperhtml.github.io/issues"
+  },
+  "homepage": "https://github.com/viperHTML/viperhtml.github.io#readme",
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "fs-extra": "^6.0.1",
+    "gulp": "^3.9.1",
+    "viperhtml": "^2.14.0",
+    "yargs": "^12.0.1"
+  }
+}

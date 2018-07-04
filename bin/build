@@ -1,0 +1,16 @@
+#!/bin/bash
+
+basedir="$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")/.."
+dir=build
+
+set -ev
+
+if [ $# -ge 1 ]; then
+  dir=$1
+  if [ ! -d "$basedir/$dir" ] || [ ! "$(ls -A "$basedir/$dir")" ]; then
+    git clone -b master -v https://${GH_TOKEN}@github.com/viperHTML/viperhtml.github.io.git "$basedir/$dir"
+  fi
+  rm -rf "$basedir/$dir/*"
+fi
+
+pnpx gulp build --dest "$basedir/$dir"

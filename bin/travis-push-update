@@ -1,0 +1,14 @@
+#!/bin/bash
+# This should instead probably be done using Travis CI's
+# deployments, but I don't know how to actually use those.
+# See: https://docs.travis-ci.com/user/deployment/
+set -ev
+
+if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "src" ]; then
+	cd ../gh-pages
+	git add -A
+	git config --global user.email "contact@travis-ci.org"
+	git config --global user.name "Travis CI"
+	git commit -am "CI Update" || true
+	git push || true
+fi

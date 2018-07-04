@@ -1,0 +1,34 @@
+# Configuration
+env:
+  global:
+    - 'GH_TOKEN={secure}' # Replace this with an actual GitHub deploy token
+sudo: false
+language: node_js
+
+node_js:
+  - '10'
+
+# The pre-install script
+before_install:
+  - npm i -g pnpm # Use pnpm
+
+# The install script
+install:
+  - pnpm install
+
+# The pre-build script
+before_script:
+  - pnpm run lint
+  - chmod u+x ./bin/travis-push-update
+
+# The build script
+script:
+  - ./bin/build ../gh-pages
+
+# The commit script
+after_success:
+  - ./bin/travis-push-update
+
+# Disable email notifications
+notifications:
+  email: false
