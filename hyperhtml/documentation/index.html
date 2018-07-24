@@ -1372,6 +1372,7 @@
                 <li><strong>simplified event handling</strong> directly borrowed by HyperHTMLElement behavior.</li>
                 <li><strong>onconnected</strong> and <strong>ondisconnected</strong> events out of the box</li>
                 <li><strong>Component.for(context, uid)</strong> utility to simplify creation of sub components within any render</li>
+                <li><strong>simplified dispatch</strong> to use the first available node and dispatch cancelable, bubbling, custom events with a <code>component</code> property and arbitrary <code>detail</code> data</li>
               </ul>
               <p>
                 The following examples represent <code>hyper.Component</code> features in a nutshell.
@@ -1425,6 +1426,11 @@
                 up() { this.setState({action: 'up'}); }
                 bottom() { this.setState({action: 'bottom'}); }
                 right() { this.setState({action: 'right'}); }
+
+                setState(state) {
+                  super.setState(state);
+                  this.dispatch('new-state', state);
+                }
 
                 render() { return this.html`
                   &lt;button data-call=left onclick=${this}&gt;◂&lt;/button&gt;
