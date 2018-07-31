@@ -1041,11 +1041,18 @@
               <p>
                 You can extend hyperHTML intents by defining a name and a callback.
                 This mechanism is basically the same used to explicitly opt in for
-                text, html, or any other accepted value.
+                text, html, or any other accepted value, including attributes.
               </p>
               <p>
                 This callback will receive whatever interpolated value is passed along,
                 and its returned value will be used as the transformation.
+              </p>
+              <p>
+                If the name contains one or more hyphens <code>-</code>,
+                the intent would be set for attributes instead,
+                and the callback will receive the node element,
+                and the interpolated value passed along.
+                Its optionally returned value will be used as attribute value.
               </p>
               <p>
                 This value can be anything, including an intent itself.
@@ -1072,8 +1079,16 @@
                 }
               );
 
+              hyperHTML.define(
+                'color-style',
+                (node, value) => {
+                  node.style.cssText = `color:${value};`;
+                  return value;
+                }
+              );
+
               hyperHTML.bind(document.body)`
-              &lt;section id="info"&gt;
+              &lt;section color-style=${'red'} id="info"&gt;
                 ${'Welcome'}
               &lt;/section&gt;
               &lt;section id="admin"&gt;
