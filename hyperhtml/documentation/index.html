@@ -649,7 +649,7 @@
               <p>The following example shows several ways to update an attribute correctly as well as the wrong way, mentioned above.</p>
               <pre><code class="javascript">
               // THE FOLLOWING IS OK 👍
-              html`&lt;divclass=${`foo ${mayBar ? 'bar' : ''}`}&gt;Foo bar?&lt;/div&gt;`;
+              html`&lt;div class=${`foo ${mayBar ? 'bar' : ''}`}&gt;Foo bar?&lt;/div&gt;`;
               html`&lt;div class=${'foo' + (mayBar ? ' bar' : '')}&gt;Foo bar?&lt;/div&gt;`;
               html`&lt;div class=${['foo', mayBar ? 'bar' : ''].join(' ')}&gt;Foo bar?&lt;/div&gt;`;
               html`&lt;div style=${`top:${top}; left:${left};`}&gt;x&lt;/div&gt;`;
