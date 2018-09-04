@@ -43,7 +43,7 @@ const content = () => {
           <p>
             Created to <a href="https://medium.com/@WebReflection/hyperhtml-a-virtual-dom-alternative-279db455ee0e">simplify </a>
             DOM performance best practices, <a href="${config.github}">hyperHTML</a> is
-            100% ECMAScript compliant and it weighs in at less than 4Kb, featuring:
+            100% ECMAScript compliant and it weights about 5Kb, featuring:
           </p>
           <ul>
             <li>best in class repeated renders and updates performance</li>
