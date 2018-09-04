@@ -5,7 +5,7 @@
 set -ev
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "src" ]; then
-	cd ../gh-pages
+	cd ../master
 	git add -A
 	git config --global user.email "contact@travis-ci.org"
 	git config --global user.name "Travis CI"
