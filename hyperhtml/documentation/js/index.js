@@ -1,4 +1,5 @@
 // (c) Andrea Giammarchi - @WebReflection
+/* global hljs */
 addEventListener(
   'DOMContentLoaded',
   function () {
@@ -58,7 +59,7 @@ addEventListener(
     function hashChange(el) {
       if (hash.el !== el) {
         if (hash.el) hash.el.className = '';
-        if (hash.el = el) {
+        if ((hash.el = el)) {
           el.className = 'is-active';
           var rect = el.getBoundingClientRect();
           if (

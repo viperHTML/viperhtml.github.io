@@ -1,143 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html>
-<html lang="en">
+<!--
+ISC License
+
+Copyright (c) 2018, Andrea Giammarchi, @WebReflection
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
+OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>hyperHTML</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
-    <link rel="stylesheet" href="/css/index.css">
-    <script defer src="js/index.js"></script>
+    
+<meta charset="utf-8">
+<title>hyperHTML</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="canonical" href="https://viperhtml.js.org/hyper.html">
+
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.2/css/bulma.min.css">
+<link rel="stylesheet" href="/css/index.css">
+
+<script defer="true" src="/js/index.js"></script>
   </head>
   <body>
     <section class="hero is-fullheight is-light">
       <div class="hero-head">
-        <header class="nav">
-          <div class="container">
-            <div class="nav-left">
-              <a class="nav-item" href="https://github.com/viperHTML/viperhtml.github.io" title="This Website on GitHub">
-                <img width="35" height="28" src="/img/viperhtml.svg" alt="Logo">
-              </a>
-              <a class="nav-item" href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
-                <img width="51" src="https://logo.js.org/dark_horz.png" alt="JS.ORG Logo"/>
-              </a>
-            </div>
-            <span class="nav-toggle">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-            <div class="nav-right nav-menu">
-              <a href="/" class="nav-item is-active">
-                Home
-              </a>
-              <a href="#examples" class="nav-item" title="Coming Soon">
-                Examples
-              </a>
-              <a href="#documentation" class="nav-item" title="Coming Soon">
-                Documentation
-              </a>
-              <span class="nav-item">
-                <a href="https://github.com/WebReflection/hyperHTML" class="button is-inverted">
-                  <span class="icon">
-                    <img width="18" height="18" src="/img/github.svg">
-                  </span>
-                  <span>GitHub</span>
-                </a>
-              </span>
-            </div>
-          </div>
-        </header>
+        
+<header class="nav">
+  <div class="container">
+    <div class="nav-left">
+      <a class="nav-item" href="https://github.com/viperHTML/viperhtml.github.io" title="This Website on GitHub">
+        <img width="35" height="28" src="/img/viperhtml.svg" alt="Logo">
+      </a>
+      <a class="nav-item" href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+        <img width="51" src="https://logo.js.org/dark_horz.png" alt="JS.ORG Logo">
+      </a>
+    </div>
+    <span class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <div class="nav-right nav-menu">
+      <a href="/" class="nav-item is-active">
+        Home
+      </a>
+      <a href="#examples" class="nav-item" title="Coming Soon">
+        Examples
+      </a>
+      <a href="#documentation" class="nav-item" title="Coming Soon">
+        Documentation
+      </a>
+      
+<span class="nav-item">
+  <a href="https://github.com/WebReflection/hyperHTML" class="button is-inverted">
+    <span class="icon">
+      <img width="18" height="18" src="/img/github.svg">
+    </span>
+    <span>GitHub</span>
+  </a>
+</span>
+    </div>
+  </div>
+</header>
       </div>
       <div class="hero-body">
-        <div class="container">
-          <div class="tile is-ancestor">
-            <div class="tile is-parent is-4">
-              <article class="tile is-child has-text-centered">
-                <p class="title">hyper(HTML)</p>
-                <p class="subtitle">Declarative Front End</p>
-                <img src="/img/hyperhtml.svg" alt="hyperHTML">
-              </article>
-            </div>
-            <div class="tile is-parent is-8">
-              <article class="tile is-child">
-                <div class="content">
-                  <p>
-                    Created to <a href="https://medium.com/@WebReflection/hyperhtml-a-virtual-dom-alternative-279db455ee0e">simplify </a>
-                    DOM performance best practices, <a href="https://github.com/WebReflection/hyperHTML">hyperHTML</a> is
-                    100% ECMAScript compliant and it weights about 5Kb, featuring:
-                  </p>
-                  <ul>
-                    <li>best in class repeated renders and updates performance</li>
-                    <li>declarative and reactive UI via standard <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals">template literals</a></li>
-                    <li>an ideal solution via <a href="https://webpack.js.org/">Webpack</a> bundles</li>
-                    <li>auto sanitized text content when needed</li>
-                    <li>partial outputs between nodes</li>
-                    <li>asynchronous content, renders on demand</li>
-                  </ul>
-                  <p>
-                    <strong>Framework agnostic</strong>, <em>hyperHTML</em> can be used to render any view,
-                    including <a href="https://w3c.github.io/webcomponents/spec/custom/">Custom Elements</a> and Web Components.
-                  </p>
-                  <p style="min-height:32px;">
-                    <img src="https://coveralls.io/repos/github/WebReflection/hyperHTML/badge.svg?branch=master" alt="code coverage">
-                    <a class="github-button" href="https://github.com/WebReflection/hyperHTML" data-icon="octicon-star" data-show-count="true" aria-label="Star WebReflection/hyperHTML on GitHub">Star</a>
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
+        
+<div class="container">
+  <div class="tile is-ancestor">
+    <div class="tile is-parent is-4">
+      <article class="tile is-child has-text-centered">
+        <p class="title">hyper(HTML)</p>
+        <p class="subtitle">Declarative Front End</p>
+        <img src="/img/hyperhtml.svg" alt="hyperHTML">
+      </article>
+    </div>
+    <div class="tile is-parent is-8">
+      <article class="tile is-child">
+        <div class="content">
+          <p>
+            Created to <a href="https://medium.com/@WebReflection/hyperhtml-a-virtual-dom-alternative-279db455ee0e">simplify </a>
+            DOM performance best practices, <a href="https://github.com/WebReflection/hyperHTML">hyperHTML</a> is
+            100% ECMAScript compliant and it weights about 5Kb, featuring:
+          </p>
+          <ul>
+            <li>best in class repeated renders and updates performance</li>
+            <li>declarative and reactive UI via standard <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals">template literals</a></li>
+            <li>an ideal solution via <a href="https://webpack.js.org/">Webpack</a> bundles</li>
+            <li>auto sanitized text content when needed</li>
+            <li>partial outputs between nodes</li>
+            <li>asynchronous content, renders on demand</li>
+          </ul>
+          <p>
+            <strong>Framework agnostic</strong>, <em>hyperHTML</em> can be used to render any view,
+            including <a href="https://w3c.github.io/webcomponents/spec/custom/">Custom Elements</a> and Web Components.
+          </p>
+          <p style="min-height:32px;">
+            <img src="https://coveralls.io/repos/github/WebReflection/hyperHTML/badge.svg?branch=master" alt="code coverage">
+            <a class="github-button" href="https://github.com/WebReflection/hyperHTML" data-icon="octicon-star" data-show-count="true" aria-label="Star WebReflection/hyperHTML on GitHub">Star</a>
+          </p>
         </div>
+      </article>
+    </div>
+  </div>
+</div>
       </div>
       <div class="hero-foot">
-        <nav class="tabs is-boxed is-fullwidth">
-          <div class="container">
-            <ul>
-              <li class="is-active"><a href="/hyper.html"><img width="35" height="28" src="/img/hyperhtml.svg" alt="hyperHTML"><span>hyper</span></a></li>
-              <li><a href="/viper.html"><img width="35" height="28" src="/img/viperhtml.svg" alt="viperHTML"><span>viper</span></a></li>
-              <li><a href="/basic.html"><img width="35" height="28" src="/img/basichtml.svg" alt="basicHTML"><span>basic</span></a></li>
-              <li><a href="/native.html"><img width="35" height="28" src="/img/nativehtml.svg" alt="nativeHTML"><span>native</span></a></li>
-            </ul>
-          </div>
-        </nav>
+        
+<nav class="tabs is-boxed is-fullwidth">
+  <div class="container">
+    <ul>
+      
+<li class="is-active">
+  <a href="/hyper.html">
+    <img width="35" height="28" src="/img/hyperhtml.svg" alt="hyperHTML"><span>hyper</span>
+  </a>
+</li>
+      
+<li class="">
+  <a href="/viper.html">
+    <img width="35" height="28" src="/img/viperhtml.svg" alt="viperHTML"><span>viper</span>
+  </a>
+</li>
+      
+<li class="">
+  <a href="/basic.html">
+    <img width="35" height="28" src="/img/basichtml.svg" alt="basicHTML"><span>basic</span>
+  </a>
+</li>
+      
+<li class="">
+  <a href="/native.html">
+    <img width="35" height="28" src="/img/nativehtml.svg" alt="nativeHTML"><span>native</span>
+  </a>
+</li>
+    </ul>
+  </div>
+</nav>
       </div>
     </section>
-        <div class="modal">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-        <div class="box">
-          <article class="media">
-            <div class="media-left">
-              <figure class="image is-64x64">
-                <img id="ag" src="/img/ag.png" alt="Andrea Giammarchi">
-              </figure>
-            </div>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong>Hello There!</strong><br>
-                  I am doing my best to create good documentation full of meaningful examples.
-                </p>
-              </div>
-            </div>
-          </article>
+    
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-64x64">
+            <img id="ag" src="/img/ag.png" alt="Andrea Giammarchi">
+          </figure>
+        </div>
+        <div class="media-content">
           <div class="content">
             <p>
-              However, no matter how interesting an Open Source project is,
-              if it's not sustainable, it won't have the support it needs.
-              Please consider backing this project, <strong>thank you</strong>!
-            </p>
-            <p>
-              <a id="donate" class="button is-info" href="https://opencollective.com/hyperhtml">Open Collective</a>
-              <a id="paypal" class="button is-success" href="https://www.paypal.me/webreflection">PayPal Donation</a>
-            </p>
-            <p>
-              <a id="examples" class="button" href="/hyperhtml/examples/">Examples</a>
-              <a id="documentation" class="button" href="/hyperhtml/documentation/">Documentation</a>
+              <strong>Hello There!</strong><br>
+              I am doing my best to create good documentation full of meaningful examples.
             </p>
           </div>
         </div>
+      </article>
+      <div class="content">
+        <p>
+          However, no matter how interesting an Open Source project is,
+          if it's not sustainable, it won't have the support it needs.
+          Please consider backing this project, <strong>thank you</strong>!
+        </p>
+        <p>
+          <a id="donate" class="button is-info" href="https://opencollective.com/hyperhtml">Open Collective</a>
+          <a id="paypal" class="button is-success" href="https://www.paypal.me/webreflection">PayPal Donation</a>
+        </p>
+        
+<p>
+  <a id="examples" class="button" href="/hyperhtml/examples/">Examples</a>
+  <a id="documentation" class="button" href="/hyperhtml/documentation/">Documentation</a>
+</p>
       </div>
-      <button class="modal-close"></button>
     </div>
+  </div>
+  <button class="modal-close"></button>
+</div>
   </body>
 </html>
