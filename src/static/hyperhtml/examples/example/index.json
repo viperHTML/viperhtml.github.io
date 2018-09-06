@@ -27,7 +27,7 @@
         }
       },
       {
-        "name": "Custom Element",
+        "name": "Custom Component",
         "dir": "custom-component",
         "pen": {
           "fw": "https://codepen.io/WebReflection/pen/prjpye?editors=0010",
@@ -48,6 +48,14 @@
         "pen": {
           "fw": "https://codepen.io/gaearon/pen/amqdNA?editors=0010",
           "hyper": "https://codepen.io/WebReflection/pen/oejpGV?editors=0010"
+        }
+      },
+      {
+        "name": "Not primitive props",
+        "dir": "not-primitive-props",
+        "pen": {
+          "fw": "https://codepen.io/jiayihu/pen/gdGxow?editors=0010",
+          "hyper": "https://codepen.io/jiayihu/pen/QVqNGJ?editors=0010"
         }
       },
       {

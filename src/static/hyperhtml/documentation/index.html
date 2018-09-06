@@ -630,10 +630,46 @@
               <p>
                 The following code will log in console exactly the <code>user</code> reference.
                 No JSON is involved whatsoever in the process.
-              </p.>
+              </p>
               <pre><code class="javascript">
               hyper(ref)`&lt;p onconnected=${function () { console.log(this.data); }} data=${user} /p&gt;`;
               </code></pre>
+              <p>
+                If you however find yourself restricted by <code>data</code>, big news for you: hyperHTML doesn't lock you in and it lets you free to implement it as follows for instance.
+              </p>
+              <pre><code class="javascript">
+              customElements.define(
+                'h-welcome',
+                class HyperWelcome extends HTMLElement {
+                  constructor(...args) {
+                    super(...args);
+                    this.html = hyperHTML.bind(self);
+                  }
+                  
+                  get user() {
+                    return this._user;
+                  }
+                
+                  set user(value) {
+                    this._user = value;
+                    this.render();
+                  }
+                  
+                  render() {
+                    return this.html`&lt;h1>Hello, ${this._user.name}&lt;/h1&gt;`;
+                  }
+                }
+              );
+              
+              hyperHTML.bind(document.getElementById('root'))`
+                &lt;h-welcome user=${{ name: 'Sara' }} /&gt;
+                &lt;h-welcome user=${{ name: 'Cahal' }} /&gt;
+                &lt;h-welcome user=${{ name: 'Edite' }} /&gt;
+              `;
+              </code></pre>
+              <p>
+               View the example above on <a href="https://codepen.io/jiayihu/pen/QVqNGJ?editors=0010">Code Pen</a>
+              </p>
               <h3 id="essentials-7">Partial Attributes</h3>
               <p>
                 Differently from other libraries, partial attributes are not supported but there are
@@ -918,7 +954,7 @@
               }
               </code></pre>
               <p>
-                As you can see on <a href="https://codepen.io/WebReflection/pen/qXXgJd?editors=0010">Code Pen</a>,
+                As you can see on <a href="https:// .io/WebReflection/pen/qXXgJd?editors=0010">Code Pen</a>,
                 the second time the <code>update()</code> function is called
                 the only change that happens to the DOM
                 is that the new list item is appended to the end of the <em>UL</em> element.
