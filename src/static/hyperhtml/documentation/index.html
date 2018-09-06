@@ -128,7 +128,7 @@
               <h2>Introduction</h2><hr>
               <h3 id="introduction-0">What is hyperHTML?</h3>
               <p>
-                hyperHTML is a DOM &amp; ECMAScript standard compliant, zero-dependency, fully cross platform library
+                hyperHTML is a DOM &amp; ECMAScript standard compliant, zero-dependency, fully cross-platform library
                 suitable for <strong>declarative</strong> and
                 <strong>reactive</strong> Web Applications.
               </p>
@@ -479,7 +479,7 @@
               <h3 id="essentials-4">Attributes vs Content</h3>
               <p>
                 By now it should be clear how to create nodes inside an existing element or on the fly.
-                While this is great content wise, we haven't talked much about attributes and what's possible with them.
+                While this is great content-wise, we haven't talked much about attributes and what's possible with them.
               </p>
               <p> Here's a list:</p>
               <ul>
@@ -617,7 +617,7 @@
               <p>
                 Fully inspired by <a href="https://preactjs.com">Preact</a> implementation,
                 <code>style</code> attributes can be updated via both strings, like any other regular attribute,
-                of via an object.
+                or via an object.
               </p>
               <pre><code class="javascript">
               hyper(ref)`&lt;p style=${{fontSize: 32}}&gt;${'BIG CONTENT'}&lt;/p&gt;`;
@@ -630,10 +630,43 @@
               <p>
                 The following code will log in console exactly the <code>user</code> reference.
                 No JSON is involved whatsoever in the process.
-              </p.>
+              </p>
               <pre><code class="javascript">
               hyper(ref)`&lt;p onconnected=${function () { console.log(this.data); }} data=${user} /p&gt;`;
               </code></pre>
+              <p>
+                If you, however, find yourself restricted by <code>data</code>, big news for you: hyperHTML doesn't lock you in and it lets you free to implement it as follows for instance.
+              </p>
+              <pre><code class="javascript">
+              customElements.define(
+                'h-welcome',
+                class HyperWelcome extends HTMLElement {
+                  get html() { return this._html || (this._html = hyperHTML.bind(this)); }
+                  
+                  get user() {
+                    return this._user;
+                  }
+                
+                  set user(value) {
+                    this._user = value;
+                    this.render();
+                  }
+                  
+                  render() {
+                    return this.html`&lt;h1>Hello, ${this._user.name}&lt;/h1&gt;`;
+                  }
+                }
+              );
+              
+              hyperHTML.bind(document.getElementById('root'))`
+                &lt;h-welcome user=${{ name: 'Sara' }} /&gt;
+                &lt;h-welcome user=${{ name: 'Cahal' }} /&gt;
+                &lt;h-welcome user=${{ name: 'Edite' }} /&gt;
+              `;
+              </code></pre>
+              <p>
+               View the example above on <a href="https://codepen.io/jiayihu/pen/QVqNGJ?editors=0010">Code Pen</a>
+              </p>
               <h3 id="essentials-7">Partial Attributes</h3>
               <p>
                 Differently from other libraries, partial attributes are not supported but there are
@@ -682,7 +715,7 @@
                 <li>
                   if the content is an <strong>Array</strong>, it's an explicit intent to perform one of the following operations:
                   <ul>
-                    <li>if it's an array of <strong>strings</strong>, they will be injected as explict opt-in for <em>HTML</em></li>
+                    <li>if it's an array of <strong>strings</strong>, they will be injected as explicit opt-in for <em>HTML</em></li>
                     <li>if it's an array of <strong>DOM Nodes</strong>, they will be appended in place, which plays well with multi node wires.</li>
                     <li>if it's an array of <strong>Promises</strong>, they will be placed once all promises are resolved, with <em>any</em> returned value</li>
                   </ul>
@@ -692,7 +725,7 @@
                   <ul>
                     <li>if it has a <strong>text</strong> property, it will force whatever value as sanitized string, hence XSS free <em>text content</em></li>
                     <li>if it has a <strong>html</strong> property, it will force whatever value as string, injecting it as <em>HTML</em></li>
-                    <li>if it has an <strong>any</strong> property, it will resolve whatever content it has compatibly with all understood types</li>
+                    <li>if it has an <strong>any</strong> property, it will resolve whatever content it has, compatibly with all understood types</li>
                     <li>if none of the following is true, hyperHTML will try to find out if it has the type <strong>defined</strong> in its registry.<br>
                     In which case, it will pass along whatever value it is to the defined callback,
                     and it will parse the resulting object against the types in this list.</li>
@@ -752,7 +785,7 @@
               </p>
               <h3 id="essentials-10">The Placeholder</h3>
               <p>
-                Every intent can be setup asynchronously
+                Every intent can be set up asynchronously
                 by simply using the <code>placeholder</code> property.
               </p>
               <p>
@@ -1040,7 +1073,7 @@
               <h3 id="api-3">hyperHTML.define(intent, callback)</h3>
               <p>
                 You can extend hyperHTML intents by defining a name and a callback.
-                This mechanism is basically the same used to explicitly opt in for
+                This mechanism is basically the same used to explicitly opt-in for
                 text, html, or any other accepted value, including attributes.
               </p>
               <p>
@@ -1334,7 +1367,7 @@
                 The goal of <a href="https://github.com/WebReflection/hyperHTML-Element">HyperHTMLElement</a> 
                 is to be an ideal companion to hyperHTML itself.<br>
                 It removes all the repeated, boring and sometimes problematic setup steps needed
-                to define Custom Elements. This makes their creation a no brainer.
+                to define Custom Elements. This makes their creation a no-brainer.
                 Have a look at the <a href="https://viperhtml.js.org/hyperhtml/examples/#!fw=Polymer&example=custom-element">comparisons VS Polymer</a>.
               </p>
               <p>
@@ -1381,7 +1414,7 @@
                 based on the following features:
               </p>
               <ul>
-                <li><strong>no custom elements</strong> needed. Forget polyfills and issues with classes extending builtin classes, it just works with regular HTML.</li>
+                <li><strong>no custom elements</strong> needed. Forget polyfills and issues with classes extending built-in classes, it just works with regular HTML.</li>
                 <li><strong>automatic wire</strong> via lazy assignment. Just render returning <code>this.html`...`</code> or  <code>this.svg`...`</code> without caring about hyperHTML at all.</li>
                 <li><strong>basic state handling</strong> through a Preact<i>ish</i> method such <code>setState(objOrCallback)</code>, including the ability to define a <code>defaultState</code> accessor.</li>
                 <li><strong>simplified event handling</strong> directly borrowed by HyperHTMLElement behavior.</li>
