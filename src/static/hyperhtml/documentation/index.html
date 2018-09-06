@@ -641,10 +641,7 @@
               customElements.define(
                 'h-welcome',
                 class HyperWelcome extends HTMLElement {
-                  constructor(...args) {
-                    super(...args);
-                    this.html = hyperHTML.bind(self);
-                  }
+                  get html() { return this._html || (this._html = hyperHTML.bind(this)); }
                   
                   get user() {
                     return this._user;
