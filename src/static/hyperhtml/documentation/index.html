@@ -185,30 +185,31 @@
                 its chunks will always be the same.
               </p>
               <pre><code class="javascript">
-              const invokes = [];
-              function template(chunks, ...interpolations) {
-                invokes.push(chunks);
-                return chunks.join(interpolations[0]);
-              }
-
-              // create two different strings
-              template`1 ${2} 3`; // 1 2 3
-              template`1 ${4} 3`; // 1 4 3
-
-              // verify chunks were exactly the same
-              console.assert(
-                invokes[0] === invokes[1],
-                'same unique Array'
-              );
-
-              // try a different template literal
-              template`${2} 3`; //2 3
-
-              // verify it's different
-              console.assert(
-                invokes[1] !== invokes[2],
-                'different template used'
-              );
+                const invokes = [];
+                function template(chunks, ...interpolations) {
+                  invokes.push(chunks);
+                  return chunks.join(interpolations[0]);
+                }
+                  
+                // create two different strings
+                const foo = x => template`1 ${x} 3`;
+                foo(2);
+                foo(4);
+                
+                // verify chunks were exactly the same
+                console.assert(
+                  invokes[0] === invokes[1],
+                  'same unique Array'
+                );
+                  
+                // try a different template literal
+                template`${2} 3`; //2 3
+                  
+                // verify it's different
+                console.assert(
+                  invokes[1] !== invokes[2],
+                  'different template used'
+                );                
               </code></pre>
               <p>
                 This native feature, even reflected when transpiled via Babel, is key to generating a DOM structure and parsing it once, 
