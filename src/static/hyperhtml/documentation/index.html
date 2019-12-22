@@ -1388,6 +1388,7 @@
                 to react to when you change an attribute directly instead of passing through
                 the verbose and boring <code>comp.setAttribute(name, value)</code></li>
                 <li>a lazy <code>html</code> read-only property that will create content in the right place: the node itself or its shadow DOM, if previously defined.</li>
+                <li>convenient access to child elements with `ref` attribute via `this.refs.name`, e.g., `<input ref="email" type="email">` => `this.refs.email`</li>
                 <li>automatic <strong>bound events</strong> without the usual binding overhead through native <code>handleEvent</code> behavior,
                 as <a href="https://medium.com/@WebReflection/dom-handleevent-a-cross-platform-standard-since-year-2000-5bf17287fd38">described in this post</a>,
                 or through lazy method binding like <code>handleClick</code> and others.</li>
