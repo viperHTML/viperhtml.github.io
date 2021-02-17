@@ -6,3 +6,9 @@ This is a statically hosted site with examples and documentations of the _viperH
 
 Please [support the development of this project](https://github.com/WebReflection/donate)
 to make it a sustainable Open Source Software.
+
+## Note
+
+The current build status is crap. It requires NodeJS 10 or errors with gulp happen.
+
+Alternatively, [see if this solves](https://stackoverflow.com/a/58394828/2800218) with NodeJS LTS 12.
