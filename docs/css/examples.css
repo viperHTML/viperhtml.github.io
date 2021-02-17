@@ -1,0 +1,13 @@
+section.hero.is-light .hero-body a {
+  color: rgba(54,54,54,.7);
+  border-bottom: 1px dotted rgba(154,154,154,.7);
+}
+section.hero.is-light .hero-body a:hover {
+  color: inherit;
+}
+.hero.is-fullheight .hero-body {
+  display: block;
+}
+.content pre {
+  padding: 0;
+}

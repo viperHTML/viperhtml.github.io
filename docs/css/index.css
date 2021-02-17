@@ -1,0 +1,36 @@
+section.hero.is-light .hero-body a {
+  color: rgba(54,54,54,.7);
+  border-bottom: 1px dotted rgba(154,154,154,.7);
+}
+section.hero.is-light .hero-body a:hover {
+  color: inherit;
+}
+.hero.is-fullheight .hero-body {
+  display: block;
+  margin-top: 64px;
+}
+.hero.is-fullheight .hero-body .container {
+  max-width: 920px;
+}
+#ag {
+  display: block;
+  content: ' ';
+  float: left;
+  border: 4px solid #EEE;
+  width: 64px;
+  height: 64px;
+  -webkit-border-radius: 46px;
+  -khtml-border-radius: 46px;
+  -moz-border-radius: 46px;
+  border-radius: 46px;
+  background: transparent url(/img/ag.png) center center no-repeat;
+  background-size: 100%;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  cursor: pointer;
+}
+#icon-github:hover {
+  fill: #363636;
+}

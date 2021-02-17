@@ -1,0 +1,257 @@
+{
+  "React": {
+    "dir": "react",
+    "tests": [
+      {
+        "name": "Hello, world!",
+        "dir": "hello-world",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/ZpvBNJ?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/BdomvX?editors=0010"
+        }
+      },
+      {
+        "name": "Hello, world & tick",
+        "dir": "hello-world-tick",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/gwoJZk?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/RZWjOv?editors=0010"
+        }
+      },
+      {
+        "name": "Basic Component",
+        "dir": "basic-component",
+        "pen": {
+          "fw": "",
+          "hyper": ""
+        }
+      },
+      {
+        "name": "Custom Component",
+        "dir": "custom-component",
+        "pen": {
+          "fw": "https://codepen.io/WebReflection/pen/prjpye?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/brVYPN?editors=0010"
+        }
+      },
+      {
+        "name": "Combined Components",
+        "dir": "combined-component",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/rrJNJY?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/ZJbvLa?editors=0010"
+        }
+      },
+      {
+        "name": "Stateful Component",
+        "dir": "state-class",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/amqdNA?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/oejpGV?editors=0010"
+        }
+      },
+      {
+        "name": "Not primitive props",
+        "dir": "not-primitive-props",
+        "pen": {
+          "fw": "https://codepen.io/jiayihu/pen/gdGxow?editors=0010",
+          "hyper": "https://codepen.io/jiayihu/pen/QVqNGJ?editors=0010"
+        }
+      },
+      {
+        "name": "Basic event handling",
+        "dir": "basic-event",
+        "pen": {
+          "fw": "",
+          "hyper": ""
+        }
+      },
+      {
+        "name": "Conditional Rendering",
+        "dir": "conditional-render",
+        "pen": {
+          "fw": "https://codepen.io/gaearon/pen/QKzAgB?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/zdvpaJ?editors=0010"
+        }
+      },
+      {
+        "name": "Temperature Calculator",
+        "dir": "calculator",
+        "pen": {
+          "fw": "https://codepen.io/valscion/pen/jBNjja?editors=0010",
+          "hyper": "https://codepen.io/WebReflection/pen/LjpVqW?editors=0010"
+        }
+      }
+    ]
+  },
+  "Vue.js": {
+    "dir": "vue",
+    "tests": [
+      {
+        "name": "Hello, world!",
+        "dir": "hello-world",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/BdomvX?editors=0010"
+        }
+      },
+      {
+        "name": "Bound attributes",
+        "dir": "hello-attributes",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/VzvXGB?editors=0010"
+        }
+      },
+      {
+        "name": "Conditional element",
+        "dir": "conditional",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/mMexQa?editors=0010"
+        }
+      },
+      {
+        "name": "Basic todos",
+        "dir": "todos",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/YxyagJ?editors=0010"
+        }
+      },
+      {
+        "name": "User input",
+        "dir": "user-input",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/rzOvOG?editors=0010"
+        }
+      },
+      {
+        "name": "Input Bindings",
+        "dir": "bindings",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/QMjrvd?editors=0010"
+        }
+      },
+      {
+        "name": "Multiple Input Bindings",
+        "dir": "bindings-list",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/bvObKV?editors=0010"
+        }
+      },
+      {
+        "name": "Todos Component",
+        "dir": "complex-todos",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/PKPeQZ?editors=0010"
+        }
+      }
+    ]
+  },
+  "Polymer": {
+    "dir": "polymer",
+    "tests": [
+      {
+        "name": "custom-element",
+        "dir": "custom-element",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/YxwGjo?editors=0010"
+        }
+      },
+      {
+        "name": "With Shadow DOM",
+        "dir": "shadow-dom",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/aydmPR?editors=0010"
+        }
+      },
+      {
+        "name": "Compose with shadow DOM",
+        "dir": "sd-composed",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/mMVrYJ?editors=0010"
+        }
+      },
+      {
+        "name": "Data binding",
+        "dir": "data-binding",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/LjGRwo?editors=0010"
+        }
+      },
+      {
+        "name": "Declare a property",
+        "dir": "declare-property",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/JyGbjV?editors=0010"
+        }
+      },
+      {
+        "name": "Bind to a property",
+        "dir": "bind-property",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/KvVNgo?editors=0010"
+        }
+      },
+      {
+        "name": "Template repeating",
+        "dir": "template-repeating",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/MvKbqL?editors=0010"
+        }
+      }
+    ]
+  },
+  "Angular": {
+    "dir": "angular",
+    "tests": [
+      {
+        "name": "most basic App",
+        "dir": "first-component",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/wqMYwo?editors=0010"
+        }
+      },
+      {
+        "name": "Tour of Heroes",
+        "dir": "tour-of-heroes-0",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/vJLVVy?editors=0010"
+        }
+      },
+      {
+        "name": "List of Heroes",
+        "dir": "tour-of-heroes-1",
+        "pen": {
+          "hyper": "https://codepen.io/WebReflection/pen/dzGQbO?editors=0010"
+        }
+      }
+    ]
+  },
+  "Marko": {
+    "dir": "marko",
+    "tests": [
+      {
+        "name": "basic counter",
+        "dir": "counter",
+        "pen": {
+          "fw": "http://markojs.com/#reactive-ui-components",
+          "hyper": "https://codepen.io/WebReflection/pen/jLzMrp?editors=0010"
+        }
+      },
+      {
+        "name": "CE counter",
+        "dir": "counter-ce",
+        "pen": {
+          "fw": "http://markojs.com/#reactive-ui-components",
+          "hyper": "https://codepen.io/WebReflection/pen/prLEeQ?editors=0010"
+        }
+      },
+      {
+        "name": "Silky smooth",
+        "dir": "sine-wave",
+        "pen": {
+          "fw": "http://markojs.com/#silky-smooth",
+          "hyper": "https://codepen.io/WebReflection/pen/rzQPpv?editors=0010"
+        }
+      }
+    ]
+  }
+}

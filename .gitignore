@@ -4,6 +4,7 @@
 # Except:
 ## Sources
 !/bin
+!/docs
 !/src
 !/test
 
