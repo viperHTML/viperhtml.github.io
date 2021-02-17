@@ -509,6 +509,18 @@
               </code></pre>
               <h3 id="essentials-5">Boolean Attributes</h3>
               <p>
+                New in 2.34, there is a new specialized syntax to grant the desired behavior with boolean attributes.
+              </p>
+              <pre><code class="javascript">
+              hyperHTML.bind(form)`
+                &lt;button ?disabled=${value}&gt;
+                  click me if you can
+                &lt;/button&gt;`;
+              </code></pre>
+              <p>
+                This special syntax guarantees that the attribute will be either present, with an empty value, or removed, no matter if the value is a proper boolean or not: any truthy or falsy value will do.
+              </p>
+              <p>
                 Whenever an attribute has a special meaning, and it should be present or not,
                 we can use boolean attribute values.
               </p>
